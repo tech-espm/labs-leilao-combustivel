@@ -42,12 +42,12 @@ CREATE TABLE usuario (
   idtipo int NOT NULL,
   senha varchar(100) NOT NULL,
   token char(32) DEFAULT NULL,
-  criacao datetime NOT NULL,
   telefone varchar(20) NOT NULL,
-	endereco varchar(100) NOT NULL,
-	cep varchar(15) NOT NULL,
-	idcidade int NOT NULL,
+  endereco varchar(100) NOT NULL,
+  cep varchar(15) NOT NULL,
+  idcidade int NOT NULL,
   idestado int NOT NULL,
+  criacao datetime NOT NULL,
   PRIMARY KEY (id),
   UNIQUE KEY usuario_login_UN (login),
   KEY usuario_idperfil_FK_idx (idperfil),
@@ -60,7 +60,7 @@ CREATE TABLE usuario (
   CONSTRAINT usuario_idestado_FK FOREIGN KEY (idestado) REFERENCES estado (id) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
-INSERT INTO usuario (login, nome, idperfil, senha, token, criacao) VALUES ('ADMIN', 'ADMINISTRADOR', 1, 'peTcC99vkvvLqGQL7mdhGuJZIvL2iMEqvCNvZw3475PJ:JVyo1Pg2HyDyw9aSOd3gNPT30KdEyiUYCjs7RUzSoYGN', NULL, NOW());
+INSERT INTO usuario (login, nome, idperfil, idtipo, senha, token, criacao, telefone, endereco, cep, idcidade, idestado) VALUES ('ADMIN', 'ADMINISTRADOR', 1, 1, 'peTcC99vkvvLqGQL7mdhGuJZIvL2iMEqvCNvZw3475PJ:JVyo1Pg2HyDyw9aSOd3gNPT30KdEyiUYCjs7RUzSoYGN', NULL, NOW(), '', '', '', 5270, 25);
 
 CREATE TABLE IF NOT EXISTS posto (
   id int NOT NULL,
@@ -69,6 +69,19 @@ CREATE TABLE IF NOT EXISTS posto (
   PRIMARY KEY (id),
   CONSTRAINT fk_posto_usuario_id FOREIGN KEY (id) REFERENCES usuario (id) ON DELETE CASCADE ON UPDATE NO ACTION
 )
+
+CREATE TABLE IF NOT EXISTS distribuidor (
+  id int NOT NULL,
+  cnpj varchar(18) NOT NULL,
+  num_anuncios int NOT NULL,
+  num_vendas int NOT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_posto_usuario_id FOREIGN KEY (id) REFERENCES usuario (id) ON DELETE CASCADE ON UPDATE NO ACTION
+)
+
+
+
+
 
 
 CREATE TABLE IF NOT EXISTS pedido (

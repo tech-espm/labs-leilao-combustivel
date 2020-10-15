@@ -5,6 +5,7 @@
 			<div class="panel-heading">Informações do Usuário</div>
 			<div class="panel-body no-bottom">
 				<input type="hidden" id="id" name="id" value="<%=(item ? item.id : 0) %>" />
+				<input type="hidden" id="idtipo" name="idtipo" value="1" />
 				<div class="form-group">
 					<label for="login">Login</label>
 					<input id="login" name="login" maxlength="100" class="form-control upper" type="text" spellcheck="false" value="<%=(item ? item.login : '') %>" <%=(item ? 'readonly="readonly"' : '') %> />
@@ -21,6 +22,26 @@
 						<option value="<%= perfis[i].id %>" <%-((item && item.idperfil === perfis[i].id) ? 'selected="selected"' : '') %>><%= perfis[i].nome %></option>
 						<% } %>
 					</select>
+				</div>
+				<div class="form-group">
+					<label for="telefone">Telefone</label>
+					<input id="telefone" name="telefone" maxlength="20" class="form-control upper" type="text" spellcheck="false" value="<%=(item ? item.telefone : '') %>" />
+				</div>
+				<div class="form-group">
+					<label for="endereco">Endereço</label>
+					<input id="endereco" name="endereco" maxlength="100" class="form-control upper" type="text" spellcheck="false" value="<%=(item ? item.endereco : '') %>" />
+				</div>
+				<div class="form-group">
+					<label for="cep">CEP</label>
+					<input id="cep" name="cep" maxlength="15" class="form-control upper" type="text" spellcheck="false" value="<%=(item ? item.cep : '') %>" />
+				</div>
+				<div class="form-group">
+					<label for="idestado">Estado</label>
+					<input id="idestado" name="idestado" class="form-control upper" type="number" value="<%=(item ? item.idestado : '') %>" />
+				</div>
+				<div class="form-group">
+					<label for="idcidade">Cidade</label>
+					<input id="idcidade" name="idcidade" class="form-control upper" type="number" value="<%=(item ? item.idcidade : '') %>" />
 				</div>
 			</div>
 			<div class="panel-footer">
@@ -48,6 +69,27 @@
 				maxlength: 100
 			},
 			idperfil: {
+				required: true
+			},
+			telefone: {
+				required: true,
+				minlength: 3,
+				maxlength: 20
+			},
+			endereco: {
+				required: true,
+				minlength: 3,
+				maxlength: 100
+			},
+			cep: {
+				required: true,
+				minlength: 3,
+				maxlength: 15
+			},
+			idestado: {
+				required: true
+			},
+			idcidade: {
 				required: true
 			}
 		},

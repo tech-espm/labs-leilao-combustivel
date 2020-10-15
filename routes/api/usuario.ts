@@ -18,7 +18,7 @@ router.get("/listar", wrap(async (req: express.Request, res: express.Response) =
 	let u = await Usuario.cookie(req, res, true);
 	if (!u)
 		return;
-	res.json(await Usuario.listarUsuario());
+	res.json(await Usuario.listarGeral());
 }));
 
 router.get("/obter", wrap(async (req: express.Request, res: express.Response) => {
@@ -26,7 +26,7 @@ router.get("/obter", wrap(async (req: express.Request, res: express.Response) =>
 	if (!u)
 		return;
 	let id = parseInt(req.query["id"] as string);
-	res.json(isNaN(id) ? null : await Usuario.obterUsuario(id));
+	res.json(isNaN(id) ? null : await Usuario.obterGeral(id));
 }));
 
 router.post("/criar", wrap(async (req: express.Request, res: express.Response) => {
@@ -34,10 +34,8 @@ router.post("/criar", wrap(async (req: express.Request, res: express.Response) =
 	if (!u)
 		return;
 	u = req.body as Usuario;
-	if (u) {
-		u.idperfil = parseInt(req.body.idperfil);
-	}
-	jsonRes(res, 400, u ? await Usuario.criar(u) : "Dados inválidos");
+	u.idtipo = Usuario.IdTipoGeral;
+	jsonRes(res, 400, u ? await Usuario.criarGeral(u) : "Dados inválidos");
 }));
 
 router.post("/alterar", wrap(async (req: express.Request, res: express.Response) => {
@@ -46,11 +44,7 @@ router.post("/alterar", wrap(async (req: express.Request, res: express.Response)
 		return;
 	let id = u.id;
 	u = req.body as Usuario;
-	if (u) {
-		u.id = parseInt(req.body.id);
-		u.idperfil = parseInt(req.body.idperfil);
-	}
-	jsonRes(res, 400, (u && !isNaN(u.id)) ? (id === u.id ? "Um usuário não pode alterar a si próprio" : await Usuario.alterar(u)) : "Dados inválidos");
+	jsonRes(res, 400, (u && !isNaN(u.id)) ? (id === u.id ? "Um usuário não pode alterar a si próprio" : await Usuario.alterarGeral(u)) : "Dados inválidos");
 }));
 
 router.get("/excluir", wrap(async (req: express.Request, res: express.Response) => {

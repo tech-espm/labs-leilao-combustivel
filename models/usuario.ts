@@ -6,6 +6,7 @@ import Sql = require("../infra/sql");
 import GeradorHash = require("../utils/geradorHash");
 import appsettings = require("../appsettings");
 import intToHex = require("../utils/intToHex");
+import emailValido = require("../utils/emailValido");
 
 export = class Usuario {
 
@@ -23,13 +24,12 @@ export = class Usuario {
 	public nome: string;
 	public idperfil: number;
 	public idtipo: number;
-	public senha: string;
-	public criacao: string;
 	public telefone: string;
 	public endereco: string;
 	public cep: string;
 	public idcidade: number;
 	public idestado: number;
+	public criacao: string;
 
 	// Utilizados apenas através do cookie
 	public admin: boolean;
@@ -68,7 +68,7 @@ export = class Usuario {
 				u.nome = row.nome as string;
 				u.idperfil = row.idperfil as number;
 				u.idtipo = row.idtipo as number;
-				u.admin = (u.idperfil === Usuario.IdPerfilAdmin);
+				u.admin = (u.idperfil === Usuario.IdPerfilAdmin && u.idtipo === Usuario.IdTipoGeral);
 
 				usuario = u;
 			});
@@ -101,7 +101,7 @@ export = class Usuario {
 		await Sql.conectar(async (sql: Sql) => {
 			login = login.normalize().trim().toUpperCase();
 
-			let rows = await sql.query("select id, nome, idperfil, senha from usuario where login = ?", [login]);
+			let rows = await sql.query("select id, nome, idperfil, idtipo, senha from usuario where login = ?", [login]);
 			let row;
 			let ok: boolean;
 
@@ -119,7 +119,8 @@ export = class Usuario {
 			u.login = login;
 			u.nome = row.nome as string;
 			u.idperfil = row.idperfil as number;
-			u.admin = (u.idperfil === Usuario.IdPerfilAdmin);
+			u.idtipo = row.idtipo as number;
+			u.admin = (u.idperfil === Usuario.IdPerfilAdmin && u.idtipo === Usuario.IdTipoGeral);
 
 			res.cookie(appsettings.cookie, cookieStr, { maxAge: 365 * 24 * 60 * 60 * 1000, httpOnly: true, path: "/", secure: appsettings.cookieSecure });
 		});
@@ -173,35 +174,84 @@ export = class Usuario {
 	}
 
 	protected static validarUsuario(u: Usuario): string {
+		u.id = parseInt(u.id as any);
+
+		u.login = (u.login || "").normalize().trim().toUpperCase();
+		if (u.login.length < 3 || u.login.length > 100 || !emailValido(u.login))
+			return "Login inválido";
+
 		u.nome = (u.nome || "").normalize().trim().toUpperCase();
 		if (u.nome.length < 3 || u.nome.length > 100)
 			return "Nome inválido";
 
-		// @@@ validar os outros campos novos aqui!
+		u.idperfil = parseInt(u.idperfil as any);
+		if (isNaN(u.idperfil) || u.idperfil < Usuario.IdPerfilAdmin || u.idperfil > Usuario.IdPerfilComum)
+			return "Perfil inválido";
+
+		u.idtipo = parseInt(u.idtipo as any);
+		if (isNaN(u.idtipo) || u.idtipo < Usuario.IdTipoGeral || u.idperfil > Usuario.IdTipoDistribuidor)
+			return "Tipo inválido";
+
+		u.telefone = (u.telefone || "").normalize().trim().toUpperCase();
+		if (u.telefone.length < 3 || u.telefone.length > 20)
+			return "Telefone inválido";
+
+		u.endereco = (u.endereco || "").normalize().trim().toUpperCase();
+		if (u.endereco.length < 3 || u.endereco.length > 100)
+			return "Telefone inválido";
+
+		u.cep = (u.cep || "").normalize().trim().toUpperCase();
+		if (u.cep.length < 9 || u.cep.length > 15)
+			return "CEP inválido";
+
+		u.idcidade = parseInt(u.idcidade as any);
+		u.idestado = parseInt(u.idestado as any);
 
 		return null;
 	}
 
-	public static async listarUsuario(): Promise<Usuario[]> {
+	public static async listarGeral(): Promise<Usuario[]> {
 		let lista: Usuario[] = null;
 
 		await Sql.conectar(async (sql: Sql) => {
-			// @@@ ajustar query com os campos novos
-			lista = await sql.query("select u.id, u.login, u.nome, p.nome perfil, date_format(u.criacao, '%d/%m/%Y') criacao from usuario u inner join perfil p on p.id = u.idperfil order by u.login asc") as Usuario[];
+			lista = await sql.query("select u.id, u.login, u.nome, p.nome perfil, t.nome tipo, u.telefone, u.endereco, u.cep, c.nome cidade, e.sigla estado, date_format(u.criacao, '%d/%m/%Y') criacao from usuario u inner join perfil p on p.id = u.idperfil inner join tipo t on t.id = u.idtipo inner join cidade c on c.id = u.idcidade inner join estado e on e.id = u.idestado where idtipo = 1") as Usuario[];
 		});
 
 		return (lista || []);
 	}
 
-	public static async obterUsuario(id: number): Promise<Usuario> {
+	public static async obterGeral(id: number): Promise<Usuario> {
 		let lista: Usuario[] = null;
 
 		await Sql.conectar(async (sql: Sql) => {
-			// @@@ ajustar query com os campos novos
-			lista = await sql.query("select id, login, nome, idperfil, date_format(criacao, '%d/%m/%Y') criacao from usuario where id = ?", [id]) as Usuario[];
+			lista = await sql.query("select id, login, nome, idperfil, idtipo, senha, telefone, endereco, cep, idcidade, idestado, date_format(criacao, '%d/%m/%Y') criacao from usuario where id = ? and idtipo = 1", [id]) as Usuario[];
 		});
 
 		return ((lista && lista[0]) || null);
+	}
+
+	public static async criarGeral(u: Usuario): Promise<string> {
+		let res: string;
+		if ((res = Usuario.validarUsuario(u)))
+			return res;
+
+		await Sql.conectar(async (sql: Sql) => {
+			res = await Usuario.criarUsuario(sql, u);
+		});
+
+		return res;
+	}
+
+	public static async alterarGeral(u: Usuario): Promise<string> {
+		let res: string;
+		if ((res = Usuario.validarUsuario(u)))
+			return res;
+
+		await Sql.conectar(async (sql: Sql) => {
+			res = await Usuario.alterarUsuario(sql, u);
+		});
+
+		return res;
 	}
 
 	protected static async criarUsuario(sql: Sql, u: Usuario): Promise<string> {
@@ -212,8 +262,7 @@ export = class Usuario {
 			return "Login inválido";
 
 		try {
-			// @@@ acrescentar os campos novos aqui
-			await sql.query("insert into usuario (login, nome, idperfil, senha, criacao) values (?, ?, ?, ?, now())", [u.login, u.nome, u.idperfil, appsettings.usuarioHashSenhaPadrao]);
+			await sql.query("insert into usuario (login, nome, idperfil, idtipo, senha, telefone, endereco, cep, idcidade, idestado, criacao) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now())", [u.login, u.nome, u.idperfil, u.idtipo, appsettings.usuarioHashSenhaPadrao, u.telefone, u.endereco, u.cep, u.idcidade, u.idestado]);
 			u.id = await sql.scalar("select last_insert_id()") as number;
 		} catch (e) {
 			if (e.code) {
@@ -223,7 +272,7 @@ export = class Usuario {
 						break;
 					case "ER_NO_REFERENCED_ROW":
 					case "ER_NO_REFERENCED_ROW_2":
-						res = "Perfil não encontrado";
+						res = "Perfil, tipo, cidade ou estado não encontrado";
 						break;
 					default:
 						throw e;
@@ -240,8 +289,7 @@ export = class Usuario {
 		if (u.id === Usuario.IdUsuarioAdmin)
 			return "Não é possível editar o usuário administrador principal";
 
-		// @@@ acrescentar os campos novos aqui
-		await sql.query("update usuario set nome = ?, idperfil = ? where id = ?", [u.nome, u.idperfil, u.id]);
+		await sql.query("update usuario set nome = ?, idperfil = ?, telefone = ?, endereco = ?, cep = ?, idcidade = ?, idestado = ? where id = ?", [u.nome, u.idperfil, u.telefone, u.endereco, u.cep, u.idcidade, u.idestado, u.id]);
 
 		return null;
 	}
