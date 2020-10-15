@@ -18,7 +18,7 @@ router.get("/listar", wrap(async (req: express.Request, res: express.Response) =
 	let u = await Usuario.cookie(req, res, true);
 	if (!u)
 		return;
-	res.json(await Usuario.listar());
+	res.json(await Usuario.listarUsuario());
 }));
 
 router.get("/obter", wrap(async (req: express.Request, res: express.Response) => {
@@ -26,7 +26,7 @@ router.get("/obter", wrap(async (req: express.Request, res: express.Response) =>
 	if (!u)
 		return;
 	let id = parseInt(req.query["id"] as string);
-	res.json(isNaN(id) ? null : await Usuario.obter(id));
+	res.json(isNaN(id) ? null : await Usuario.obterUsuario(id));
 }));
 
 router.post("/criar", wrap(async (req: express.Request, res: express.Response) => {
@@ -34,8 +34,9 @@ router.post("/criar", wrap(async (req: express.Request, res: express.Response) =
 	if (!u)
 		return;
 	u = req.body as Usuario;
-	if (u)
+	if (u) {
 		u.idperfil = parseInt(req.body.idperfil);
+	}
 	jsonRes(res, 400, u ? await Usuario.criar(u) : "Dados inválidos");
 }));
 

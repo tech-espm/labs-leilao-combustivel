@@ -9,15 +9,27 @@ import intToHex = require("../utils/intToHex");
 
 export = class Usuario {
 
-	private static readonly IdAdmin = 1;
-	private static readonly IdPerfilAdmin = 1;
+	public static readonly IdUsuarioAdmin = 1;
+
+	public static readonly IdPerfilAdmin = 1;
+	public static readonly IdPerfilComum = 2;
+
+	public static readonly IdTipoGeral = 1;
+	public static readonly IdTipoPosto = 2;
+	public static readonly IdTipoDistribuidor = 3;
 
 	public id: number;
 	public login: string;
 	public nome: string;
 	public idperfil: number;
+	public idtipo: number;
 	public senha: string;
 	public criacao: string;
+	public telefone: string;
+	public endereco: string;
+	public cep: string;
+	public idcidade: number;
+	public idestado: number;
 
 	// Utilizados apenas através do cookie
 	public admin: boolean;
@@ -39,7 +51,7 @@ export = class Usuario {
 			let usuario: Usuario = null;
 
 			await Sql.conectar(async (sql: Sql) => {
-				let rows = await sql.query("select id, login, nome, idperfil, token from usuario where id = ?", [id]);
+				let rows = await sql.query("select id, login, nome, idperfil, idtipo, token from usuario where id = ?", [id]);
 				let row;
 
 				if (!rows || !rows.length || !(row = rows[0]))
@@ -55,6 +67,7 @@ export = class Usuario {
 				u.login = row.login as string;
 				u.nome = row.nome as string;
 				u.idperfil = row.idperfil as number;
+				u.idtipo = row.idtipo as number;
 				u.admin = (u.idperfil === Usuario.IdPerfilAdmin);
 
 				usuario = u;
@@ -159,86 +172,82 @@ export = class Usuario {
 		return r;
 	}
 
-	private static validar(u: Usuario): string {
+	protected static validarUsuario(u: Usuario): string {
 		u.nome = (u.nome || "").normalize().trim().toUpperCase();
 		if (u.nome.length < 3 || u.nome.length > 100)
 			return "Nome inválido";
 
+		// @@@ validar os outros campos novos aqui!
+
 		return null;
 	}
 
-	public static async listar(): Promise<Usuario[]> {
+	public static async listarUsuario(): Promise<Usuario[]> {
 		let lista: Usuario[] = null;
 
 		await Sql.conectar(async (sql: Sql) => {
+			// @@@ ajustar query com os campos novos
 			lista = await sql.query("select u.id, u.login, u.nome, p.nome perfil, date_format(u.criacao, '%d/%m/%Y') criacao from usuario u inner join perfil p on p.id = u.idperfil order by u.login asc") as Usuario[];
 		});
 
 		return (lista || []);
 	}
 
-	public static async obter(id: number): Promise<Usuario> {
+	public static async obterUsuario(id: number): Promise<Usuario> {
 		let lista: Usuario[] = null;
 
 		await Sql.conectar(async (sql: Sql) => {
+			// @@@ ajustar query com os campos novos
 			lista = await sql.query("select id, login, nome, idperfil, date_format(criacao, '%d/%m/%Y') criacao from usuario where id = ?", [id]) as Usuario[];
 		});
 
 		return ((lista && lista[0]) || null);
 	}
 
-	public static async criar(u: Usuario): Promise<string> {
-		let res: string;
-		if ((res = Usuario.validar(u)))
-			return res;
+	protected static async criarUsuario(sql: Sql, u: Usuario): Promise<string> {
+		let res: string = null;
 
 		u.login = (u.login || "").normalize().trim().toUpperCase();
 		if (u.login.length < 3 || u.login.length > 100)
 			return "Login inválido";
 
-		await Sql.conectar(async (sql: Sql) => {
-			try {
-				await sql.query("insert into usuario (login, nome, idperfil, senha, criacao) values (?, ?, ?, ?, now())", [u.login, u.nome, u.idperfil, appsettings.usuarioHashSenhaPadrao]);
-			} catch (e) {
-				if (e.code) {
-					switch (e.code) {
-						case "ER_DUP_ENTRY":
-							res = `O login ${u.login} já está em uso`;
-							break;
-						case "ER_NO_REFERENCED_ROW":
-						case "ER_NO_REFERENCED_ROW_2":
-							res = "Perfil não encontrado";
-							break;
-						default:
-							throw e;
-					}
-				} else {
-					throw e;
+		try {
+			// @@@ acrescentar os campos novos aqui
+			await sql.query("insert into usuario (login, nome, idperfil, senha, criacao) values (?, ?, ?, ?, now())", [u.login, u.nome, u.idperfil, appsettings.usuarioHashSenhaPadrao]);
+			u.id = await sql.scalar("select last_insert_id()") as number;
+		} catch (e) {
+			if (e.code) {
+				switch (e.code) {
+					case "ER_DUP_ENTRY":
+						res = `O login ${u.login} já está em uso`;
+						break;
+					case "ER_NO_REFERENCED_ROW":
+					case "ER_NO_REFERENCED_ROW_2":
+						res = "Perfil não encontrado";
+						break;
+					default:
+						throw e;
 				}
+			} else {
+				throw e;
 			}
-		});
+		}
 
 		return res;
 	}
 
-	public static async alterar(u: Usuario): Promise<string> {
-		let res: string;
-		if ((res = Usuario.validar(u)))
-			return res;
-
-		if (u.id === Usuario.IdAdmin)
+	protected static async alterarUsuario(sql: Sql, u: Usuario): Promise<string> {
+		if (u.id === Usuario.IdUsuarioAdmin)
 			return "Não é possível editar o usuário administrador principal";
 
-		await Sql.conectar(async (sql: Sql) => {
-			await sql.query("update usuario set nome = ?, idperfil = ? where id = ?", [u.nome, u.idperfil, u.id]);
-			res = sql.linhasAfetadas.toString();
-		});
+		// @@@ acrescentar os campos novos aqui
+		await sql.query("update usuario set nome = ?, idperfil = ? where id = ?", [u.nome, u.idperfil, u.id]);
 
-		return res;
+		return null;
 	}
 
 	public static async excluir(id: number): Promise<string> {
-		if (id === Usuario.IdAdmin)
+		if (id === Usuario.IdUsuarioAdmin)
 			return "Não é possível excluir o usuário administrador principal";
 
 		let res: string = null;
