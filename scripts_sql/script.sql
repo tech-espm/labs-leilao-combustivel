@@ -87,10 +87,13 @@ CREATE TABLE IF NOT EXISTS distribuidor (
 CREATE TABLE IF NOT EXISTS pedido (
   id_pedido INT NOT NULL AUTO_INCREMENT,
   id_anu INT NOT NULL,
+  idusuario INT NOT NULL,
   data_pedido DATE NOT NULL,
   valortotal_pedido DOUBLE NOT NULL,
   id_posto INT NOT NULL,
-  PRIMARY KEY (`id_pedido`))
+  PRIMARY KEY (`id_pedido`)
+  CONSTRAINT pedido_idusuario_FK FOREIGN KEY (idusuario) REFERENCES usuario (id) ON DELETE RESTRICT ON UPDATE RESTRICT
+  )
 
 
 
