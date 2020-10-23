@@ -245,19 +245,4 @@ CREATE TABLE IF NOT EXISTS notaf (
 
 
 
--- -----------------------------------------------------
--- Table `mydb`.`docdistribuidora`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS docdistribuidora (
-  id_doc INT NOT NULL,
-  pathdoc VARCHAR(255) NOT NULL,
-  id_dist INT NOT NULL,
-  PRIMARY KEY (`id_doc`),
-  INDEX `fk_docdistribuidora_distribuidor1_idx` (`id_dist` ASC) VISIBLE,
-  CONSTRAINT `fk_docdistribuidora_distribuidor1`
-    FOREIGN KEY (`id_dist`)
-    REFERENCES distribuidor (`id_dist`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-
 
