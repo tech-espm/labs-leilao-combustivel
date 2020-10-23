@@ -31,18 +31,24 @@ export = class Pedido {
 	}
 
 	public static async obter(id_nota: number): Promise<Pedido> {
-		let lista: Notaf[] = null;
-
+		let lista: Pedido[] = null;
+		
 		await Sql.conectar(async (sql: Sql) => {
-			lista = await sql.query("select id_nota, id_pedido, data_nota, numboleto_nota from notaf where id_nota = ?", [id_nota]) as Notaf[];
+			lista = await sql.query("select id_nota, id_pedido, data_nota, numboleto_nota from notaf where id_nota = ?", [id_nota]) as Pedido[];
 		});
 
 		return ((lista && lista[0]) || null);
 	}
-
-	public static async criar(sql: Sql, pe: Pedido): Promise<void> {
-			await sql.query("insert into pedido (id_pedido, id_anu, data_pedido, valortotal_pedido, id_posto) values (?, ?, ?, ?,?)", [pe.id_pedido, pe.id_anu, pe.data_pedido, pe.valortotal_pedido, pe.id_posto]);
-        	
+	//O QUE VOLTA NO RETURN? 
+	
+	public static async criar(pe: Pedido): Promise<string> { 
+		let res: string;
+		await Sql.conectar(async (sql: Sql) => {
+			await sql.query("insert into pedido (id_anu, data_pedido, valortotal_pedido, id_posto) values (?, ?, ?, ?,?)", [pe.id_pedido, pe.id_anu, pe.data_pedido, pe.valortotal_pedido, pe.id_posto]);
+			res = sql.linhasAfetadas.toString(); 
+		});
+		
+		return res;
 	}
 
 	public static async editar(pe: Pedido): Promise<string> {
@@ -65,5 +71,9 @@ export = class Pedido {
 
 		return res;
 	}
+
+
+	//CRIAR FUNÇÃO COMPRA 
+
 
 }
