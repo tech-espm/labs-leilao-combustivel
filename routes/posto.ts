@@ -35,3 +35,5 @@ router.get("/listar", wrap(async (req: express.Request, res: express.Response) =
 	else
 		res.render("posto/listar", { titulo: "Gerenciar Postos", usuario: u, lista: JSON.stringify(await Posto.listar()) });
 }));
+
+export = router;

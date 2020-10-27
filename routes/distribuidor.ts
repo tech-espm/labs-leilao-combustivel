@@ -35,3 +35,5 @@ router.get("/listar", wrap(async (req: express.Request, res: express.Response) =
 	else
 		res.render("distribuidor/listar", { titulo: "Gerenciar Distribuidoras", usuario: u, lista: JSON.stringify(await Distribuidor.listar()) });
 }));
+
+export = router;

@@ -1,6 +1,6 @@
 {
-	"name": "Leilão de Combustível",
-	"short_name": "Leilão de Combustível",
+	"name": "EPEX",
+	"short_name": "EPEX",
 	"start_url": "/",
 	"dir": "ltr",
 	"lang": "pt-BR",
@@ -8,7 +8,7 @@
 	"display": "standalone",
 	"background_color": "#222222",
 	"theme_color": "#222222",
-	"description": "Leilão de Combustível",
+	"description": "EPEX",
 	"icons": [
 		{
 			"src": "favicon-36x36.png",

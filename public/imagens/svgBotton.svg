@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="413.662" height="76.351" viewBox="0 0 413.662 76.351">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f09f0e;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        fill: #14234a;
+        font-size: 18px;
+        font-family: Montserrat-Bold, Montserrat;
+        font-weight: 700;
+      }
+    </style>
+  </defs>
+  <g id="Group_109" data-name="Group 109" transform="translate(-213 -264)">
+    <path id="Veja_mais_1" data-name="Veja mais 1" class="cls-1" d="M0,0H413.662V76.351H0V0Z" transform="translate(213 264)"/>
+    <path id="triangulinho_esquerda" data-name="triangulinho esquerda" class="cls-2" d="M2077.151,296.187l15.922-23.526-16.763-24.346h12.038l15.737,24.342-15.025,23.53Z" transform="translate(-1852.361 29.772)"/>
+    <path id="triangulinho_esquerda-2" data-name="triangulinho esquerda" class="cls-2" d="M2103.244,296.187l-15.922-23.526,16.763-24.346h-12.038l-15.737,24.342,15.025,23.53Z" transform="translate(-1487.361 29.772)"/>
+    <text id="CADASTRO_DE_POSTOS" data-name="CADASTRO DE POSTOS" class="cls-3" transform="translate(310 308)"><tspan x="0" y="0">CADASTRO DE POSTOS</tspan></text>
+  </g>
+</svg>
