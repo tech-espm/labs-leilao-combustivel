@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="43.009" viewBox="0 0 120 43.009">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f09f0e;
+      }
+
+      .cls-2 {
+        fill: #14234a;
+        font-size: 13px;
+        font-family: Montserrat-Bold, Montserrat;
+        font-weight: 700;
+      }
+
+      .cls-3 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="Group_111" data-name="Group 111" transform="translate(-361 -492)">
+    <path id="Veja_mais_1" data-name="Veja mais 1" class="cls-1" d="M0,0H120V43.009H0V0Z" transform="translate(361 492)"/>
+    <text id="ENVIAR" class="cls-2" transform="translate(396 519)"><tspan x="0" y="0">ENVIAR</tspan></text>
+    <path id="triangulinho_direita" data-name="triangulinho direita" class="cls-3" d="M2091.894,276.013l-9.212-13.611,9.7-14.086h-6.965l-9.1,14.083L2085,276.013Z" transform="translate(-1620.274 251.859)"/>
+    <path id="triangulinho_esquerda" data-name="triangulinho esquerda" class="cls-3" d="M2076.8,276.013l9.212-13.611-9.7-14.086h6.965l9.1,14.083-8.693,13.614Z" transform="translate(-1706.508 251.859)"/>
+  </g>
+</svg>

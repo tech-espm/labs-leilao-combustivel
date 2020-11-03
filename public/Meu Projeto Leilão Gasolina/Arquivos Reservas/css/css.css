@@ -1,0 +1,89 @@
+body {
+
+	font-size: 15px;
+	font-family: "Montserrat";
+	font-weight: 600;
+	color: rgb(20, 35, 74);
+
+}
+
+#btnVoltar {
+	color: black;
+	background-color: rgb(240, 159, 14);
+	margin-top: 1%;
+	margin-left: 1%;
+	font-weight: 600;
+}
+
+.text-center {
+
+	font-size: 45px;
+	font-weight: 600;
+
+}
+
+.form-control::placeholder {
+
+	font-family: 'Montserrat';
+	font-size: 15px;
+	font-weight: 500;
+
+}
+
+
+#telaLogin {
+
+	margin-left: 15%;
+	margin-right: 15%;
+	display: block;
+	position: ;
+	margin-bottom: 3%;
+}
+
+#fundo {
+	background-color: rgb(20, 35, 74);
+}
+
+#imgLogo {
+
+
+
+
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 13%;
+	margin-top: %;
+	margin-bottom: 1%;
+
+}
+
+#card {
+
+	background-color: whitesmoke;
+
+	/*	background-color: rgb(240, 159, 14)*/
+}
+
+
+
+
+
+
+#editMarg {
+	margin-bottom: 2%;
+
+}
+
+#cardhead {
+
+	background-color: rgb(240, 159, 14);
+	color: black;
+}
+
+#botaoFin {
+
+	background-color: rgb(240, 159, 14);
+
+
+}
