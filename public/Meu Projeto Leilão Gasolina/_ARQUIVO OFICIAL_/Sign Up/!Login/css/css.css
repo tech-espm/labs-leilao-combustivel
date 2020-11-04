@@ -1,0 +1,85 @@
+body {
+	background-color: rgb(20, 35, 74);
+	margin-top: 1%;
+	font-size: 16px;
+	font-family: "Montserrat";
+	font-weight: 700;
+	color: rgb(20, 35, 74);
+
+}
+
+
+#telaLogin {
+
+	margin-left: 15%;
+	margin-right: 15%;
+
+}
+
+.btnLogo {
+
+	width: 100%;
+	max-width: 15%;
+	min-width: 150px;
+
+
+}
+
+.form-control::placeholder {
+
+	font-family: 'Montserrat';
+	font-size: 15px;
+	font-weight: 500;
+
+}
+
+#card {
+
+	background-color: whitesmoke;
+
+	/*	background-color: rgb(240, 159, 14)*/
+}
+
+
+#cardhead {
+
+	background-color: rgb(240, 159, 14);
+
+}
+
+#botaoFin {
+
+
+
+	width: 100%;
+	background-color: #f09f0e;
+
+}
+
+#svg {
+
+	width: 100%;
+	height: 3rem;
+
+
+}
+
+#texthead {
+	color: black;
+	font-weight: 600;
+}
+
+#EsqSenha {
+
+	font-size: 12.5px;
+	font-weight: 400;
+	margin-left: 0.5%;
+}
+
+#cadAqui {
+	color: green;
+	font-size: 22px;
+	margin-left: 5px;
+
+
+}

@@ -14,22 +14,23 @@ body {
 	font-size: 40px;
 	font-weight: 700;
 
+
 }
 
 .form-control::placeholder {
 
 	font-family: 'Montserrat';
 	font-size: 15.5px;
-	font-weight: 500;
+	font-weight: 400;
 
 }
 
 #btnVoltar {
-	color: whitesmoke;
-	background-color: rgb(20, 35, 74);
-	margin-top: 0.7%;
-	margin-left: 1%;
-	font-weight: 600;
+	background-color: whitesmoke;
+	margin-top: 0.5%;
+	margin-left: 0.5%;
+
+
 }
 
 
@@ -38,7 +39,6 @@ body {
 
 	margin-left: 15%;
 	margin-right: 15%;
-	display: block;
 	margin-bottom: 3%;
 }
 
@@ -46,39 +46,30 @@ body {
 	background-color: whitesmoke;
 }
 
-#imgLogo {
-
-
-
-
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	width: 13%;
-	margin-top: -1.5%;
-	margin-bottom: 1%;
-
-}
 
 #card {
 
 	background-color: whitesmoke;
 
-	/*	background-color: rgb(240, 159, 14)*/
+
+}
+
+#btnLogo {
+
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 170px;
+	margin-bottom: 1.5%;
+
 }
 
 
-
-
-#editMarg {
-	margin-bottom: 2%;
-
-}
 
 #cardhead {
 
 	background-color: whitesmoke;
-	color:
+
 }
 
 #botaoFin {
