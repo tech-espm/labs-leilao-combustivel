@@ -70,6 +70,7 @@ CREATE TABLE IF NOT EXISTS posto (
   CONSTRAINT fk_posto_usuario_id FOREIGN KEY (id) REFERENCES usuario (id) ON DELETE CASCADE ON UPDATE NO ACTION
 )
 
+------------------------------ESSE
 CREATE TABLE IF NOT EXISTS distribuidor (
   id int NOT NULL,
   cnpj varchar(18) NOT NULL,
@@ -116,6 +117,7 @@ CREATE TABLE IF NOT EXISTS combustivel (
 -- -----------------------------------------------------
 -- Table `mydb`.`anuncio`
 -- -----------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS anuncio (
   id_anu INT NOT NULL,
   prazo_anu VARCHAR(45) NOT NULL,
@@ -185,29 +187,7 @@ CREATE TABLE IF NOT EXISTS transportadora (
 -- -----------------------------------------------------
 -- Table `mydb`.`usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS usuarioregular (
-  id_cad INT NOT NULL AUTO_INCREMENT,
-  email_cad VARCHAR(45) NOT NULL,
-  senha_cad VARCHAR(100) NOT NULL,
-  cel_cad VARCHAR(45) NOT NULL,
-  tipo_cad INT NOT NULL,
-  id_posto INT NOT NULL,
-  id_dist INT NOT NULL,
-  criacao DATE NOT NULL,
-  token CHAR(32) NOT NULL,
-  PRIMARY KEY (`id_cad`),
-  INDEX fk_usuario_id_postox (`id_posto` ASC) VISIBLE,
-  INDEX fk_usuario_distribuidor1_idx (`id_dist` ASC) VISIBLE,
-  CONSTRAINT fk_usuario_posto
-    FOREIGN KEY (`id_posto`)
-    REFERENCES posto (`id_posto`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_usuario_distribuidor1
-    FOREIGN KEY (`id_dist`)
-    REFERENCES distribuidor (`id_dist`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+
 
 
 
