@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS distribuidor (
   num_anuncios int NOT NULL,
   num_vendas int NOT NULL,
   PRIMARY KEY (id),
-  CONSTRAINT fk_posto_usuario_id FOREIGN KEY (id) REFERENCES usuario (id) ON DELETE CASCADE ON UPDATE NO ACTION
+  CONSTRAINT fk_distribuidor_usuario_id FOREIGN KEY (id) REFERENCES usuario (id) ON DELETE CASCADE ON UPDATE NO ACTION
 )
 
 
@@ -100,8 +100,6 @@ CREATE TABLE IF NOT EXISTS pedido (
 -- -----------------------------------------------------
 -- Table `mydb`.`posto`
 -- -----------------------------------------------------
-
-
 
 -- -----------------------------------------------------
 -- Table `mydb`.`combustivel`
