@@ -33,6 +33,9 @@ CREATE TABLE estado (
 
 INSERT INTO estado (id, sigla, nome, idcapital) VALUES (1, 'AC','ACRE', 16), (2, 'AL','ALAGOAS', 69), (3, 'AP','AMAPÁ', 131), (4, 'AM','AMAZONAS', 178), (5, 'BA','BAHIA', 538), (6, 'CE','CEARÁ', 678), (7, 'DF','DISTRITO FEDERAL', 804), (8, 'ES','ESPIRITO SANTO', 882), (9, 'GO','GOIÁS', 977), (10,'MA','MARANHÃO', 1314), (11,'MS','MATO GROSSO DO SUL', 1365), (12,'MT','MATO GROSSO', 1461), (13,'MG','MINAS GERAIS', 1630), (14,'PA','PARÁ', 2436), (15,'PB','PARAÍBA', 2655), (16,'PR','PARANÁ', 2878), (17,'PE','PERNAMBUCO', 3315), (18,'PI','PIAUÍ', 3582), (19,'RJ','RIO DE JANEIRO', 3658), (20,'RN','RIO GRANDE DO NORTE', 3770), (21,'RS','RIO GRANDE DO SUL', 4174), (22,'RO','RONDÔNIA', 4382), (23,'RR','RORAIMA', 4400), (24,'SC','SANTA CATARINA', 4500), (25,'SP','SÃO PAULO', 5270), (26,'SE','SERGIPE', 5353), (27,'TO','TOCANTINS', 5514);
 
+
+--COLOCAR SCRIPT DA CIDADE AQUI
+
 -- DROP TABLE IF EXISTS usuario;
 CREATE TABLE usuario (
   id int NOT NULL AUTO_INCREMENT,
@@ -65,7 +68,7 @@ CREATE TABLE usuario (
   CONSTRAINT usuario_idestado_FK FOREIGN KEY (idestado) REFERENCES estado (id) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
-INSERT INTO usuario (login, nome, idperfil, idtipo, senha, token, criacao, telefone, endereco, cep, idcidade, idestado) VALUES ('ADMIN', 'ADMINISTRADOR', 1, 1, 'peTcC99vkvvLqGQL7mdhGuJZIvL2iMEqvCNvZw3475PJ:JVyo1Pg2HyDyw9aSOd3gNPT30KdEyiUYCjs7RUzSoYGN', NULL, NOW(), '', '', '', 5270, 25);
+INSERT INTO usuario (login, nome, idperfil, idtipo, senha, token, criacao, telefone, endereco, cep, idcidade, idestado, cnpj) VALUES ('ADMIN', 'ADMINISTRADOR', 1, 1, 'peTcC99vkvvLqGQL7mdhGuJZIvL2iMEqvCNvZw3475PJ:JVyo1Pg2HyDyw9aSOd3gNPT30KdEyiUYCjs7RUzSoYGN', NULL, NOW(), '', '', '', 5270, 25, '');
 
 
 CREATE TABLE IF NOT EXISTS pedido (
@@ -74,17 +77,10 @@ CREATE TABLE IF NOT EXISTS pedido (
   id_usuario INT NOT NULL,
   data_pedido DATE NOT NULL,
   valortotal_pedido DOUBLE NOT NULL,
-  PRIMARY KEY (`id_pedido`)
-  CONSTRAINT pedido_idusuario_FK FOREIGN KEY (idusuario) REFERENCES usuario (id) ON DELETE RESTRICT ON UPDATE RESTRICT
-  )
+  PRIMARY KEY (`id_pedido`),
+  CONSTRAINT pedido_idusuario_FK FOREIGN KEY (id_usuario) REFERENCES usuario (id) ON DELETE RESTRICT ON UPDATE RESTRICT
+  );
 
-
-CREATE TABLE IF NOT EXISTS rescomb(
-  id_usuario INT NOT NULL,
-  id_comb INT NOT NULL,
-  FOREIGN KEY (id_usuario) REFERENCES usuario(id),
-  FOREIGN KEY (id_comb) REFERENCES combustivel(id_comb)
-)
 -- -----------------------------------------------------
 -- Table `mydb`.`combustivel`
 -- -----------------------------------------------------
@@ -93,9 +89,15 @@ CREATE TABLE IF NOT EXISTS combustivel (
   tipo_comb INT NOT NULL,
   desc_comb VARCHAR(45) NOT NULL,
   origem_comb VARCHAR(45) NULL,
-  PRIMARY KEY (`id_comb`))
+  PRIMARY KEY (`id_comb`));
 
 
+CREATE TABLE IF NOT EXISTS rescomb(
+  id_usuario INT NOT NULL,
+  id_comb INT NOT NULL,
+  FOREIGN KEY (id_usuario) REFERENCES usuario(id),
+  FOREIGN KEY (id_comb) REFERENCES combustivel(id_comb)
+);
 
 -- -----------------------------------------------------
 -- Table `mydb`.`anuncio`
@@ -126,7 +128,7 @@ CREATE TABLE IF NOT EXISTS anuncio (
     REFERENCES combustivel (`id_comb`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-    FOREIGN KEY (id_usuario) REFERENCES usuario(id))
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id));
 
 
 
@@ -145,7 +147,7 @@ CREATE TABLE IF NOT EXISTS transportadora (
     FOREIGN KEY (`anuncio_id_anu`)
     REFERENCES anuncio (`id_anu`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION);
 
 
 
@@ -159,7 +161,7 @@ CREATE TABLE IF NOT EXISTS mediapreco (
   semanal_mediap DOUBLE NOT NULL,
   mensal_mediap DOUBLE NOT NULL,
   anual_mediap DOUBLE NOT NULL,
-  PRIMARY KEY (`id_mediap`))
+  PRIMARY KEY (`id_mediap`));
 
 
 
@@ -177,7 +179,7 @@ CREATE TABLE IF NOT EXISTS notaf (
     FOREIGN KEY (`id_pedido`)
     REFERENCES pedido (`id_pedido`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION);
 
 
 
