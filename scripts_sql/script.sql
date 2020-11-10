@@ -81,10 +81,6 @@ CREATE TABLE IF NOT EXISTS distribuidor (
 )
 
 
-
-
-
-
 CREATE TABLE IF NOT EXISTS pedido (
   id_pedido INT NOT NULL AUTO_INCREMENT,
   id_anu INT NOT NULL,
@@ -101,9 +97,6 @@ CREATE TABLE IF NOT EXISTS pedido (
 -- -----------------------------------------------------
 -- Table `mydb`.`posto`
 -- -----------------------------------------------------
-
-
-
 -- -----------------------------------------------------
 -- Table `mydb`.`combustivel`
 -- -----------------------------------------------------
@@ -185,14 +178,6 @@ CREATE TABLE IF NOT EXISTS transportadora (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 
-
--- -----------------------------------------------------
--- Table `mydb`.`usuario`
--- -----------------------------------------------------
-
-
-
-
 -- -----------------------------------------------------
 -- Table `mydb`.`mediapreco`
 -- -----------------------------------------------------
@@ -228,16 +213,6 @@ CREATE TABLE IF NOT EXISTS notaf (
 -- -----------------------------------------------------
 -- Table `mydb`.`docdistribuidora`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS docdistribuidora (
-  id_doc INT NOT NULL,
-  pathdoc VARCHAR(255) NOT NULL,
-  id_dist INT NOT NULL,
-  PRIMARY KEY (`id_doc`),
-  INDEX `fk_docdistribuidora_distribuidor1_idx` (`id_dist` ASC) VISIBLE,
-  CONSTRAINT `fk_docdistribuidora_distribuidor1`
-    FOREIGN KEY (`id_dist`)
-    REFERENCES distribuidor (`id_dist`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+
 
 

@@ -13,7 +13,18 @@
 				<div class="form-group">
 					<label for="nome">Nome</label>
 					<input id="nome" name="nome" maxlength="100" class="form-control upper" type="text" spellcheck="false" value="<%=(item ? item.nome : '') %>" />
-				</div>
+				</div> 
+
+				<div class="form-group">
+					<label for="nome">Senha</label>
+					<input id="senha" name="senha" maxlength="100" class="form-control upper" type="password" spellcheck="false" value="<%=(item ? item.nome : '') %>" />
+				</div> 
+
+				<div class="form-group">
+					<label for="nome">Confirmar senha</label>
+					<input id="senha" name="senha" maxlength="100" class="form-control upper" type="password" spellcheck="false" value="<%=(item ? item.nome : '') %>" />
+				</div> 
+
 				<div class="form-group">
 					<label for="idperfil">Perfil</label>
 					<select id="idperfil" name="idperfil" class="form-control" size="1">
@@ -22,7 +33,18 @@
 						<option value="<%= perfis[i].id %>" <%-((item && item.idperfil === perfis[i].id) ? 'selected="selected"' : '') %>><%= perfis[i].nome %></option>
 						<% } %>
 					</select>
-				</div>
+				</div>  
+
+				<div class="form-group">
+					<label for="idtipo">Tipo</label>
+					<select id="idtipo" name="idtipo" class="form-control" size="1">
+						<option value="">SELECIONE...</option>
+						<% for (let i = 0; i < tipos.length; i++) { %>
+						<option value="<%= tipos[i].id %>" <%-((item && item.idtipo === tipos[i].id) ? 'selected="selected"' : '') %>><%= tipos[i].nome %></option>
+						<% } %>
+					</select>
+				</div> 
+
 				<div class="form-group">
 					<label for="telefone">Telefone</label>
 					<input id="telefone" name="telefone" maxlength="20" class="form-control upper" type="text" spellcheck="false" value="<%=(item ? item.telefone : '') %>" />
@@ -69,6 +91,9 @@
 				maxlength: 100
 			},
 			idperfil: {
+				required: true
+			},
+			idtipo: {
 				required: true
 			},
 			telefone: {

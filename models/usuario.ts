@@ -30,7 +30,7 @@ export = class Usuario {
 	public idcidade: number;
 	public idestado: number;
 	public criacao: string;
-
+	
 	// Utilizados apenas através do cookie
 	public admin: boolean;
 
@@ -261,7 +261,7 @@ export = class Usuario {
 		if (u.login.length < 3 || u.login.length > 100)
 			return "Login inválido";
 
-		try {
+		try {		//FALTA ATRIBUTO CNPJ, POSSUIR CAMINHÃO, CONVENIO, EXTRATO BANCARIO, CONTRATO SOCIAL, RAZÃO SOCIAL
 			await sql.query("insert into usuario (login, nome, idperfil, idtipo, senha, telefone, endereco, cep, idcidade, idestado, criacao) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now())", [u.login, u.nome, u.idperfil, u.idtipo, appsettings.usuarioHashSenhaPadrao, u.telefone, u.endereco, u.cep, u.idcidade, u.idestado]);
 			u.id = await sql.scalar("select last_insert_id()") as number;
 		} catch (e) {
