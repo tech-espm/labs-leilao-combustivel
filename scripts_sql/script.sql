@@ -48,6 +48,11 @@ CREATE TABLE usuario (
   idcidade int NOT NULL,
   idestado int NOT NULL,
   criacao datetime NOT NULL,
+  cnpj varchar(18) NOT NULL,
+  num_anuncios int,
+  num_vendas int,
+  num_pedidos int,
+  num_compras int,
   PRIMARY KEY (id),
   UNIQUE KEY usuario_login_UN (login),
   KEY usuario_idperfil_FK_idx (idperfil),
@@ -62,41 +67,24 @@ CREATE TABLE usuario (
 
 INSERT INTO usuario (login, nome, idperfil, idtipo, senha, token, criacao, telefone, endereco, cep, idcidade, idestado) VALUES ('ADMIN', 'ADMINISTRADOR', 1, 1, 'peTcC99vkvvLqGQL7mdhGuJZIvL2iMEqvCNvZw3475PJ:JVyo1Pg2HyDyw9aSOd3gNPT30KdEyiUYCjs7RUzSoYGN', NULL, NOW(), '', '', '', 5270, 25);
 
-CREATE TABLE IF NOT EXISTS posto (
-  id int NOT NULL,
-  num_pedidos int NOT NULL,
-  num_compras int NOT NULL,
-  PRIMARY KEY (id),
-  CONSTRAINT fk_posto_usuario_id FOREIGN KEY (id) REFERENCES usuario (id) ON DELETE CASCADE ON UPDATE NO ACTION
-)
-
-------------------------------ESSE
-CREATE TABLE IF NOT EXISTS distribuidor (
-  id int NOT NULL,
-  cnpj varchar(18) NOT NULL,
-  num_anuncios int NOT NULL,
-  num_vendas int NOT NULL,
-  PRIMARY KEY (id),
-  CONSTRAINT fk_distribuidor_usuario_id FOREIGN KEY (id) REFERENCES usuario (id) ON DELETE CASCADE ON UPDATE NO ACTION
-)
-
 
 CREATE TABLE IF NOT EXISTS pedido (
   id_pedido INT NOT NULL AUTO_INCREMENT,
   id_anu INT NOT NULL,
-  idusuario INT NOT NULL,
+  id_usuario INT NOT NULL,
   data_pedido DATE NOT NULL,
   valortotal_pedido DOUBLE NOT NULL,
-  id_posto INT NOT NULL,
   PRIMARY KEY (`id_pedido`)
   CONSTRAINT pedido_idusuario_FK FOREIGN KEY (idusuario) REFERENCES usuario (id) ON DELETE RESTRICT ON UPDATE RESTRICT
   )
 
 
-
--- -----------------------------------------------------
--- Table `mydb`.`posto`
--- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS rescomb(
+  id_usuario INT NOT NULL,
+  id_comb INT NOT NULL,
+  FOREIGN KEY (id_usuario) REFERENCES usuario(id),
+  FOREIGN KEY (id_comb) REFERENCES combustivel(id_comb)
+)
 -- -----------------------------------------------------
 -- Table `mydb`.`combustivel`
 -- -----------------------------------------------------
@@ -118,7 +106,7 @@ CREATE TABLE IF NOT EXISTS anuncio (
   prazo_anu VARCHAR(45) NOT NULL,
   transporte_anu VARCHAR(45) NOT NULL,
   qtd_anu DOUBLE NOT NULL,
-  id_dist VARCHAR(45) NOT NULL,
+  id_usuario INT NOT NULL,
   data_anu DATE NULL,
   valor_anu DOUBLE NOT NULL,
   id_transp INT NOT NULL,
@@ -137,29 +125,10 @@ CREATE TABLE IF NOT EXISTS anuncio (
     FOREIGN KEY (`combustivel_id_comb`)
     REFERENCES combustivel (`id_comb`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION,
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id))
 
 
-
--- -----------------------------------------------------
--- Table `mydb`.`distribuidor`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS distribuidor (
-  id_dist INT NOT NULL AUTO_INCREMENT,
-  anuncios_dist INT NULL,
-  vestas_dist INT NULL,
-  cnpj_dist VARCHAR(45) NOT NULL,
-  id_cad INT NOT NULL,
-  id_anu INT NULL,
-  end_dist VARCHAR(45) NOT NULL,
-  nome_dist VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id_dist`),
-  INDEX fk_distribuidor_anuncio1_idx (`id_anu` ASC) VISIBLE,
-  CONSTRAINT fk_distribuidor_anuncio1
-    FOREIGN KEY (`id_anu`)
-    REFERENCES anuncio (`id_anu`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
 
 
 
@@ -177,6 +146,8 @@ CREATE TABLE IF NOT EXISTS transportadora (
     REFERENCES anuncio (`id_anu`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
+
+
 
 -- -----------------------------------------------------
 -- Table `mydb`.`mediapreco`
@@ -208,11 +179,6 @@ CREATE TABLE IF NOT EXISTS notaf (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 
-
-
--- -----------------------------------------------------
--- Table `mydb`.`docdistribuidora`
--- -----------------------------------------------------
 
 
 
