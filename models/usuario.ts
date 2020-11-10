@@ -23,13 +23,19 @@ export = class Usuario {
 	public login: string;
 	public nome: string;
 	public idperfil: number;
-	public idtipo: number;
+	public idtipo: number; 
+	public senha: string; 
 	public telefone: string;
 	public endereco: string;
 	public cep: string;
 	public idcidade: number;
 	public idestado: number;
-	public criacao: string;
+	public criacao: string; 
+	public cnpj: string; 
+	public num_anuncios: number; 
+	public num_vendas: number; 
+	public num_pedidos: number; 
+	public num_compras: number; 
 	
 	// Utilizados apenas através do cookie
 	public admin: boolean;
@@ -214,7 +220,7 @@ export = class Usuario {
 		let lista: Usuario[] = null;
 
 		await Sql.conectar(async (sql: Sql) => {
-			lista = await sql.query("select u.id, u.login, u.nome, p.nome perfil, t.nome tipo, u.telefone, u.endereco, u.cep, c.nome cidade, e.sigla estado, date_format(u.criacao, '%d/%m/%Y') criacao from usuario u inner join perfil p on p.id = u.idperfil inner join tipo t on t.id = u.idtipo inner join cidade c on c.id = u.idcidade inner join estado e on e.id = u.idestado where idtipo = 1") as Usuario[];
+			lista = await sql.query("select u.id, u.login, u.nome, p.nome perfil, t.nome tipo, u.telefone, u.cnpj, u.endereco, u.cep, c.nome cidade, e.sigla estado, date_format(u.criacao, '%d/%m/%Y') criacao from usuario u inner join perfil p on p.id = u.idperfil inner join tipo t on t.id = u.idtipo inner join cidade c on c.id = u.idcidade inner join estado e on e.id = u.idestado where idtipo = 1") as Usuario[];
 		});
 
 		return (lista || []);
@@ -224,7 +230,7 @@ export = class Usuario {
 		let lista: Usuario[] = null;
 
 		await Sql.conectar(async (sql: Sql) => {
-			lista = await sql.query("select id, login, nome, idperfil, idtipo, senha, telefone, endereco, cep, idcidade, idestado, date_format(criacao, '%d/%m/%Y') criacao from usuario where id = ? and idtipo = 1", [id]) as Usuario[];
+			lista = await sql.query("select id, login, nome, idperfil, idtipo, senha, telefone, cnpj, endereco, cep, idcidade, idestado, date_format(criacao, '%d/%m/%Y') criacao from usuario where id = ? and idtipo = 1", [id]) as Usuario[];
 		});
 
 		return ((lista && lista[0]) || null);
@@ -262,7 +268,7 @@ export = class Usuario {
 			return "Login inválido";
 
 		try {		//FALTA ATRIBUTO CNPJ, POSSUIR CAMINHÃO, CONVENIO, EXTRATO BANCARIO, CONTRATO SOCIAL, RAZÃO SOCIAL
-			await sql.query("insert into usuario (login, nome, idperfil, idtipo, senha, telefone, endereco, cep, idcidade, idestado, criacao) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now())", [u.login, u.nome, u.idperfil, u.idtipo, appsettings.usuarioHashSenhaPadrao, u.telefone, u.endereco, u.cep, u.idcidade, u.idestado]);
+			await sql.query("insert into usuario (login, nome, idperfil, idtipo, senha, telefone, cnpj, endereco, cep, idcidade, idestado, criacao) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now())", [u.login, u.nome, u.idperfil, u.idtipo, appsettings.usuarioHashSenhaPadrao, u.telefone, u.cnpj, u.endereco, u.cep, u.idcidade, u.idestado]);
 			u.id = await sql.scalar("select last_insert_id()") as number;
 		} catch (e) {
 			if (e.code) {

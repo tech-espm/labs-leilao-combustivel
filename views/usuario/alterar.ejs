@@ -17,12 +17,12 @@
 
 				<div class="form-group">
 					<label for="nome">Senha</label>
-					<input id="senha" name="senha" maxlength="100" class="form-control upper" type="password" spellcheck="false" value="<%=(item ? item.nome : '') %>" />
+					<input id="senha" name="senha" maxlength="100" class="form-control upper" type="password" spellcheck="false" value="<%=(item ? item.senha : '') %>" />
 				</div> 
 
 				<div class="form-group">
 					<label for="nome">Confirmar senha</label>
-					<input id="senha" name="senha" maxlength="100" class="form-control upper" type="password" spellcheck="false" value="<%=(item ? item.nome : '') %>" />
+					<input id="senha" name="senha" maxlength="100" class="form-control upper" type="password" spellcheck="false" value="<%=(item ? item.senha : '') %>" />
 				</div> 
 
 				<div class="form-group">
@@ -48,7 +48,13 @@
 				<div class="form-group">
 					<label for="telefone">Telefone</label>
 					<input id="telefone" name="telefone" maxlength="20" class="form-control upper" type="text" spellcheck="false" value="<%=(item ? item.telefone : '') %>" />
-				</div>
+				</div> 
+
+				<div class="form-group">
+					<label for="cnpj">CNPJ<label>
+					<input id="cnpj" name="cnpj" maxlength="20" class="form-control upper" type="text" spellcheck="false" value="<%=(item ? item.cnpj : '') %>" />
+				</div> 
+
 				<div class="form-group">
 					<label for="endereco">Endereço</label>
 					<input id="endereco" name="endereco" maxlength="100" class="form-control upper" type="text" spellcheck="false" value="<%=(item ? item.endereco : '') %>" />
