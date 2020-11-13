@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS rescomb(
 -- -----------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS anuncio (
-  id_anu INT NOT NULL,
+  id_anu INT NOT NULL AUTO_INCREMENT,
   prazo_anu VARCHAR(45) NOT NULL,
   transporte_anu VARCHAR(45) NOT NULL,
   qtd_anu DOUBLE NOT NULL,
@@ -113,16 +113,9 @@ CREATE TABLE IF NOT EXISTS anuncio (
   valor_anu DOUBLE NOT NULL,
   id_transp INT NOT NULL,
   id_comb INT NOT NULL,
-  id_pedido INT NOT NULL,
   combustivel_id_comb INT NOT NULL,
   PRIMARY KEY (`id_anu`),
-  INDEX fk_anuncio_pedido1_idx (`id_pedido` ASC) VISIBLE,
   INDEX fk_anuncio_combustivel1_idx (`combustivel_id_comb` ASC) VISIBLE,
-  CONSTRAINT fk_anuncio_pedido1
-    FOREIGN KEY (`id_pedido`)
-    REFERENCES pedido (`id_pedido`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT fk_anuncio_combustivel1
     FOREIGN KEY (`combustivel_id_comb`)
     REFERENCES combustivel (`id_comb`)

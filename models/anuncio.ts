@@ -43,7 +43,7 @@ export = class Anuncio {
 	public static async criar(a: Anuncio): Promise<string> { 
 		let res: string;
 		await Sql.conectar(async (sql: Sql) => {
-			await sql.query("insert into anuncio (id_anu, prazo_anu, transporte_anu, qtd_anu, id_usuario, data_anu, valor_anu, id_transp, id_comb, id_pedido) values (?, ?, ?, ?,?,?,?,?,?,?)", [a.id_anu, a.prazo_anu, a.transporte_anu, a.qtd_anu, a.id_usuario, a.data_anu, a.valor_anu, a.id_transp, a.id_comb, a.id_pedido]);
+			await sql.query("insert into anuncio (prazo_anu, transporte_anu, qtd_anu, id_usuario, data_anu, valor_anu, id_transp, id_comb) values (?, ?, ?, ?,?,?,?,?,?,?)", [a.prazo_anu, a.transporte_anu, a.qtd_anu, a.id_usuario, a.data_anu, a.valor_anu, a.id_transp, a.id_comb]);
 			res = sql.linhasAfetadas.toString();
 		});
 		
