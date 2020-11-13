@@ -33,8 +33,8 @@ router.post("/criar", wrap(async (req: express.Request, res: express.Response) =
 	let u = await Usuario.cookie(req, res, true);
 	if (!u)
 		return;
-	u = req.body as Usuario;
-	u.idtipo = Usuario.IdTipoGeral;
+	u = req.body as Usuario; 
+	//u.idtipo = Usuario.IdTipoGeral;
 	jsonRes(res, 400, u ? await Usuario.criarGeral(u) : "Dados inválidos");
 }));
 
