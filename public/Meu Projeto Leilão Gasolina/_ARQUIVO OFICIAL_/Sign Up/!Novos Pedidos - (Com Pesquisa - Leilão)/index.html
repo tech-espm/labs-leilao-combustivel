@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="shortcut icon" href="/img/favicon.jpg" />
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css2/css.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;700;900&display=swap');
+	</style>
+
+	<title>Navbar</title>
+
+</head>
+
+<body>
+
+	<!--HEADER / NAVBAR-->
+
+	<nav id="navTop" class="navbar navbar-expand-md navbar-dark">
+
+
+		<img id="btnLogo" class="navbar-brand mr-0" href="#" src="img/logo.png" width="140px" type="button">
+
+
+		<button class="navbar-toggler" type="button" style="background-color:#F09F0e" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+			<i class="fa fa-bars" style="font-size:30px;color:white"></i>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarCollapse">
+			<ul class="navbar-nav m-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="">HOME</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="">TENDÊNCIAS</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link text-nowrap" href="">NOVOS PEDIDOS</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="">RELATÓRIOS</a>
+				</li>
+			</ul>
+			<form class="form-inline mt-2 mt-md-0">
+
+
+				<button class="btn">
+
+					<i class="fa fa-search" style="font-size:30px;color:white"></i>
+
+				</button>
+
+
+				<div class="dropdown ml-3">
+
+					<button class="btn btn-default" type="button" id="menu1" data-toggle="dropdown">
+
+						<i class="fa fa-bars" style="font-size:30px;color:#F09F0E"></i> <span class="caret"></span></button>
+					<ul id="btnCaixa" class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="menu1">
+						<li role="presentation"><a role="menuitem" id="btnContas" tabindex="-1" href="#">Minhas Contas</a></li>
+						<li role="presentation"><a role="menuitem" id="btnMPedidos" tabindex="-1" href="#">Meus Pedidos</a></li>
+						<li role="presentation"><a role="menuitem" id="btnAbertura" tabindex="-1" href="#">Abertura de Crédito</a></li>
+						<li role="presentation"><a role="menuitem" id="btnConfiguracoes" tabindex="-1" href="#">Configurações</a></li>
+						<hr class="bg-light">
+						<li role="presentation"><a role="menuitem" id="btnSair" tabindex="-1" href="#">Sair</a></li>
+
+
+						<li role="presentation" class="divider"></li>
+
+					</ul>
+				</div>
+
+			</form>
+		</div>
+	</nav>
+
+
+	<!--CONTEÚDO DO SITE-->
+
+
+	<div class="text-center mt-5 mb-4">
+
+		<h1 id="topText">
+			Utilize os filtros para<br> otimizar suas compras!
+		</h1>
+
+	</div>
+
+	<div class="text-center mb-2">
+		<img width="25px" class="img-responsive" style="transform: rotate(90deg);" src="img/triangulinho%20esquerda_amarelo.png">
+	</div>
+
+
+
+	<div class="container mt-4 mb-5">
+		<hr class="mb-4">
+		<div class="row">
+			<div class="col-4">
+				<div class="form-group">
+					<label class="m-2" for="exampleFormControlSelect1">Combustível</label>
+					<select class="form-control" id="exampleFormControlSelect1">
+						<option>Gasolina Comum</option>
+						<option>Gasolina Aditivada</option>
+						<option>Gasolina Premium</option>
+						<option>Álcool</option>
+						<option>Alcool Aditivado</option>
+						<option>Diesel S10</option>
+						<option>Diesel S500</option>
+						<option>- Qualquer -</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-4">
+				<div class="form-group">
+					<label class="m-2" for="exampleFormControlSelect2">Prazo de Pagamento</label>
+					<select class="form-control" id="exampleFormControlSelect2">
+						<option>0 dia</option>
+						<option>1 dia</option>
+						<option>2 dias</option>
+						<option>3 dias</option>
+						<option>4 dias</option>
+						<option>5 dias</option>
+						<option>6 dias</option>
+						<option>7 dias</option>
+						<option>- Qualquer -</option>
+
+					</select>
+				</div>
+			</div>
+			<div class="col-4">
+				<div class="form-group">
+					<label class="m-2" for="exampleFormControlSelect3">Origem</label>
+					<select class="form-control" id="exampleFormControlSelect3">
+						<option>Apenas Baguar</option>
+						<option>Bombeio</option>
+						<option>Importada</option>
+						<option>Formulada</option>
+						<option>- Qualquer -</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+
+
+		<div class="row">
+			<div class="col-4">
+				<div class="form-group">
+					<label class="m-2" for="exampleFormControlSelect4">Transporte</label>
+					<select class="form-control" id="exampleFormControlSelect4">
+						<option>CIF</option>
+						<option>FOB</option>
+						<option>- Qualquer -</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-4">
+				<div class="form-group">
+					<label class="m-2" for="exampleFormControlSelect5">Quantidade</label>
+					<select class="form-control" id="exampleFormControlSelect5">
+						<option>5</option>
+						<option>10</option>
+						<option>15</option>
+						<option>20</option>
+						<option>25</option>
+						<option>30</option>
+						<option>40</option>
+						<option>50+</option>
+						<option>- Qualquer -</option>
+					</select>
+					<small class="m-1">Obs.: Unidade em milhares (Litros)</small>
+				</div>
+			</div>
+			<div class="col-4">
+				<div class="form-group">
+					<label for="exampleFormControlSelect6" class="m-2">Média de Preço</label>
+					<select class="form-control" id="exampleFormControlSelect6">
+						<option>Hoje</option>
+						<option>Amanhã</option>
+						<option>- Qualquer -</option>
+
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="mb-5 container" style='text-align:center; width: auto; height:90px '>
+		<div style='display: inline-block;'>
+
+
+			<!-- BOTÃO LEILÃO -->
+
+			<svg type="button" id="btnLeilao" class="mr-5" xmlns="http://www.w3.org/2000/svg" width="140px" viewBox="0 0 120 43.009">
+				<defs>
+					<style>
+						.cls-1 {
+							fill: #f09f0e;
+						}
+
+						.cls-2 {
+							fill: #14234a;
+							font-size: 13px;
+							font-family: Montserrat-Bold, Montserrat;
+							font-weight: 700;
+						}
+
+						.cls-3 {
+							fill: #fff;
+						}
+					</style>
+				</defs>
+				<g id="Group_113" data-name="Group 113" transform="translate(-360 -455.495)">
+					<path id="Veja_mais_1" data-name="Veja mais 1" class="cls-1" d="M0,0H120V43.009H0V0Z" transform="translate(360 455.495)" />
+					<text id="LEILÃO" class="cls-2" transform="translate(392 482)">
+						<tspan x="5.4" y="1">LEILÃO</tspan>
+					</text>
+					<path id="triangulinho_direita" data-name="triangulinho direita" class="cls-3" d="M2091.894,276.013l-9.212-13.611,9.7-14.086h-6.965l-9.1,14.083L2085,276.013Z" transform="translate(-1621.274 214.859)" />
+					<path id="triangulinho_esquerda" data-name="triangulinho esquerda" class="cls-3" d="M2076.8,276.013l9.212-13.611-9.7-14.086h6.965l9.1,14.083-8.693,13.614Z" transform="translate(-1707.508 214.859)" />
+				</g>
+			</svg>
+
+		</div>
+		<div style='display: inline-block;'>
+
+			<!-- BOTÃO PEDIDOS -->
+
+			<svg type="button" id="btnPedidos" class="ml-5" xmlns="http://www.w3.org/2000/svg" width="140px" viewBox="0 0 120 43.009">
+				<defs>
+					<style>
+						.cls-1 {
+							fill: #f09f0e;
+						}
+
+						.cls-2 {
+							fill: #14234a;
+							font-size: 12px;
+							font-family: Montserrat-Bold, Montserrat;
+							font-weight: 700;
+						}
+
+						.cls-3 {
+							fill: #fff;
+						}
+					</style>
+				</defs>
+				<g id="Group_113" data-name="Group 113" transform="translate(-360 -455.495)">
+					<path id="Veja_mais_1" data-name="Veja mais 1" class="cls-1" d="M0,0H120V43.009H0V0Z" transform="translate(360 455.495)" />
+					<text id="PEDIDOS" class="cls-2" transform="translate(392 482)">
+						<tspan x="-0.7" y="0.5">PEDIDOS</tspan>
+					</text>
+					<path id="triangulinho_direita" data-name="triangulinho direita" class="cls-3" d="M2091.894,276.013l-9.212-13.611,9.7-14.086h-6.965l-9.1,14.083L2085,276.013Z" transform="translate(-1621.274 214.859)" />
+					<path id="triangulinho_esquerda" data-name="triangulinho esquerda" class="cls-3" d="M2076.8,276.013l9.212-13.611-9.7-14.086h6.965l9.1,14.083-8.693,13.614Z" transform="translate(-1707.508 214.859)" />
+				</g>
+			</svg>
+
+		</div>
+
+
+	</div>
+	<hr class="container">
+
+	<div id="Cartoes" class="container">
+		<div class="card-title">
+			<h2>Achamos esses resultados:</h2>
+		</div>
+
+		<div class="card">
+			<div class="data">NOME DA DISTRIBUIDORA </div>
+
+			<span>Combustível: <span>-</span></span>
+			<span>Origem: <span>-</span></span>
+			<span>Prazo: <span>-</span></span>
+			<span>Transporte: <span>-</span></span>
+			<span>Quant. Disponível: <span>-</span></span>
+			<span>Preço: <span>-</span></span>
+
+			<div class="autor">
+				<div class="img-container">
+					<div class="img"></div>
+				</div>
+				<div class="info">
+					<span>Site Oficial:</span>
+					<a href="" style="font-size: 11px">sitedistribuidora.bom.br</a>
+				</div>
+			</div>
+
+			<div class="tags">
+
+				<a href="#">Comprar</a>
+
+
+			</div>
+		</div>
+
+		<div class="card">
+			<div class="data">NOME DA DISTRIBUIDORA </div>
+
+			<span>Combustível: <span>-</span></span>
+			<span>Origem: <span>-</span></span>
+			<span>Prazo: <span>-</span></span>
+			<span>Transporte: <span>-</span></span>
+			<span>Quant. Disponível: <span>-</span></span>
+			<span>Preço: <span>-</span></span>
+
+			<div class="autor">
+				<div class="img-container">
+					<div class="img"></div>
+				</div>
+				<div class="info">
+					<span>Site Oficial:</span>
+					<a href="" style="font-size: 11px">sitedistribuidora.bom.br</a>
+				</div>
+			</div>
+
+			<div class="tags">
+
+				<a href="#">Comprar</a>
+
+
+			</div>
+		</div>
+
+
+		<div class="card">
+			<div class="data">NOME DA DISTRIBUIDORA </div>
+
+			<span>Combustível: <span>-</span></span>
+			<span>Origem: <span>-</span></span>
+			<span>Prazo: <span>-</span></span>
+			<span>Transporte: <span>-</span></span>
+			<span>Quant. Disponível: <span>-</span></span>
+			<span>Preço: <span>-</span></span>
+
+			<div class="autor">
+				<div class="img-container">
+					<div class="img"></div>
+				</div>
+				<div class="info">
+					<span>Site Oficial:</span>
+					<a href="" style="font-size: 11px">sitedistribuidora.bom.br</a>
+				</div>
+			</div>
+
+			<div class="tags">
+
+				<a href="#">Comprar</a>
+
+
+			</div>
+		</div>
+		<div class="card">
+			<div class="data">NOME DA DISTRIBUIDORA </div>
+
+			<span>Combustível: <span>-</span></span>
+			<span>Origem: <span>-</span></span>
+			<span>Prazo: <span>-</span></span>
+			<span>Transporte: <span>-</span></span>
+			<span>Quant. Disponível: <span>-</span></span>
+			<span>Preço: <span>-</span></span>
+
+			<div class="autor">
+				<div class="img-container">
+					<div class="img"></div>
+				</div>
+				<div class="info">
+					<span>Site Oficial:</span>
+					<a href="" style="font-size: 11px">sitedistribuidora.bom.br</a>
+				</div>
+			</div>
+
+			<div class="tags">
+
+				<a href="#">Comprar</a>
+
+
+			</div>
+		</div>
+
+	</div>
+
+
+
+	<hr class="container">
+
+	<!-- PARTE DE BAIXO -->
+	<hr class="mt-5">
+
+	<div class="container mt-5 mb-4 bg-i">
+
+		<div class="row">
+
+			<div class="col-4">
+
+				<div class="mb-4">
+
+					<h2 id="bottomTitulo" class="mb-3">
+						Contato
+					</h2>
+
+
+					<div>
+
+
+
+						<div class="form-row align-items-center">
+
+							<i class="fa fa-envelope col-form-label" style="font-size:30px; color: "></i>
+
+
+							<div class="col">
+
+								<label class="col-form-label" id="bottomText">abc@epex.com.br</label>
+
+							</div>
+
+						</div>
+
+
+
+
+					</div>
+
+
+
+
+
+					<div class="form-row align-items-center">
+
+						<i class="fa fa-phone-square col-form-label" style="font-size:34px; color: "></i>
+
+
+						<div class="col">
+
+							<label class="col-form-label" id="bottomText">+55 (11) 99999-9999 </label>
+
+						</div>
+
+					</div>
+
+				</div>
+
+
+
+				<h2 id="bottomTitulo" class="mb-4">Endereço</h2>
+
+				<div>
+					<p id="bottomText">
+
+						Rua xxxxxxxx,xxxxxxxxxxxxxxxxxx, 123
+						<br>Complexo xyz, Apto. 10
+						<br> São Paulo, SP, Brasil
+						<br> CEP 0000000-000
+
+					</p>
+
+				</div>
+
+			</div>
+
+			<div class="col-4">
+
+				<h2 id="bottomTitulo" class="mb-3">Links</h2>
+
+				<div>
+					<a href="#" id="bottomText">Home</a>
+				</div>
+
+				<div>
+					<a href="#" id="bottomText">Tendências</a>
+				</div>
+
+				<div>
+					<a href="#" id="bottomText">Novos Pedidos</a>
+				</div>
+
+				<div>
+					<a href="#" id="bottomText">Relatórios</a>
+				</div>
+
+				<div>
+					<a href="#" id="bottomText">Termos e Serviços</a>
+				</div>
+
+				<div>
+					<a href="#" id="bottomText">Políticas de Privacidade</a>
+				</div>
+			</div>
+			<div class="col-4">
+
+				<img src="img/maps.png" width="400px" height="300px">
+			</div>
+
+		</div>
+
+	</div>
+
+	<!--	FOOTER -->
+
+	<footer class="p-3" style="background-color: #14234A">
+		<div class="container">
+			<span style="color: white; font-weight: 500">© 2020 EPEX</span>
+		</div>
+	</footer>
+
+
+
+
+
+
+
+
+</body></html>
