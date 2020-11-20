@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS combustivel (
   desc_comb VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id_comb`));
 
-insert into combustivel(id_comb, tipo_comb, desc_comb) values('1', 'Gasolina Comum'),
+insert into combustivel(id_comb, desc_comb) values('1', 'Gasolina Comum'),
 ('2', 'Gasolina Aditivada'),
 ('3', 'Gasolina Premium'),
 ('4', 'Alcool Comum'),
@@ -104,6 +104,14 @@ CREATE TABLE IF NOT EXISTS rescomb(
   FOREIGN KEY (id_comb) REFERENCES combustivel(id_comb)
 );
 
+
+CREATE TABLE IF NOT EXISTS transportadora (
+  id_transp INT NOT NULL AUTO_INCREMENT,
+  nome_transp VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id_transp`)); 
+
+  insert into transportadora(id_transp, nome_transp)values 
+  (1,"FOB"),(2,"CIF");
 -- -----------------------------------------------------
 -- Table `mydb`.`anuncio`
 -- -----------------------------------------------------
@@ -118,9 +126,8 @@ CREATE TABLE IF NOT EXISTS anuncio (
   id_transp INT NOT NULL,
   id_comb INT NOT NULL,
   PRIMARY KEY (`id_anu`),
-  INDEX fk_anuncio_combustivel1_idx (`combustivel_id_comb` ASC) VISIBLE,
     CONSTRAINT FK_tranportadora FOREIGN KEY (id_transp)
-    REFERENCES transportadora(id_transp)
+    REFERENCES transportadora(id_transp),
     CONSTRAINT fk_anuncio_combustivel1
     FOREIGN KEY (`id_comb`)
     REFERENCES combustivel (`id_comb`)
@@ -128,20 +135,6 @@ CREATE TABLE IF NOT EXISTS anuncio (
     ON UPDATE NO ACTION,
     FOREIGN KEY (id_usuario) REFERENCES usuario(id));
 
-
-
-
-
--- -----------------------------------------------------
--- Table `mydb`.`transportadora`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS transportadora (
-  id_transp INT NOT NULL AUTO_INCREMENT,
-  nome_transp VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id_transp`)); 
-
-  insert into transportadora(id_transp, nome_transp)values 
-  (1,"FOB"),(2,"CIF");
 
 -- -----------------------------------------------------
 -- Table `mydb`.`mediapreco`
