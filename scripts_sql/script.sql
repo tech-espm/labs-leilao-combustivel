@@ -138,8 +138,11 @@ CREATE TABLE IF NOT EXISTS anuncio (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS transportadora (
   id_transp INT NOT NULL AUTO_INCREMENT,
-  nome_tansp VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id_transp`);
+  nome_transp VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id_transp`); 
+
+  insert into transportadora(id_transp, nome_transp)values 
+  (1,"FOB"),(2,"CIF")
 
 -- -----------------------------------------------------
 -- Table `mydb`.`mediapreco`
