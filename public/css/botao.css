@@ -1,0 +1,49 @@
+.btn-primary.epex {
+	position: relative;
+	font-family: 'Montserrat', sans-serif;
+	background-color: #f09f0e;
+	font-weight: bold;
+	color: #14234a;
+	border: 0px none transparent;
+	padding: 0px;
+	background-image: url(../imagens/botao-esq.png);
+	background-position: left top;
+	background-size: contain;
+	background-repeat: no-repeat;
+	box-shadow: 0px 1px 4px rgba(0,0,0,0.75);
+	outline: 0px none transparent;
+}
+
+.btn-primary.epex:hover {
+	box-shadow: 0px 1px 6px rgba(0,0,0,0.9);
+	outline: 0px none transparent;
+}
+
+.btn-primary.epex:not(:disabled):not(.disabled).active, .btn-primary.epex:not(:disabled):not(.disabled):active, .show>.btn-primary.epex.dropdown-toggle,
+.btn-primary:not(:disabled):not(.disabled).active:focus, .btn-primary:not(:disabled):not(.disabled):active:focus, .show>.btn-primary.dropdown-toggle:focus {
+    background-color: #db9110;
+	color: #14234a;
+	box-shadow: 0px 1px 6px rgba(0,0,0,0.9);
+	border: 0px none transparent;
+	outline: 0px none transparent;
+}
+
+.btn-lg.epex {
+	padding: 0px;
+}
+
+.epex > span {
+	display: inline-block;
+	width: 100%;
+	margin: 0px;
+	border: 0px none transparent;
+	padding: .75rem 2.5rem;
+	background-image: url(../imagens/botao-dir.png);
+	background-position: right top;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+.btn-lg.epex > span {
+	padding: 1.5rem 3.5rem;
+}

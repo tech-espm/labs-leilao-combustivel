@@ -22,6 +22,10 @@ router.all("/criar", wrap(async (req: express.Request, res: express.Response) =>
 	res.render("publico/criar", { layout: "layout-publico", titulo: "Criar" });
 }));
 
+router.all("/pedidos", wrap(async (req: express.Request, res: express.Response) => {
+	res.render("publico/pedidos", { layout: "layout-publico", titulo: "Pedidos" });
+}));
+
 router.all("/login", wrap(async (req: express.Request, res: express.Response) => {
 	let u = await Usuario.cookie(req);
 	if (!u) {
