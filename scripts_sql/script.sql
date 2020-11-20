@@ -88,9 +88,15 @@ CREATE TABLE IF NOT EXISTS combustivel (
   id_comb INT NOT NULL,
   tipo_comb INT NOT NULL,
   desc_comb VARCHAR(45) NOT NULL,
-  origem_comb VARCHAR(45) NULL,
   PRIMARY KEY (`id_comb`));
 
+insert into combustivel(idcomb, tipo_comb, desc_comb) values('1', '1', 'Gasolina Comum')
+insert into combustivel(idcomb, tipo_comb, desc_comb) values('1', '2', 'Gasolina Adtivada')
+insert into combustivel(idcomb, tipo_comb, desc_comb) values('1', '3', 'Gasolina Premium')
+insert into combustivel(idcomb, tipo_comb, desc_comb) values('2', '1', 'Alcol Comum')
+insert into combustivel(idcomb, tipo_comb, desc_comb) values('2', '2', 'Alcol Aditivado')
+insert into combustivel(idcomb, tipo_comb, desc_comb) values('3', '1', 'Disel S10')
+insert into combustivel(idcomb, tipo_comb, desc_comb) values('3', '2', 'Disel S500');
 
 CREATE TABLE IF NOT EXISTS rescomb(
   id_usuario INT NOT NULL,
@@ -106,18 +112,18 @@ CREATE TABLE IF NOT EXISTS rescomb(
 CREATE TABLE IF NOT EXISTS anuncio (
   id_anu INT NOT NULL AUTO_INCREMENT,
   prazo_anu VARCHAR(45) NOT NULL,
-  transporte_anu VARCHAR(45) NOT NULL,
   qtd_anu DOUBLE NOT NULL,
   id_usuario INT NOT NULL,
   data_anu DATE NULL,
   valor_anu DOUBLE NOT NULL,
   id_transp INT NOT NULL,
   id_comb INT NOT NULL,
-  combustivel_id_comb INT NOT NULL,
   PRIMARY KEY (`id_anu`),
   INDEX fk_anuncio_combustivel1_idx (`combustivel_id_comb` ASC) VISIBLE,
-  CONSTRAINT fk_anuncio_combustivel1
-    FOREIGN KEY (`combustivel_id_comb`)
+    CONSTRAINT FK_tranportadora FOREIGN KEY (id_transp)
+    REFERENCES transportadora(id_transp)
+    CONSTRAINT fk_anuncio_combustivel1
+    FOREIGN KEY (`id_comb`)
     REFERENCES combustivel (`id_comb`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
@@ -133,16 +139,7 @@ CREATE TABLE IF NOT EXISTS anuncio (
 CREATE TABLE IF NOT EXISTS transportadora (
   id_transp INT NOT NULL AUTO_INCREMENT,
   nome_tansp VARCHAR(45) NOT NULL,
-  anuncio_id_anu INT NOT NULL,
-  PRIMARY KEY (`id_transp`),
-  INDEX fk_transportadora_anuncio1_idx (`anuncio_id_anu` ASC) VISIBLE,
-  CONSTRAINT fk_transportadora_anuncio1
-    FOREIGN KEY (`anuncio_id_anu`)
-    REFERENCES anuncio (`id_anu`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-
+  PRIMARY KEY (`id_transp`);
 
 -- -----------------------------------------------------
 -- Table `mydb`.`mediapreco`
@@ -173,7 +170,5 @@ CREATE TABLE IF NOT EXISTS notaf (
     REFERENCES pedido (`id_pedido`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
-
-
 
 
