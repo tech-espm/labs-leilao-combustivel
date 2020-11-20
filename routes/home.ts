@@ -16,6 +16,10 @@ router.all("/", wrap(async (req: express.Request, res: express.Response) => {
 
 router.all("/cadastro", wrap(async (req: express.Request, res: express.Response) => {
 	res.render("publico/cadastro", { layout: "layout-publico", titulo: "Cadastre-se" });
+})); 
+
+router.all("/criar", wrap(async (req: express.Request, res: express.Response) => {
+	res.render("publico/criar", { layout: "layout-publico", titulo: "Criar" });
 }));
 
 router.all("/login", wrap(async (req: express.Request, res: express.Response) => {
