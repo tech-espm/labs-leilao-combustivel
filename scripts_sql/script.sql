@@ -86,17 +86,16 @@ CREATE TABLE IF NOT EXISTS pedido (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS combustivel (
   id_comb INT NOT NULL,
-  tipo_comb INT NOT NULL,
   desc_comb VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id_comb`));
 
-insert into combustivel(id_comb, tipo_comb, desc_comb) values('1', '1', 'Gasolina Comum'),
-('1', '2', 'Gasolina Adtivada'),
-('1', '3', 'Gasolina Premium'),
-('2', '1', 'Alcol Comum'),
-('2', '2', 'Alcol Aditivado'),
-('3', '1', 'Disel S10'),
-('3', '2', 'Disel S500');
+insert into combustivel(id_comb, tipo_comb, desc_comb) values('1', 'Gasolina Comum'),
+('2', 'Gasolina Aditivada'),
+('3', 'Gasolina Premium'),
+('4', 'Alcool Comum'),
+('5', 'Alcool Aditivado'),
+('6', 'Diesel S10'),
+('7', 'Diesel S500');
 
 CREATE TABLE IF NOT EXISTS rescomb(
   id_usuario INT NOT NULL,
