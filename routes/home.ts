@@ -14,12 +14,12 @@ router.all("/", wrap(async (req: express.Request, res: express.Response) => {
 	}
 }));
 
-router.all("/cadastro", wrap(async (req: express.Request, res: express.Response) => {
-	res.render("publico/cadastro", { layout: "layout-publico", titulo: "Cadastre-se" });
+router.all("/tipocadastro", wrap(async (req: express.Request, res: express.Response) => {
+	res.render("publico/tipocadastro", { layout: "layout-publico", titulo: "Escolha o tipo" });
 })); 
 
-router.all("/criar", wrap(async (req: express.Request, res: express.Response) => {
-	res.render("publico/criar", { layout: "layout-publico", titulo: "Criar" });
+router.all("/cadastro", wrap(async (req: express.Request, res: express.Response) => {
+	res.render("publico/cadastro", { layout: "layout-publico", titulo: "Cadastro" });
 }));
 
 router.all("/pedidos", wrap(async (req: express.Request, res: express.Response) => {

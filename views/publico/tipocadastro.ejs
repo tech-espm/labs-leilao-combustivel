@@ -1,0 +1,84 @@
+
+<div class="form-group">
+	<img src="<%- root %>/imagens/logo.png" alt="Logo" id="imgLogo">
+</div>
+
+<div id="card">
+	<div class="card-header" id="cardhead">
+		<h1 class="text-center">
+			Escolha o tipo de cadastro que você deseja realizar:
+		</h1>
+	</div>
+
+	<div class="text-center" id="cardbutton">
+		<a id="btnPosto" href="..." class="btn btn-primary btn-lg btn-block epex mb-5"><span>CADASTRO DE POSTOS</span></a>
+		<a id="btnDistribuidora" href="..." class="btn btn-primary btn-lg btn-block epex mb-5"><span>CADASTRO DE DISTRIBUIDORAS</span></a>
+	</div>
+</div>
+
+<%- contentFor("head") %>
+
+<style type="text/css">
+body {
+	font-family: 'Montserrat', sans-serif;
+	background-color: rgb(20, 35, 74);
+}
+
+#imgLogo {
+
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 170px;
+	margin-top: 1%;
+
+}
+
+#card {
+
+	background-color: whitesmoke;
+	padding: 2%;
+	margin-left: 0%;
+	margin-right: 0%;
+	box-shadow: 1px 2px 20px black;
+
+}
+
+.text-center {
+
+	font-size: 32px;
+
+}
+
+#btnPosto {
+	margin-bottom: 2%;
+	margin-top: 1%
+}
+
+#btnDistribuidora {
+	margin-bottom: 2.6%;
+	margin-top: 0.6%
+}
+
+#formgroup {
+
+	margin-top: 1.7%;
+
+}
+
+#cardhead {
+	box-shadow: 0px 0.3px 1px 0.2px;
+	margin: 0px auto 3%;
+	max-width: 1000px;
+}
+
+#cardbutton {
+	margin: 0px auto;
+	max-width: 600px;
+}
+
+.form-control::placeholder {
+	font-size: 0.75em;
+	color: #aaaaaa;
+}
+</style>
