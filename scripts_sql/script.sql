@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS combustivel (
   desc_comb VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id_comb`));
 
-insert into combustivel(id_comb, tipo_comb, desc_comb) values('1', '1', 'Gasolina Comum');
+insert into combustivel(id_comb, tipo_comb, desc_comb) values('1', '1', 'Gasolina Comum'),
 ('1', '2', 'Gasolina Adtivada'),
 ('1', '3', 'Gasolina Premium'),
 ('2', '1', 'Alcol Comum'),
