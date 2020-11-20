@@ -90,13 +90,13 @@ CREATE TABLE IF NOT EXISTS combustivel (
   desc_comb VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id_comb`));
 
-insert into combustivel(idcomb, tipo_comb, desc_comb) values('1', '1', 'Gasolina Comum')
-insert into combustivel(idcomb, tipo_comb, desc_comb) values('1', '2', 'Gasolina Adtivada')
-insert into combustivel(idcomb, tipo_comb, desc_comb) values('1', '3', 'Gasolina Premium')
-insert into combustivel(idcomb, tipo_comb, desc_comb) values('2', '1', 'Alcol Comum')
-insert into combustivel(idcomb, tipo_comb, desc_comb) values('2', '2', 'Alcol Aditivado')
-insert into combustivel(idcomb, tipo_comb, desc_comb) values('3', '1', 'Disel S10')
-insert into combustivel(idcomb, tipo_comb, desc_comb) values('3', '2', 'Disel S500');
+insert into combustivel(id_comb, tipo_comb, desc_comb) values('1', '1', 'Gasolina Comum');
+('1', '2', 'Gasolina Adtivada'),
+('1', '3', 'Gasolina Premium'),
+('2', '1', 'Alcol Comum'),
+('2', '2', 'Alcol Aditivado'),
+('3', '1', 'Disel S10'),
+('3', '2', 'Disel S500');
 
 CREATE TABLE IF NOT EXISTS rescomb(
   id_usuario INT NOT NULL,
