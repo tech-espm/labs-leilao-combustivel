@@ -1,0 +1,94 @@
+
+<div class="row">
+	<div class="col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+		<form id="form" class="panel panel-default" action="#">
+			<div class="panel-heading">Informações do Assunto</div>
+			<div class="panel-body no-bottom">
+				<input type="hidden" id="id" name="id" value="<%=(item ? item.id : 0) %>" />
+				<div class="form-group">
+					<label for="prazo_anu">Prazo</label>
+					<input id="prazo_anu" name="prazo_anu" maxlength="100" class="form-control" type="text" spellcheck="false" value="<%=(item ? item.nome : '') %>" />
+                </div> 
+                <div class="form-group">
+					<label for="qtd_anu">Quantidade</label>
+					<input id="qtd_anu" name="qtd_anu" maxlength="100" class="form-control" type="text" spellcheck="false" value="<%=(item ? item.nome : '') %>" />
+                </div> 
+                <div class="form-group">
+					<label for="data_anu">data</label>
+					<input id="data_anu" name="data_anu" maxlength="100" class="form-control" type="text" spellcheck="false" value="<%=(item ? item.nome : '') %>" />
+                </div>  
+                <div class="form-group">
+					<label for="valor_anu">Valor</label>
+					<input id="valor_anu" name="valor_anu" maxlength="100" class="form-control" type="text" spellcheck="false" value="<%=(item ? item.nome : '') %>" />
+                </div> 
+                <div class="form-group">
+					<label for="id_transp">Transportadora</label>
+					<select id="id_transp" name="id_transp" class="form-control" size="1">
+						<option value="">SELECIONE...</option>
+						<% for (let i = 0; i < tipos.length; i++) { %>
+						<option value="<%= tipos[i].id_transp %>" <%-((item && item.id_transp === tipos[i].id_transp) ? 'selected="selected"' : '') %>><%= tipos[i].nome_transp %></option>
+						<% } %>
+					</select>
+				</div> 
+				<div class="form-group">
+					<label for="id_comb">Combustivel</label>
+					<select id="id_comb" name="id_comb" class="form-control" size="1">
+						<option value="">SELECIONE...</option>
+						<% for (let i = 0; i < comb.length; i++) { %>
+						<option value="<%= comb[i].id_comb %>" <%-((item && item.id_comb === comb[i].id_comb) ? 'selected="selected"' : '') %>><%= comb[i].desc_comb %></option>
+						<% } %>
+					</select>
+				</div> 
+			</div>
+			<div class="panel-footer">
+				<input value="<%=(item ? 'Salvar Alterações' : 'Criar Assunto') %>" class="btn btn-primary btn-lg btn-block" type="submit" />
+			</div>
+		</form>
+	</div>
+</div>
+
+<%- contentFor("scripts") %>
+<script type="text/javascript">
+	//<![CDATA[
+	"use strict";
+
+	$("#form").validate({
+		rules: {
+			nome: {
+				required: true,
+				minlength: 3,
+				maxlength: 100
+			}
+		},
+
+		submitHandler: function (form) {
+			if (JsonWebApi.active)
+				return;
+
+			Notification.wait();
+
+			//<% if (item) { %>
+
+			JsonWebApi.postFormData("<%- root %>/api/anuncio/alterar", form, function (response) {
+				if (response.success)
+					Notification.success("Anuncio alterado com sucesso! " + emoji.happy);
+				else
+					Notification.error(response.value, true);
+			});
+
+			//<% } else { %>
+
+			JsonWebApi.postFormData("<%- root %>/api/anuncio/criar", form, function (response) {
+				if (response.success) {
+					resetForm("#form");
+					Notification.success("Anuncio criado com sucesso! " + emoji.happy);
+				} else {
+					Notification.error(response.value, true);
+				}
+			});
+
+			//<% } %>
+		}
+	});
+	//]]>
+</script>
