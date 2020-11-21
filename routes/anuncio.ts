@@ -1,6 +1,8 @@
 import express = require("express");
 import wrap = require("express-async-error-wrapper");
-import Anuncio = require("../models/anuncio");
+import Anuncio = require("../models/anuncio"); 
+import Combustivel = require("../models/combustivel") 
+import Transportadora = require("../models/transportadora")
 import Usuario = require("../models/usuario");
 import appsettings = require("../appsettings");
 
@@ -11,7 +13,7 @@ router.all("/criar", wrap(async (req: express.Request, res: express.Response) =>
 	if (!u || !u.admin)
 		res.redirect(appsettings.root + "/acesso");
 	else
-		res.render("anuncio/alterar", { titulo: "Criar Assunto", usuario: u, item: null });
+		res.render("anuncio/alterar", { titulo: "Criar Anuncio", usuario: u, item: null, tipos: await Transportadora.listar(), comb: await Combustivel.listar() });
 }));
 
 router.all("/alterar", wrap(async (req: express.Request, res: express.Response) => {
