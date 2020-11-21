@@ -2,21 +2,17 @@ import Sql = require("../infra/sql");
 
 export = class Anuncio {
 
-	private static readonly IdAdmin = 1;
-	private static readonly IdPerfilAdmin = 1;
 
 	public id_anu: number;
 	public prazo_anu: string;
-	public transporte_anu: string;
     public qtd_anu: number;
-    public id_posto: number; 
     public id_usuario: number; 
 	public data_anu: Date; 
     public valor_anu: number; 
     public id_transp: number; 
     public id_comb: number; 
-    public id_pedido: number;  
-    public combustivel_id_comb: number; //Perg Caio
+  
+
 
     //Listar Nota Fiscal? Perguntar 
 	public static async listar(): Promise<Anuncio[]> {
@@ -33,7 +29,7 @@ export = class Anuncio {
 		let lista: Anuncio[] = null;
 		
 		await Sql.conectar(async (sql: Sql) => {
-			lista = await sql.query("select id_anu, prazo_anu, transporte_anu, qtd_anu, data_anu, valor_anu, id_transp, id_comb, id_pedido from anuncio where id_anu = ?", [id_anu]) as Anuncio[];
+			lista = await sql.query("select id_anu, prazo_anu, qtd_anu, data_anu, valor_anu, id_transp, id_comb, id_pedido from anuncio where id_anu = ?", [id_anu]) as Anuncio[];
 		});
 
 		return ((lista && lista[0]) || null);
@@ -43,7 +39,7 @@ export = class Anuncio {
 	public static async criar(a: Anuncio): Promise<string> { 
 		let res: string;
 		await Sql.conectar(async (sql: Sql) => {
-			await sql.query("insert into anuncio (prazo_anu, transporte_anu, qtd_anu, id_usuario, data_anu, valor_anu, id_transp, id_comb) values (?, ?, ?, ?,?,?,?,?,?,?)", [a.prazo_anu, a.transporte_anu, a.qtd_anu, a.id_usuario, a.data_anu, a.valor_anu, a.id_transp, a.id_comb]);
+			await sql.query("insert into anuncio (prazo_anu, qtd_anu, id_usuario, data_anu, valor_anu, id_transp, id_comb) values (?, ?, ?,?,?,?,?,?,?)", [a.prazo_anu, a.qtd_anu, a.id_usuario, a.data_anu, a.valor_anu, a.id_transp, a.id_comb]);
 			res = sql.linhasAfetadas.toString();
 		});
 		
@@ -53,7 +49,7 @@ export = class Anuncio {
 	public static async editar(a: Anuncio): Promise<string> {
 		let res: string;
 		await Sql.conectar(async (sql: Sql) => {
-			await sql.query("update anuncio set prazo_anu= ?, transporte_anu = ?, qtd_anu = ?, data_anu = ?, valor_anu = ?  where id_anu = ?", [a.prazo_anu, a.transporte_anu, a.qtd_anu, a.data_anu, a.valor_anu]);
+			await sql.query("update anuncio set prazo_anu= ?, qtd_anu = ?, data_anu = ?, valor_anu = ?  where id_anu = ?", [a.prazo_anu, a.qtd_anu, a.data_anu, a.valor_anu]);
 			res = sql.linhasAfetadas.toString();
 		});
 
