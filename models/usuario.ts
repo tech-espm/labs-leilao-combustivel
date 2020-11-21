@@ -220,7 +220,7 @@ export = class Usuario {
 		let lista: Usuario[] = null;
 
 		await Sql.conectar(async (sql: Sql) => {
-			lista = await sql.query("select u.id, u.login, u.nome, p.nome perfil, t.nome tipo, u.telefone, u.cnpj, u.endereco, u.cep, c.nome cidade, e.sigla estado, date_format(u.criacao, '%d/%m/%Y') criacao from usuario u inner join perfil p on p.id = u.idperfil inner join tipo t on t.id = u.idtipo inner join cidade c on c.id = u.idcidade inner join estado e on e.id = u.idestado where idtipo = 1") as Usuario[];
+			lista = await sql.query("select u.id, u.login, u.nome, p.nome perfil, t.nome tipo, u.telefone, u.cnpj, u.endereco, u.cep, c.nome cidade, e.sigla estado, date_format(u.criacao, '%d/%m/%Y') criacao from usuario u inner join perfil p on p.id = u.idperfil inner join tipo t on t.id = u.idtipo inner join cidade c on c.id = u.idcidade inner join estado e on e.id = u.idestado") as Usuario[];
 		});
 
 		return (lista || []);
