@@ -230,7 +230,7 @@ export = class Usuario {
 		let lista: Usuario[] = null;
 
 		await Sql.conectar(async (sql: Sql) => {
-			lista = await sql.query("select id, login, nome, idperfil, idtipo, senha, telefone, cnpj, endereco, cep, idcidade, idestado, date_format(criacao, '%d/%m/%Y') criacao from usuario where id = ? and idtipo = 1", [id]) as Usuario[];
+			lista = await sql.query("select id, login, nome, idperfil, idtipo, senha, telefone, cnpj, endereco, cep, idcidade, idestado, date_format(criacao, '%d/%m/%Y') criacao from usuario where id = ?", [id]) as Usuario[];
 		});
 
 		return ((lista && lista[0]) || null);
