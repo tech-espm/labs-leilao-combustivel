@@ -6,6 +6,11 @@ export = class Assunto {
 	public criacao: string;
 
 	private static validar(a: Assunto): string {
+		if (!a)
+			return "Assunto inválido";
+
+		a.id = parseInt(a.id as any);
+
 		a.nome = (a.nome || "").normalize().trim();
 		if (a.nome.length < 3 || a.nome.length > 100)
 			return "Nome inválido";
@@ -34,52 +39,54 @@ export = class Assunto {
 	}
 
 	public static async criar(a: Assunto): Promise<string> {
-		let res: string;
-		if ((res = Assunto.validar(a)))
-			return res;
+		let erro: string;
+		if ((erro = Assunto.validar(a)))
+			return erro;
 
 		await Sql.conectar(async (sql: Sql) => {
 			try {
 				await sql.query("insert into assunto (nome, criacao) values (?, now())", [a.nome]);
 			} catch (e) {
-			if (e.code && e.code === "ER_DUP_ENTRY")
-				res = `O assunto ${a.nome} já existe`;
-			else
-				throw e;
-			}
-		});
-
-		return res;
-	}
-
-	public static async alterar(a: Assunto): Promise<string> {
-		let res: string;
-		if ((res = Assunto.validar(a)))
-			return res;
-
-		await Sql.conectar(async (sql: Sql) => {
-			try {
-				await sql.query("update assunto set nome = ? where id = ?", [a.nome, a.id]);
-				res = sql.linhasAfetadas.toString();
-			} catch (e) {
 				if (e.code && e.code === "ER_DUP_ENTRY")
-					res = `O assunto ${a.nome} já existe`;
+					erro = `O assunto ${a.nome} já existe`;
 				else
 					throw e;
 			}
 		});
 
-		return res;
+		return erro;
+	}
+
+	public static async alterar(a: Assunto): Promise<string> {
+		let erro: string;
+		if ((erro = Assunto.validar(a)))
+			return erro;
+
+		await Sql.conectar(async (sql: Sql) => {
+			try {
+				await sql.query("update assunto set nome = ? where id = ?", [a.nome, a.id]);
+				if (!sql.linhasAfetadas)
+					erro = "Assunto não encontrado";
+			} catch (e) {
+				if (e.code && e.code === "ER_DUP_ENTRY")
+					erro = `O assunto ${a.nome} já existe`;
+				else
+					throw e;
+			}
+		});
+
+		return erro;
 	}
 
 	public static async excluir(id: number): Promise<string> {
-		let res: string = null;
+		let erro: string = null;
 
 		await Sql.conectar(async (sql: Sql) => {
 			await sql.query("delete from assunto where id = ?", [id]);
-			res = sql.linhasAfetadas.toString();
+			if (!sql.linhasAfetadas)
+				erro = "Assunto não encontrado";
 		});
 
-		return res;
+		return erro;
 	}
 };

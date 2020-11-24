@@ -1,7 +1,7 @@
 ﻿import express = require("express");
 import wrap = require("express-async-error-wrapper");
 import jsonRes = require("../../utils/jsonRes");
-import Anuncio = require("../../models/assunto");
+import Anuncio = require("../../models/anuncio");
 import Usuario = require("../../models/usuario");
 
 const router = express.Router();
@@ -12,7 +12,7 @@ router.get("/listar", wrap(async (req: express.Request, res: express.Response) =
 	let u = await Usuario.cookie(req, res);
 	if (!u)
 		return;
-	res.json(await Anuncio.listar());
+	res.json(await Anuncio.listar(u.id));
 }));
 
 router.get("/obter", wrap(async (req: express.Request, res: express.Response) => {
@@ -20,7 +20,7 @@ router.get("/obter", wrap(async (req: express.Request, res: express.Response) =>
 	if (!u)
 		return;
 	let id = parseInt(req.query["id"] as string);
-	res.json(isNaN(id) ? null : await Anuncio.obter(id));
+	res.json(isNaN(id) ? null : await Anuncio.obter(id, u.id));
 }));
 
 router.post("/criar", wrap(async (req: express.Request, res: express.Response) => {
@@ -28,7 +28,9 @@ router.post("/criar", wrap(async (req: express.Request, res: express.Response) =
 	if (!u)
 		return;
 	let p = req.body as Anuncio;
-	jsonRes(res, 400, p ? await Anuncio.criar(p) : "Dados inválidos");
+	if (p)
+		p.id_usuario = u.id;
+	jsonRes(res, 400, await Anuncio.criar(p));
 }));
 
 router.post("/alterar", wrap(async (req: express.Request, res: express.Response) => {
@@ -37,8 +39,8 @@ router.post("/alterar", wrap(async (req: express.Request, res: express.Response)
 		return;
 	let p = req.body as Anuncio;
 	if (p)
-		p.id = parseInt(req.body.id);
-	jsonRes(res, 400, (p && !isNaN(p.id)) ? await Anuncio.alterar(p) : "Dados inválidos");
+		p.id_usuario = u.id;
+	jsonRes(res, 400, await Anuncio.alterar(p));
 }));
 
 router.get("/excluir", wrap(async (req: express.Request, res: express.Response) => {
@@ -46,7 +48,7 @@ router.get("/excluir", wrap(async (req: express.Request, res: express.Response) 
 	if (!u)
 		return;
 	let id = parseInt(req.query["id"] as string);
-	jsonRes(res, 400, isNaN(id) ? "Dados inválidos" : await Anuncio.excluir(id));
+	jsonRes(res, 400, isNaN(id) ? "Dados inválidos" : await Anuncio.excluir(id, u.id));
 }));
 
 export = router;

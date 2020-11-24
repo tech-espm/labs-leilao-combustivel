@@ -92,8 +92,8 @@ CREATE TABLE IF NOT EXISTS combustivel (
 insert into combustivel(id_comb, desc_comb) values('1', 'Gasolina Comum'),
 ('2', 'Gasolina Aditivada'),
 ('3', 'Gasolina Premium'),
-('4', 'Alcool Comum'),
-('5', 'Alcool Aditivado'),
+('4', 'Álcool Comum'),
+('5', 'Álcool Aditivado'),
 ('6', 'Diesel S10'),
 ('7', 'Diesel S500');
 
@@ -119,21 +119,18 @@ CREATE TABLE IF NOT EXISTS transportadora (
 CREATE TABLE IF NOT EXISTS anuncio (
   id_anu INT NOT NULL AUTO_INCREMENT,
   prazo_anu VARCHAR(45) NOT NULL,
-  qtd_anu DOUBLE NOT NULL,
+  qtd_anu INT NOT NULL,
   id_usuario INT NOT NULL,
-  data_anu DATE NULL,
+  data_anu DATETIME NULL,
   valor_anu DOUBLE NOT NULL,
   id_transp INT NOT NULL,
   id_comb INT NOT NULL,
   PRIMARY KEY (`id_anu`),
-    CONSTRAINT FK_tranportadora FOREIGN KEY (id_transp)
-    REFERENCES transportadora(id_transp),
-    CONSTRAINT fk_anuncio_combustivel1
-    FOREIGN KEY (`id_comb`)
-    REFERENCES combustivel (`id_comb`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-    FOREIGN KEY (id_usuario) REFERENCES usuario(id));
+  KEY(id_usuario),
+  CONSTRAINT FK_tranportadora FOREIGN KEY (id_transp) REFERENCES transportadora(id_transp) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT fk_anuncio_combustivel1 FOREIGN KEY (id_comb) REFERENCES combustivel (id_comb) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  FOREIGN KEY (id_usuario) REFERENCES usuario(id)
+);
 
 
 -- -----------------------------------------------------

@@ -13,7 +13,13 @@ router.all("/criar", wrap(async (req: express.Request, res: express.Response) =>
 	if (!u || !u.admin)
 		res.redirect(appsettings.root + "/acesso");
 	else
-		res.render("anuncio/alterar", { titulo: "Criar Anuncio", usuario: u, item: null, tipos: await Transportadora.listar(), comb: await Combustivel.listar() });
+		res.render("anuncio/alterar", {
+			titulo: "Criar Anúncio",
+			usuario: u,
+			item: null,
+			tipos: await Transportadora.listar(),
+			comb: await Combustivel.listar()
+		});
 }));
 
 router.all("/alterar", wrap(async (req: express.Request, res: express.Response) => {
@@ -21,21 +27,31 @@ router.all("/alterar", wrap(async (req: express.Request, res: express.Response) 
 	if (!u || !u.admin) {
 		res.redirect(appsettings.root + "/acesso");
 	} else {
-		let id = parseInt(req.query["id"] as string);
+		let id_anu = parseInt(req.query["id_anu"] as string);
 		let item: Anuncio = null;
-		if (isNaN(id) || !(item = await Anuncio.obter(id)))
+		if (isNaN(id_anu) || !(item = await Anuncio.obter(id_anu, u.id)))
 			res.render("home/nao-encontrado", { usuario: u });
 		else
-			res.render("anuncio/alterar", { titulo: "Editar Anuncio", usuario: u, item: item });
+			res.render("anuncio/alterar", {
+				titulo: "Editar Anúncio",
+				usuario: u,
+				item: item,
+				tipos: await Transportadora.listar(),
+				comb: await Combustivel.listar()
+			});
 	}
 }));
 
 router.get("/listar", wrap(async (req: express.Request, res: express.Response) => {
 	let u = await Usuario.cookie(req);
-	if (!u || !u.admin)
+	if (!u)
 		res.redirect(appsettings.root + "/acesso");
 	else
-		res.render("anuncio/listar", { titulo: "Gerenciar Anuncios", usuario: u, lista: JSON.stringify(await Anuncio.listar()) });
+		res.render("anuncio/listar", {
+			titulo: "Gerenciar Anúncios",
+			usuario: u,
+			lista: JSON.stringify(await Anuncio.listar(u.id))
+		});
 }));
 
 export = router;

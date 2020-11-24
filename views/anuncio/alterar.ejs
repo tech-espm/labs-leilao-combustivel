@@ -4,19 +4,19 @@
 		<form id="form" class="panel panel-default" action="#">
 			<div class="panel-heading">Informações do Assunto</div>
 			<div class="panel-body no-bottom">
-				<input type="hidden" id="id" name="id" value="<%=(item ? item.id : 0) %>" />
+				<input type="hidden" id="id_anu" name="id_anu" value="<%=(item ? item.id_anu : 0) %>" />
 				<div class="form-group">
 					<label for="prazo_anu">Prazo</label>
-					<input id="prazo_anu" name="prazo_anu" maxlength="100" class="form-control" type="text" spellcheck="false" value="<%=(item ? item.nome : '') %>" />
+					<input id="prazo_anu" name="prazo_anu" maxlength="45" class="form-control" type="text" spellcheck="false" value="<%=(item ? item.prazo_anu : '') %>" />
                 </div> 
                 <div class="form-group">
 					<label for="qtd_anu">Quantidade</label>
-					<input id="qtd_anu" name="qtd_anu" maxlength="100" class="form-control" type="text" spellcheck="false" value="<%=(item ? item.nome : '') %>" />
+					<input id="qtd_anu" name="qtd_anu" class="form-control" type="number" min="1" max="9999" value="<%=(item ? item.qtd_anu : '') %>" />
                 </div> 
                 
                 <div class="form-group">
 					<label for="valor_anu">Valor</label>
-					<input id="valor_anu" name="valor_anu" maxlength="100" class="form-control" type="text" spellcheck="false" value="<%=(item ? item.nome : '') %>" />
+					<input id="valor_anu" name="valor_anu" maxlength="10" class="form-control" type="text" spellcheck="false" value="<%=(item ? item.valor_anu.toString().replace('.', ',') : '') %>" />
                 </div> 
                 <div class="form-group">
 					<label for="id_transp">Transportadora</label>
@@ -28,7 +28,7 @@
 					</select>
 				</div> 
 				<div class="form-group">
-					<label for="id_comb">Combustivel</label>
+					<label for="id_comb">Combustível</label>
 					<select id="id_comb" name="id_comb" class="form-control" size="1">
 						<option value="">SELECIONE...</option>
 						<% for (let i = 0; i < comb.length; i++) { %>
@@ -38,7 +38,7 @@
 				</div> 
 			</div>
 			<div class="panel-footer">
-				<input value="<%=(item ? 'Salvar Alterações' : 'Criar Anuncio') %>" class="btn btn-primary btn-lg btn-block" type="submit" />
+				<input value="<%=(item ? 'Salvar Alterações' : 'Criar Anúncio') %>" class="btn btn-primary btn-lg btn-block" type="submit" />
 			</div>
 		</form>
 	</div>
@@ -51,10 +51,25 @@
 
 	$("#form").validate({
 		rules: {
-			nome: {
+			prazo_anu: {
 				required: true,
-				minlength: 3,
-				maxlength: 100
+				maxlength: 45,
+			},
+			qtd_anu: {
+				required: true,
+				number: true,
+				min: 1,
+				max: 9999
+			},
+			valor_anu: {
+				required: true,
+				maxlength: 10
+			},
+			id_transp: {
+				required: true
+			},
+			id_comb: {
+				required: true
 			}
 		},
 
@@ -68,7 +83,7 @@
 
 			JsonWebApi.postFormData("<%- root %>/api/anuncio/alterar", form, function (response) {
 				if (response.success)
-					Notification.success("Anuncio alterado com sucesso! " + emoji.happy);
+					Notification.success("Anúncio alterado com sucesso! " + emoji.happy);
 				else
 					Notification.error(response.value, true);
 			});
@@ -78,7 +93,7 @@
 			JsonWebApi.postFormData("<%- root %>/api/anuncio/criar", form, function (response) {
 				if (response.success) {
 					resetForm("#form");
-					Notification.success("Anuncio criado com sucesso! " + emoji.happy);
+					Notification.success("Anúncio criado com sucesso! " + emoji.happy);
 				} else {
 					Notification.error(response.value, true);
 				}

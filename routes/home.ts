@@ -68,4 +68,14 @@ router.get("/logout", wrap(async (req: express.Request, res: express.Response) =
 	res.redirect(appsettings.root + "/");
 }));
 
+router.all("/exemplo", wrap(async (req: express.Request, res: express.Response) => {
+	let u = await Usuario.cookie(req);
+	if (!u)
+		res.redirect(appsettings.root + "/");
+	else if (u.idtipo !== Usuario.IdTipoPosto)
+		res.redirect(appsettings.root + "/acesso");
+	else
+		res.render("home/perfil", { titulo: "Meu Perfil", usuario: u });
+}));
+
 export = router;
