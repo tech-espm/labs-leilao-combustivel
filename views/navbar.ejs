@@ -73,7 +73,47 @@
 					</ul>
 				</li>
 
-				<% } %> 
+				<% } %>  
+
+				<% if (usuario.idtipo == 2) { %>
+
+					<li class="sidebar-spacer"></li>
+	
+					<li>
+						<a href="#"><i class="fa fa-user fa-fw"></i>Pedidos<span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level collapse">
+	
+							<li>
+								<a href="<%- root %>/pedidos/criar"><i class="fa fa-plus fa-fw"></i>Criar Pedidos</a>
+							</li> 
+	
+	
+						</ul>
+					</li> 
+	
+				<% } %>  
+
+				<% if (usuario.idtipo == 3) { %>
+
+					<li class="sidebar-spacer"></li>
+	
+					<li>
+						<a href="#"><i class="fa fa-user fa-fw"></i>Anuncio<span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level collapse">
+	
+							<li>
+								<a href="<%- root %>/anuncio/criar"><i class="fa fa-plus fa-fw"></i>Criar Anuncio</a>
+							</li> 
+	
+	
+						</ul>
+					</li> 
+	
+				<% } %>  
+
+				
+
+				
 
 				
 
