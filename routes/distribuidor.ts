@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.all("/criar", wrap(async (req: express.Request, res: express.Response) => {
 	let u = await Usuario.cookie(req);
-	if (!u || !u.admin)
+	if (!u || !u.superadmin)
 		res.redirect(appsettings.root + "/acesso");
 	else
 		res.render("distribuidor/criar", { titulo: "Criar Distribuidor", usuario: u, item: null, perfis: await Distribuidor.listar() });
@@ -16,7 +16,7 @@ router.all("/criar", wrap(async (req: express.Request, res: express.Response) =>
 
 router.all("/alterar", wrap(async (req: express.Request, res: express.Response) => {
 	let u = await Usuario.cookie(req);
-	if (!u || !u.admin) {
+	if (!u || !u.superadmin) {
 		res.redirect(appsettings.root + "/acesso");
 	} else {
 		let id = parseInt(req.query["id"] as string);
@@ -30,7 +30,7 @@ router.all("/alterar", wrap(async (req: express.Request, res: express.Response) 
 
 router.get("/listar", wrap(async (req: express.Request, res: express.Response) => {
 	let u = await Usuario.cookie(req);
-	if (!u || !u.admin)
+	if (!u || !u.superadmin)
 		res.redirect(appsettings.root + "/acesso");
 	else
 		res.render("distribuidor/listar", { titulo: "Gerenciar Distribuidoras", usuario: u, lista: JSON.stringify(await Distribuidor.listar()) });

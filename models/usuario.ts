@@ -36,9 +36,9 @@ export = class Usuario {
 	public num_vendas: number; 
 	public num_pedidos: number; 
 	public num_compras: number; 
-	
+	public listidcomb: []; 
 	// Utilizados apenas através do cookie
-	public admin: boolean;
+	public superadmin: boolean;
 
 	// Não estamos utilizando Usuario.cookie como middleware, porque existem muitas requests
 	// que não precisam validar o usuário logado, e agora, é assíncrono...
@@ -74,7 +74,7 @@ export = class Usuario {
 				u.nome = row.nome as string;
 				u.idperfil = row.idperfil as number;
 				u.idtipo = row.idtipo as number;
-				u.admin = (u.idperfil === Usuario.IdPerfilAdmin && u.idtipo === Usuario.IdTipoGeral);
+				u.superadmin = (u.idperfil === Usuario.IdPerfilAdmin && u.idtipo === Usuario.IdTipoGeral);
 
 				usuario = u;
 			});
@@ -126,7 +126,7 @@ export = class Usuario {
 			u.nome = row.nome as string;
 			u.idperfil = row.idperfil as number;
 			u.idtipo = row.idtipo as number;
-			u.admin = (u.idperfil === Usuario.IdPerfilAdmin && u.idtipo === Usuario.IdTipoGeral);
+			u.superadmin = (u.idperfil === Usuario.IdPerfilAdmin && u.idtipo === Usuario.IdTipoGeral);
 
 			res.cookie(appsettings.cookie, cookieStr, { maxAge: 365 * 24 * 60 * 60 * 1000, httpOnly: true, path: "/", secure: appsettings.cookieSecure });
 		});
