@@ -24,10 +24,15 @@ router.get("/obter", wrap(async (req: express.Request, res: express.Response) =>
 }));
 
 router.post("/criar", wrap(async (req: express.Request, res: express.Response) => {
-	let u = await Usuario.cookie(req, res, true);
+	let u = await Usuario.cookie(req, res, true); 
 	if (!u)
 		return;
-	let p = req.body as Anuncio;
+	if (u.idtipo !== Usuario.IdTipoDistribuidor) 
+			res.statusCode = 403;
+			res.json("Não permitido");
+	let p = req.body as Anuncio; 
+	
+
 	if (p)
 		p.id_usuario = u.id;
 	jsonRes(res, 400, await Anuncio.criar(p));

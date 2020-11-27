@@ -10,7 +10,9 @@ const router = express.Router();
 
 router.all("/criar", wrap(async (req: express.Request, res: express.Response) => {
 	let u = await Usuario.cookie(req);
-	if (!u || !u.admin)
+	if (!u)
+	res.redirect(appsettings.root + "/");
+	else if (u.idtipo !== Usuario.IdTipoDistribuidor)
 		res.redirect(appsettings.root + "/acesso");
 	else
 		res.render("anuncio/alterar", {
@@ -24,7 +26,7 @@ router.all("/criar", wrap(async (req: express.Request, res: express.Response) =>
 
 router.all("/alterar", wrap(async (req: express.Request, res: express.Response) => {
 	let u = await Usuario.cookie(req);
-	if (!u || !u.admin) {
+	if (!u || !u.superadmin) {
 		res.redirect(appsettings.root + "/acesso");
 	} else {
 		let id_anu = parseInt(req.query["id_anu"] as string);
