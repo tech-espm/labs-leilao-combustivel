@@ -1,11 +1,4 @@
-import { randomBytes } from "crypto";
-import express = require("express");
-// https://www.npmjs.com/package/lru-cache
-import lru = require("lru-cache");
 import Sql = require("../infra/sql");
-import GeradorHash = require("../utils/geradorHash");
-import appsettings = require("../appsettings");
-import intToHex = require("../utils/intToHex");
 
 export = class Pedido {
 
@@ -15,16 +8,17 @@ export = class Pedido {
 	public id_pedido: number;
 	public id_anu: number;
 	public data_pedido: Date;
-    public valortotal_pedido: number;
-    public id_posto: number;
+	public valortotal_pedido: number; 
+	public id_usuario: number;
+
 	
 	
     //Listar Nota Fiscal? Perguntar 
-	public static async listar(): Promise<Pedido[]> {
+	public static async listar(id_usuario: number): Promise<Pedido[]> {
 		let lista: Pedido[] = null;
 
 		await Sql.conectar(async (sql: Sql) => {
-			lista = await sql.query("select u.id, u.login, u.nome, p.nome perfil, date_format(u.criacao, '%d/%m/%Y') criacao from usuario u inner join perfil p on p.id = u.idperfil order by u.login asc") as Pedido[];
+			lista = (await sql.query("select pe.id_pedido,a.id_anu, date_format(pe.data_pedido, '%d/%m/%Y') data_pedido, pe.valortotal_pedido from pedido pe inner join anuncio a on a.id_anu = a.id_anu where a.id_usuario = ? order by pe.id_pedido asc" , [id_usuario])) as Pedido[];
 		});
 
 		return (lista || []);
@@ -44,17 +38,17 @@ export = class Pedido {
 	public static async criar(pe: Pedido): Promise<string> { 
 		let res: string;
 		await Sql.conectar(async (sql: Sql) => {
-			await sql.query("insert into pedido (id_anu, data_pedido, valortotal_pedido, id_posto) values (?, ?, ?, ?,?)", [pe.id_pedido, pe.id_anu, pe.data_pedido, pe.valortotal_pedido, pe.id_posto]);
+			await sql.query("insert into pedido (id_anu, data_pedido, valortotal_pedido, id_usuario) values (?, ?, ?, ?)", [ pe.id_anu, pe.data_pedido, pe.valortotal_pedido, pe.id_usuario]);
 			res = sql.linhasAfetadas.toString(); 
 		});
 		
 		return res;
 	}
 
-	public static async editar(pe: Pedido): Promise<string> {
+	public static async alterar(pe: Pedido): Promise<string> {
 		let res: string;
 		await Sql.conectar(async (sql: Sql) => {
-			await sql.query("update pedido set id_anu = ?, data_pedido = ?, valortotal_pedido = ?, id_posto = ?  where id_pedido = ?", [pe.id_anu, pe.data_pedido, pe.valortotal_pedido, pe.id_posto]);
+			await sql.query("update pedido set data_pedido = ?, valortotal_pedido = ?  where id_pedido = ?", [ pe.data_pedido, pe.valortotal_pedido]);
 			res = sql.linhasAfetadas.toString();
 		});
 
