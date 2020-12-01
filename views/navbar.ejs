@@ -37,7 +37,7 @@
 					<a href="<%- root %>/"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
 				</li>
 
-				<% if (usuario.admin) { %>
+				<% if (usuario.id == 1) { %>
 
 					<li class="sidebar-spacer"></li>
 
@@ -54,7 +54,7 @@
 
 				<% } %>
 
-				<% if (usuario.admin) { %>
+				<% if (usuario.id == 1) { %>
 
 				<li class="sidebar-spacer"></li>
 
@@ -105,7 +105,9 @@
 								<a href="<%- root %>/anuncio/criar"><i class="fa fa-plus fa-fw"></i>Criar Anuncio</a>
 							</li> 
 	
-	
+							<li>
+								<a href="<%- root %>/anuncio/listar"><i class="fa fa-tasks fa-fw"></i>Gerenciar</a>
+							</li>
 						</ul>
 					</li> 
 	
