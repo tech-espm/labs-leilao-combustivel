@@ -3,6 +3,7 @@ import express = require("express");
 // https://www.npmjs.com/package/lru-cache
 import lru = require("lru-cache");
 import Sql = require("../infra/sql");
+import Combustivel = require("./combustivel");
 import GeradorHash = require("../utils/geradorHash");
 import appsettings = require("../appsettings");
 import intToHex = require("../utils/intToHex");
@@ -36,7 +37,7 @@ export = class Usuario {
 	public num_vendas: number; 
 	public num_pedidos: number; 
 	public num_compras: number; 
-	public listidcomb: []; 
+	public combustiveis: Combustivel[]; 
 	// Utilizados apenas através do cookie
 	public superadmin: boolean;
 
@@ -227,13 +228,19 @@ export = class Usuario {
 	}
 
 	public static async obterGeral(id: number): Promise<Usuario> {
-		let lista: Usuario[] = null;
+		let usuario: Usuario = null;
 
 		await Sql.conectar(async (sql: Sql) => {
-			lista = await sql.query("select id, login, nome, idperfil, idtipo, senha, telefone, cnpj, endereco, cep, idcidade, idestado, date_format(criacao, '%d/%m/%Y') criacao from usuario where id = ?", [id]) as Usuario[];
+			const lista = await sql.query("select id, login, nome, idperfil, idtipo, senha, telefone, cnpj, endereco, cep, idcidade, idestado, date_format(criacao, '%d/%m/%Y') criacao from usuario where id = ?", [id]) as Usuario[];
+
+			if (lista && lista[0])
+				usuario = lista[0];
 		});
 
-		return ((lista && lista[0]) || null);
+		if (usuario)
+			usuario.combustiveis = await Combustivel.listarDeUsuario(usuario.id);
+
+		return usuario;
 	}
 
 	public static async criarGeral(u: Usuario): Promise<string> {

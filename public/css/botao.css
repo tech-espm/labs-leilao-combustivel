@@ -47,3 +47,12 @@
 .btn-lg.epex > span {
 	padding: 1.5rem 3.5rem;
 }
+
+select.form-control {
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url(../imagens/seta-dropdown.png);
+    background-position: right top;
+    background-size: contain;
+	background-repeat: no-repeat;
+}

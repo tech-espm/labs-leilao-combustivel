@@ -23,6 +23,16 @@ export = class Combustivel {
 		return lista || [];
 	}
 
+	public static async listarDeUsuario(id_usuario: number): Promise<Combustivel[]> {
+		let lista: Combustivel[] = null;
+
+		await Sql.conectar(async (sql: Sql) => {
+			lista = (await sql.query("select c.id_comb, c.desc_comb from rescomb r inner join combustivel c where r.id_usuario = ? order by c.desc_comb asc", [id_usuario])) as Combustivel[];
+		});
+
+		return lista || [];
+	}
+
 	public static async obter(id_comb: number): Promise<Combustivel> {
 		let lista: Combustivel[] = null;
 
