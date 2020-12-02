@@ -26,6 +26,14 @@ router.all("/pedidos", wrap(async (req: express.Request, res: express.Response) 
 	res.render("publico/pedidos", { layout: "layout-publico", titulo: "Pedidos" });
 }));
 
+router.all("/homeposto", wrap(async (req: express.Request, res: express.Response) => {
+	res.render("publico/homeposto", { layout: "layout-publico", titulo: "HOME Posto" });
+}));
+
+router.all("/comprafim", wrap(async (req: express.Request, res: express.Response) => {
+	res.render("publico/comprafim", { layout: "layout-publico", titulo: "Compra Finalizada!" });
+}));
+
 router.all("/login", wrap(async (req: express.Request, res: express.Response) => {
 	let u = await Usuario.cookie(req);
 	if (!u) {
