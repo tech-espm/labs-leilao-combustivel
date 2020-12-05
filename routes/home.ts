@@ -34,6 +34,10 @@ router.all("/comprafim", wrap(async (req: express.Request, res: express.Response
 	res.render("publico/comprafim", { layout: "layout-publico", titulo: "Compra Finalizada!" });
 }));
 
+router.all("/tendencias", wrap(async (req: express.Request, res: express.Response) => {
+	res.render("publico/tendencias", { layout: "layout-publico", titulo: "Tendências" });
+}));
+
 router.all("/login", wrap(async (req: express.Request, res: express.Response) => {
 	let u = await Usuario.cookie(req);
 	if (!u) {
