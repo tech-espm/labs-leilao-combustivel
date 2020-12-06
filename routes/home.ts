@@ -16,14 +16,14 @@ router.all("/", wrap(async (req: express.Request, res: express.Response) => {
 
 router.all("/tipocadastro", wrap(async (req: express.Request, res: express.Response) => {
 	res.render("publico/tipocadastro", { layout: "layout-publico", titulo: "Escolha o tipo" });
-})); 
+}));
 
 router.all("/cadastro", wrap(async (req: express.Request, res: express.Response) => {
 	res.render("publico/cadastro", { layout: "layout-publico", titulo: "Cadastro" });
 }));
 
-router.all("/pedidos", wrap(async (req: express.Request, res: express.Response) => {
-	res.render("publico/pedidos", { layout: "layout-publico", titulo: "Pedidos" });
+router.all("/novospedidos", wrap(async (req: express.Request, res: express.Response) => {
+	res.render("publico/novospedidos", { layout: "layout-publico", titulo: "Novos Pedidos" });
 }));
 
 router.all("/homeposto", wrap(async (req: express.Request, res: express.Response) => {
@@ -36,6 +36,14 @@ router.all("/comprafim", wrap(async (req: express.Request, res: express.Response
 
 router.all("/tendencias", wrap(async (req: express.Request, res: express.Response) => {
 	res.render("publico/tendencias", { layout: "layout-publico", titulo: "Tendências" });
+}));
+
+router.all("/relatorios", wrap(async (req: express.Request, res: express.Response) => {
+	res.render("publico/relatorios", { layout: "layout-publico", titulo: "Relatórios" });
+}));
+
+router.all("/pedidosmktplace", wrap(async (req: express.Request, res: express.Response) => {
+	res.render("publico/pedidosmktplace", { layout: "layout-publico", titulo: "Pedidos MKT Place" });
 }));
 
 router.all("/login", wrap(async (req: express.Request, res: express.Response) => {

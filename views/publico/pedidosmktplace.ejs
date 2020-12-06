@@ -62,70 +62,117 @@
 <!--CONTEÚDO DO SITE-->
 
 
-<div class="text-center mt-5 mb-4">
+<div class="container">
 
-	<h1 id="topText">
-		Compra finalizada com sucesso!
-	</h1>
+	<div class="row mt-5">
 
-</div>
+		<div class="col">
 
-<div class="text-center mb-4">
-	<img width="50px" src="/imagens/seta-cima.png">
-</div>
 
-<hr class="container mb-5">
 
-<div class="mb-5 container text-center">
-	<div class="row">
-		<div class="col-sm-4 offset-sm-1">
+			<div class="form-row align-items-center">
 
-			<div class="card" style="width: 20rem;">
 
-				<img class="card-img-top" src="/imagens/postin.jpg" alt="Card image cap">
 
-				<div class="card-body mb-0">
-					<h5 class="mb-0"> #Nome Distribuidora </h5>
+				<div>
+
+					<label class="col-form-label textRelatorio">Anual</label>
+
 				</div>
 
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item">Combustível: -</li>
-					<li class="list-group-item">Origem: -</li>
-					<li class="list-group-item">Prazo: -</li>
-					<li class="list-group-item">Transporte: -</li>
-					<li class="list-group-item">Qtd. Disponível: -</li>
-					<li class="list-group-item">Preço: -</li>
-					<li class="list-group-item">Destino: -</li>
-				</ul>
+				<img src="/imagens/seta-esq.png" width="7px" class="ml-1">
+
+				<img src="/imagens/seta-dir.png" width="7px" class="mr-1">
+
+				<div>
+
+					<label class="col-form-label textRelatorio">Mensal</label>
+
+				</div>
+
+				<img src="/imagens/seta-esq.png" width="7px" class="ml-1">
+
+				<img src="/imagens/seta-dir.png" width="7px" class="mr-1">
+
+				<div>
+
+					<label class="col-form-label textRelatorio">Diário</label>
+
+				</div>
+
+
+
+				<img width="235px" height="320px" src="/imagens/relatorio_img.png">
+
+
 
 			</div>
+
+			<div class="text-center textLegenda">Quantidade Comprada</div>
 
 		</div>
 
-		<div class="col-sm-4 offset-sm-2">
 
-			<div class="card" style="width: 20rem;">
+		<div class="col">
 
-				<div class="card-body">
 
-					<h5 class="card-title">Boleto</h5>
 
-					<hr>
+			<div class="form-row align-items-center">
 
-					<button type="button" id="btnLeilao" class="btn btn-primary epex mb-2"><span>GERAR BOLETO DA
-							COMPRA</span></button>
+
+
+				<div>
+
+					<label class="col-form-label textRelatorio">Anual</label>
 
 				</div>
 
+				<img src="/imagens/seta-esq.png" width="7px" class="ml-1">
+
+				<img src="/imagens/seta-dir.png" width="7px" class="mr-1">
+
+				<div>
+
+					<label class="col-form-label textRelatorio">Mensal</label>
+
+				</div>
+
+				<img src="/imagens/seta-esq.png" width="7px" class="ml-1">
+
+				<img src="/imagens/seta-dir.png" width="7px" class="mr-1">
+
+				<div>
+
+					<label class="col-form-label textRelatorio">Diário</label>
+
+				</div>
+
+
+
+				<img width="235px" height="320px" src="/imagens/relatorio_img.png">
+
+
+
 			</div>
+
+			<div class="text-center textLegenda">Variação do preço comprado</div>
+
+		</div>
+
+
+		<div class="col">
+
+			<img src="/imagens/calendario_img.png">
 
 		</div>
 
 	</div>
+
+
+
+
 </div>
 
-
-<hr class="container">
 
 
 
@@ -363,12 +410,20 @@
 
 	}
 
-	#btnLeilao,
-	#btnPedidos {
-		width: 100%;
-		max-width: 300px;
-		margin-top: 10px;
-		margin-bottom: 50px;
+
+	.textRelatorio {
+
+		font-size: 20px;
+		font-weight: 500;
+		color: #14234A;
+
+	}
+
+	.textLegenda{
+
+		font-size: 16px;
+		font-weight: 500;
+
 	}
 
 	#bottomTitulo {
