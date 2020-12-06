@@ -17,13 +17,16 @@
 				<a class="nav-link" href="">HOME</a>
 			</li>
 			<li class="nav-item active">
-				<a class="nav-link" href="">TENDÊNCIAS</a>
-			</li>
-			<li class="nav-item active">
-				<a class="nav-link text-nowrap" href="">NOVOS PEDIDOS</a>
-			</li>
-			<li class="nav-item active">
 				<a class="nav-link" href="">RELATÓRIOS</a>
+			</li>
+			<li class="nav-item active">
+				<a class="nav-link text-nowrap" href="">VENDAS</a>
+			</li>
+			<li class="nav-item active">
+				<a class="nav-link" href="">ABERTURA DE CRÉDITO</a>
+			</li>
+			<li class="nav-item active">
+				<a class="nav-link" href="">CADASTRO DE COMBUSTÍVEL</a>
 			</li>
 		</ul>
 		<form class="form-inline mt-2 mt-md-0">
@@ -42,12 +45,12 @@
 					<i class="fa fa-bars" style="font-size:30px;color:#F09F0E"></i> <span class="caret"></span>
 				</button>
 				<ul id="btnCaixa" class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="menu1">
-					<li role="presentation"><a role="menuitem" id="btnContas" tabindex="-1" href="#">Minhas Contas</a>
+					<li role="presentation"><a role="menuitem" id="btnContas" tabindex="-1" href="#">Filtros</a>
 					</li>
-					<li role="presentation"><a role="menuitem" id="btnMPedidos" tabindex="-1" href="#">Meus Pedidos</a>
+					<li role="presentation"><a role="menuitem" id="btnMPedidos" tabindex="-1" href="#">Pedidos</a>
 					</li>
-					<li role="presentation"><a role="menuitem" id="btnAbertura" tabindex="-1" href="#">Abertura de
-							Crédito</a></li>
+					<li role="presentation"><a role="menuitem" id="btnAbertura" tabindex="-1" href="#">Meus Dados</a>
+					</li>
 					<li role="presentation"><a role="menuitem" id="btnConfiguracoes" tabindex="-1"
 							href="#">Configurações</a></li>
 					<hr class="bg-light">
@@ -62,120 +65,29 @@
 <!--CONTEÚDO DO SITE-->
 
 
-<div class="container">
+<div class="container mt-5">
 
-	<div class="row mt-5">
+	<div class="form-row align-items-center">
 
-		<div class="col">
+		<img src="/imagens/triangulinho_esquerda_amarelo.png" width="27px" class="col-form-label mr-2">
 
+		<div>
 
-
-			<div class="form-row align-items-center">
-
-
-
-				<div>
-
-					<label type="button" class="col-form-label textRelatorio">Anual</label>
-
-				</div>
-
-				<img src="/imagens/seta-esq.png" width="7px" class="ml-1">
-
-				<img src="/imagens/seta-dir.png" width="7px" class="mr-1">
-
-				<div>
-
-					<label type="button" class="col-form-label textRelatorio">Mensal</label>
-
-				</div>
-
-				<img src="/imagens/seta-esq.png" width="7px" class="ml-1">
-
-				<img src="/imagens/seta-dir.png" width="7px" class="mr-1">
-
-				<div>
-
-					<label type="button" class="col-form-label textRelatorio">Diário</label>
-
-				</div>
-
-
-
-				<img width="235px" height="320px" src="/imagens/relatorio_img.png">
-
-
-
-			</div>
-
-			<div class="text-center textLegenda">Quantidade Comprada</div>
-
-		</div>
-
-
-		<div class="col">
-
-
-
-			<div class="form-row align-items-center">
-
-
-
-				<div>
-
-					<label type="button" class="col-form-label textRelatorio">Anual</label>
-
-				</div>
-
-				<img src="/imagens/seta-esq.png" width="7px" class="ml-1">
-
-				<img src="/imagens/seta-dir.png" width="7px" class="mr-1">
-
-				<div>
-
-					<label type="button" class="col-form-label textRelatorio">Mensal</label>
-
-				</div>
-
-				<img src="/imagens/seta-esq.png" width="7px" class="ml-1">
-
-				<img src="/imagens/seta-dir.png" width="7px" class="mr-1">
-
-				<div>
-
-					<label type="button" class="col-form-label textRelatorio">Diário</label>
-
-				</div>
-
-
-
-				<img width="235px" height="320px" src="/imagens/relatorio_img.png">
-
-
-
-			</div>
-
-			<div class="text-center textLegenda">Variação do preço comprado</div>
-
-		</div>
-
-
-		<div class="col">
-
-			<img src="/imagens/calendario_img.png">
+			<label class="col-form-label topText">Cadastrar Combustível</label>
 
 		</div>
 
 	</div>
 
 
+	<div class="container">
 
-	<div class="container mt-5 mb-5">
-		<hr class="mb-5">
+		<hr class="mb-5 mt-4">
+
 		<div class="row">
-			<div class="col-4">
+			<div class="col-3">
 				<div class="form-group">
-					<label class="m-2" for="exampleFormControlSelect1">Combustível</label>
+					<label class="m-2" for="exampleFormControlSelect1">Produto:</label>
 					<select class="form-control" id="exampleFormControlSelect1">
 						<option>Gasolina Comum</option>
 						<option>Gasolina Aditivada</option>
@@ -188,9 +100,24 @@
 					</select>
 				</div>
 			</div>
-			<div class="col-4">
+
+			<div class="col-3">
 				<div class="form-group">
-					<label class="m-2" for="exampleFormControlSelect2">Prazo de Pagamento</label>
+					<label class="m-2" for="exampleFormControlSelect3">Origem:</label>
+					<select class="form-control" id="exampleFormControlSelect3">
+						<option>Apenas Baguar</option>
+						<option>Bombeio</option>
+						<option>Importada</option>
+						<option>Formulada</option>
+						<option>- Qualquer -</option>
+					</select>
+				</div>
+			</div>
+
+
+			<div class="col-3">
+				<div class="form-group">
+					<label class="m-2" for="exampleFormControlSelect2">Prazo de Pagamento:</label>
 					<select class="form-control" id="exampleFormControlSelect2">
 						<option>0 dia</option>
 						<option>1 dia</option>
@@ -201,87 +128,143 @@
 						<option>6 dias</option>
 						<option>7 dias</option>
 						<option>- Qualquer -</option>
-	
-					</select>
-				</div>
-			</div>
-			<div class="col-4">
-				<div class="form-group">
-					<label class="m-2" for="exampleFormControlSelect3">Origem</label>
-					<select class="form-control" id="exampleFormControlSelect3">
-						<option>Apenas Baguar</option>
-						<option>Bombeio</option>
-						<option>Importada</option>
-						<option>Formulada</option>
-						<option>- Qualquer -</option>
+
 					</select>
 				</div>
 			</div>
 		</div>
-	
-	
-	
+
+
+
 		<div class="row">
-			<div class="col-4">
+			<div class="col-3">
 				<div class="form-group">
-					<label class="m-2" for="exampleFormControlSelect4">Transporte</label>
+					<label class="m-2" for="exampleFormControlSelect4">Região:</label>
 					<select class="form-control" id="exampleFormControlSelect4">
-						<option>CIF</option>
-						<option>FOB</option>
+						<option>Região 1</option>
+						<option>Região 2</option>
+						<option>Região 3</option>
 						<option>- Qualquer -</option>
 					</select>
 				</div>
 			</div>
-			<div class="col-4">
+			<div class="col-3">
 				<div class="form-group">
-					<label class="m-2" for="exampleFormControlSelect5">Quantidade</label>
+					<label class="m-2" for="exampleFormControlSelect5">Redes de Postos:</label>
 					<select class="form-control" id="exampleFormControlSelect5">
-						<option>5</option>
-						<option>10</option>
-						<option>15</option>
-						<option>20</option>
-						<option>25</option>
-						<option>30</option>
-						<option>40</option>
-						<option>50+</option>
+						<option>-</option>
+						<option>-</option>
 						<option>- Qualquer -</option>
 					</select>
-					<small class="m-1">Obs.: Unidade em milhares (Litros)</small>
 				</div>
 			</div>
-			<div class="col-4">
+
+		</div>
+
+		<hr class="mt-5 mb-5">
+
+		<div class="row">
+			<div class="col-3">
 				<div class="form-group">
-					<label for="exampleFormControlSelect6" class="m-2">Média de Preço</label>
-					<select class="form-control" id="exampleFormControlSelect6">
-						<option>Hoje</option>
-						<option>Amanhã</option>
-						<option>- Qualquer -</option>
-	
-					</select>
+					<label class="m-2">Variação CIF/FOB:</label>
+					<div>
+
+						<input type="text" class="form-control form-group" id="" placeholder="Variação CIF/FOB">
+
+					</div>
 				</div>
 			</div>
+			<div class="col-3">
+				<div class="form-group">
+					<label class="m-2">Quantidade:</label>
+					<div>
+
+						<input type="text" class="form-control" id="" placeholder="Quantidade">
+
+					</div>
+					<small class="m-1">Obs.: Unidade em Litros</small>
+				</div>
+			</div>
+			<div class="col-3">
+				<div class="form-group">
+					<label class="m-2">Transportadora:</label>
+					<div>
+
+						<input type="text" class="form-control form-group" id="" placeholder="Transportadora">
+
+					</div>
+				</div>
+			</div>
+
 		</div>
 
-		<div class="text-center mt-5 mb-5">
+		<hr class="mt-4 mb-4">
 
-			<button type="button" id="btnPedidos" class="btn btn-primary epex"><span>PESQUISAR</span></button>
+		<label class="m-2">Range de Preço:</label>
+
+		<div class="row mt-0">
+
+
+
+			<div class="col-3">
+
+				<div class="form-group">
+
+					<label class="m-2" style="font-size: 13px; font-weight: 500;">Mínimo:</label>
+
+					<div>
+
+						<input type="text" class="form-control form-group" id="" placeholder="De (Mínimo)">
+
+					</div>
+
+				</div>
+			</div>
+
+
+			<div class="col-3">
+
+				<div class="form-group">
+					<label class="m-2" style="font-size: 13px; font-weight: 500;"> Máximo:</label>
+
+					<div>
+
+						<input type="text" class="form-control form-group" id="" placeholder="Até (Máximo)">
+
+					</div>
+
+				</div>
+			</div>
 
 		</div>
 
-		<hr class="container">
-
-		<div class="text-center" style="margin-top: 70px;">
-
-		<img width="900px" src="/imagens/precos_img.png">
-
-		</div>
+		
 
 	</div>
 
 
+	<div class="mb-5 container text-center">
+		<div class="row">
+			<div class="col-sm-4 offset-sm-1">
+	
+	
+				<button type="button" id="btnLeilao" class="btn btn-primary epex btnFinCadastro"><span>LEILÃO</span></button>
+	
+	
+			</div>
+			<div class="col-sm-4 offset-sm-2">
+	
+	
+				<button type="button" id="btnPedidos" class="btn btn-primary epex btnFinCadastro"><span>MARKETPLACE</span></button>
+	
+	
+			</div>
+		</div>
+	</div>
 
 
 </div>
+
 
 
 
@@ -411,7 +394,7 @@
 <style type="text/css">
 	body {
 
-		font-size: 17px;
+		font-size: 15px;
 		font-family: "Montserrat";
 		font-weight: 700;
 		background-color: whitesmoke;
@@ -512,27 +495,25 @@
 
 	/* CSS DO CONTEÚDO AGORA*/
 
-	#topText {
 
-		font-size: 45px;
+	/* deixando o carousel responsivo: */
+
+	.carousel-inner img {
+		width: 100%;
+		height: 100%;
+	}
+
+	.topText {
+
+		font-size: 35px;
 		color: #14234A;
 		font-weight: 700;
 
 	}
 
-
-	.textRelatorio {
-
-		font-size: 20px;
-		font-weight: 500;
-		color: #14234A;
-
-	}
-
-	.textLegenda{
-
-		font-size: 16px;
-		font-weight: 500;
+	.btnFinCadastro {
+		width: 320px;
+		margin-top: 70px;
 
 	}
 
@@ -557,5 +538,131 @@
 	div .col-4 div a {
 
 		font-size: 50px;
+	}
+
+
+	/* PARTE DOS CARDS */
+
+
+	#Cartoes {
+		display: flex;
+		width: 100%;
+		height: 100%;
+		align-items: center;
+		overflow: hidden;
+		padding: 60px;
+		overflow: hidden;
+
+	}
+
+	.container .card:nth-child(1),
+	.container .card:nth-child(2) {
+		margin-left: 0;
+	}
+
+	.card-title {
+		flex-shrink: 0;
+		width: 300px;
+		height: 400px;
+		border-radius: 20px;
+		box-shadow: 0 0 15px 0px rgba(0, 0, 0, 1);
+		background-color: #F09F0E;
+		margin-right: 30px;
+		padding: 40px;
+		flex-direction: column;
+		justify-content: flex-end;
+	}
+
+	.card-title h2 {
+		font-size: 27px;
+		font-weight: 700;
+	}
+
+	.card {
+		flex-shrink: 0;
+		width: 300px;
+		height: 400px;
+		border-radius: 20px;
+		box-shadow: 0 0 15px 0 rgba(0, 0, 0, 1);
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		background-color: #14234A;
+		padding: 30px;
+		color: white;
+		font-size: 13px;
+		margin-left: -150px;
+		transition: 0.2s;
+		z-index: 1;
+		overflow: hidden;
+		position: relative;
+		font-weight: 500;
+	}
+
+	.card:hover {
+		transform: translateY(-20px);
+		margin-right: 150px;
+	}
+
+	.card .data {
+		color: #fff;
+		font-weight: bold;
+		text-transform: uppercase;
+		font-size: 17px
+	}
+
+
+	.card .autor {
+		display: flex;
+		align-items: center;
+	}
+
+	.card .autor .img-container {
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+		border: solid 3px #f46330;
+		padding: 2px;
+		margin-right: 10px;
+	}
+
+	.card .autor .img-container .img {
+		width: 100%;
+		height: 100%;
+		border-radius: 50%;
+		background: url(./assets/avatar.png) no-repeat center center;
+		background-size: cover;
+	}
+
+	.card .autor .info {
+		font-size: 12px;
+		font-weight: bold;
+	}
+
+	.card .autor .info span {
+		display: block;
+		font-size: 15px;
+		color: white;
+	}
+
+
+
+	.card .tags a {
+		display: flex;
+		border: solid 3px #28242f;
+		border-radius: 30px;
+		padding: 8px 25px;
+		text-transform: uppercase;
+		color: white;
+		font-weight: bold;
+		text-decoration: none;
+		margin-bottom: 1px;
+		transition: all ease-out 0.3s;
+		font-size: 13px;
+	}
+
+	.card .tags a:hover {
+		border-color: #fff;
+		color: #F09F0E;
 	}
 </style>

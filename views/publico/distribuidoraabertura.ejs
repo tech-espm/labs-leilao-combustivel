@@ -17,13 +17,16 @@
 				<a class="nav-link" href="">HOME</a>
 			</li>
 			<li class="nav-item active">
-				<a class="nav-link" href="">TENDÊNCIAS</a>
-			</li>
-			<li class="nav-item active">
-				<a class="nav-link text-nowrap" href="">NOVOS PEDIDOS</a>
-			</li>
-			<li class="nav-item active">
 				<a class="nav-link" href="">RELATÓRIOS</a>
+			</li>
+			<li class="nav-item active">
+				<a class="nav-link text-nowrap" href="">VENDAS</a>
+			</li>
+			<li class="nav-item active">
+				<a class="nav-link" href="">ABERTURA DE CRÉDITO</a>
+			</li>
+			<li class="nav-item active">
+				<a class="nav-link" href="">CADASTRO DE COMBUSTÍVEL</a>
 			</li>
 		</ul>
 		<form class="form-inline mt-2 mt-md-0">
@@ -42,12 +45,12 @@
 					<i class="fa fa-bars" style="font-size:30px;color:#F09F0E"></i> <span class="caret"></span>
 				</button>
 				<ul id="btnCaixa" class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="menu1">
-					<li role="presentation"><a role="menuitem" id="btnContas" tabindex="-1" href="#">Minhas Contas</a>
+					<li role="presentation"><a role="menuitem" id="btnContas" tabindex="-1" href="#">Filtros</a>
 					</li>
-					<li role="presentation"><a role="menuitem" id="btnMPedidos" tabindex="-1" href="#">Meus Pedidos</a>
+					<li role="presentation"><a role="menuitem" id="btnMPedidos" tabindex="-1" href="#">Pedidos</a>
 					</li>
-					<li role="presentation"><a role="menuitem" id="btnAbertura" tabindex="-1" href="#">Abertura de
-							Crédito</a></li>
+					<li role="presentation"><a role="menuitem" id="btnAbertura" tabindex="-1" href="#">Meus Dados</a>
+					</li>
 					<li role="presentation"><a role="menuitem" id="btnConfiguracoes" tabindex="-1"
 							href="#">Configurações</a></li>
 					<hr class="bg-light">
@@ -62,116 +65,114 @@
 <!--CONTEÚDO DO SITE-->
 
 
-<div class="container">
+<div class="container mt-5">
 
-	<div class="row mt-5">
+	<div class="form-row align-items-center mb-4">
 
-		<div class="col">
+		<img src="/imagens/triangulinho_esquerda_amarelo.png" width="27px" class="col-form-label mr-2">
 
+		<div>
 
-
-			<div class="form-row align-items-center">
-
-
-
-				<div>
-
-					<label type="button" class="col-form-label textRelatorio">Anual</label>
-
-				</div>
-
-				<img src="/imagens/seta-esq.png" width="7px" class="ml-1">
-
-				<img src="/imagens/seta-dir.png" width="7px" class="mr-1">
-
-				<div>
-
-					<label type="button" class="col-form-label textRelatorio">Mensal</label>
-
-				</div>
-
-				<img src="/imagens/seta-esq.png" width="7px" class="ml-1">
-
-				<img src="/imagens/seta-dir.png" width="7px" class="mr-1">
-
-				<div>
-
-					<label type="button" class="col-form-label textRelatorio">Diário</label>
-
-				</div>
-
-
-
-				<img width="235px" height="320px" src="/imagens/relatorio_img.png">
-
-
-
-			</div>
-
-			<div class="text-center textLegenda">Quantidade Comprada</div>
+			<label class="col-form-label topText">Abertura de Crédito</label>
 
 		</div>
 
 
-		<div class="col">
+	</div>
 
+	<div>
 
+		<h3 class="col-form-label secondText">Lista de postos que solicitaram a abertura de crédito:</h3>
 
-			<div class="form-row align-items-center">
+	</div>
 
+	<div class="row align-items-center">
+	<div class="col-8 corfundo p-4 mt-4" style="height: 300px; overflow-y: scroll;">
 
-
-				<div>
-
-					<label type="button" class="col-form-label textRelatorio">Anual</label>
-
-				</div>
-
-				<img src="/imagens/seta-esq.png" width="7px" class="ml-1">
-
-				<img src="/imagens/seta-dir.png" width="7px" class="mr-1">
-
-				<div>
-
-					<label type="button" class="col-form-label textRelatorio">Mensal</label>
-
-				</div>
-
-				<img src="/imagens/seta-esq.png" width="7px" class="ml-1">
-
-				<img src="/imagens/seta-dir.png" width="7px" class="mr-1">
-
-				<div>
-
-					<label type="button" class="col-form-label textRelatorio">Diário</label>
-
-				</div>
-
-
-
-				<img width="235px" height="320px" src="/imagens/relatorio_img.png">
-
-
-
-			</div>
-
-			<div class="text-center textLegenda">Variação do preço comprado</div>
-
+		<div>
+			Posto 1
+		</div>
+		<hr>
+		<div>
+			Posto 2
+		</div>
+		<hr>
+		<div>
+			Posto 3
+		</div>
+		<hr>
+		<div>
+			Posto 4
+		</div>
+		<hr>
+		<div>
+			Posto 5
+		</div>
+		<hr>
+		<div>
+			Posto 6
+		</div>
+		<hr>
+		<div>
+			Posto 7
+		</div>
+		<hr>
+		<div>
+			Posto 8
+		</div>
+		<hr>
+		<div>
+			Posto 9
+		</div>
+		<hr>
+		<div>
+			Posto 10
 		</div>
 
+		
 
-		<div class="col">
+	</div>
 
-			<img src="/imagens/calendario_img.png">
+	<div class="col-4 mt-4">
+
+		<div class="col-sm-4 offset-sm-1">
+	
+	
+			<button type="button" id="" class="btn btn-primary epex btnFinCadastro mb-5"><span>CLASSIFICAR</span></button>
+
+			<button type="button" id="" class="btn btn-primary epex btnFinCadastro"><span>APROVAR</span></button>
+
 
 		</div>
 
 	</div>
 
+</div>
 
-
+	<div class="mt-3" style="font-weight: 500;">
+	*caso necessário será solicitado novas documentações
+	</div>
 
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -301,7 +302,7 @@
 <style type="text/css">
 	body {
 
-		font-size: 17px;
+		font-size: 15px;
 		font-family: "Montserrat";
 		font-weight: 700;
 		background-color: whitesmoke;
@@ -402,28 +403,39 @@
 
 	/* CSS DO CONTEÚDO AGORA*/
 
-	#topText {
 
-		font-size: 45px;
+	.topText {
+
+		font-size: 35px;
 		color: #14234A;
 		font-weight: 700;
 
 	}
 
+	.secondText {
 
-	.textRelatorio {
-
-		font-size: 20px;
-		font-weight: 500;
+		font-size: 22px;
 		color: #14234A;
+		font-weight: 600;
 
 	}
 
-	.textLegenda{
+	.corfundo {
 
-		font-size: 16px;
-		font-weight: 500;
+		background-color: #e7e7e7;
+		font-size: 20px;
 
+	}
+
+
+
+
+	#btnLeilao,
+	#btnPedidos {
+		width: 100%;
+		max-width: 300px;
+		margin-top: 10px;
+		margin-bottom: 50px;
 	}
 
 	#bottomTitulo {
@@ -447,5 +459,131 @@
 	div .col-4 div a {
 
 		font-size: 50px;
+	}
+
+
+	/* PARTE DOS CARDS */
+
+
+	#Cartoes {
+		display: flex;
+		width: 100%;
+		height: 100%;
+		align-items: center;
+		overflow: hidden;
+		padding: 60px;
+		overflow: hidden;
+
+	}
+
+	.container .card:nth-child(1),
+	.container .card:nth-child(2) {
+		margin-left: 0;
+	}
+
+	.card-title {
+		flex-shrink: 0;
+		width: 300px;
+		height: 400px;
+		border-radius: 20px;
+		box-shadow: 0 0 15px 0px rgba(0, 0, 0, 1);
+		background-color: #F09F0E;
+		margin-right: 30px;
+		padding: 40px;
+		flex-direction: column;
+		justify-content: flex-end;
+	}
+
+	.card-title h2 {
+		font-size: 27px;
+		font-weight: 700;
+	}
+
+	.card {
+		flex-shrink: 0;
+		width: 300px;
+		height: 400px;
+		border-radius: 20px;
+		box-shadow: 0 0 15px 0 rgba(0, 0, 0, 1);
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		background-color: #14234A;
+		padding: 30px;
+		color: white;
+		font-size: 13px;
+		margin-left: -150px;
+		transition: 0.2s;
+		z-index: 1;
+		overflow: hidden;
+		position: relative;
+		font-weight: 500;
+	}
+
+	.card:hover {
+		transform: translateY(-20px);
+		margin-right: 150px;
+	}
+
+	.card .data {
+		color: #fff;
+		font-weight: bold;
+		text-transform: uppercase;
+		font-size: 17px
+	}
+
+
+	.card .autor {
+		display: flex;
+		align-items: center;
+	}
+
+	.card .autor .img-container {
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+		border: solid 3px #f46330;
+		padding: 2px;
+		margin-right: 10px;
+	}
+
+	.card .autor .img-container .img {
+		width: 100%;
+		height: 100%;
+		border-radius: 50%;
+		background: url(./assets/avatar.png) no-repeat center center;
+		background-size: cover;
+	}
+
+	.card .autor .info {
+		font-size: 12px;
+		font-weight: bold;
+	}
+
+	.card .autor .info span {
+		display: block;
+		font-size: 15px;
+		color: white;
+	}
+
+
+
+	.card .tags a {
+		display: flex;
+		border: solid 3px #28242f;
+		border-radius: 30px;
+		padding: 8px 25px;
+		text-transform: uppercase;
+		color: white;
+		font-weight: bold;
+		text-decoration: none;
+		margin-bottom: 1px;
+		transition: all ease-out 0.3s;
+		font-size: 13px;
+	}
+
+	.card .tags a:hover {
+		border-color: #fff;
+		color: #F09F0E;
 	}
 </style>

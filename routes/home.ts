@@ -46,6 +46,24 @@ router.all("/pedidosmktplace", wrap(async (req: express.Request, res: express.Re
 	res.render("publico/pedidosmktplace", { layout: "layout-publico", titulo: "Pedidos MKT Place" });
 }));
 
+router.all("/distribuidora/vendas", wrap(async (req: express.Request, res: express.Response) => {
+	res.render("publico/distribuidoravendas", { layout: "layout-publico", titulo: "Vendas Distribuidora" });
+}));
+
+router.all("/distribuidora/relatorios", wrap(async (req: express.Request, res: express.Response) => {
+	res.render("publico/distribuidorarelatorios", { layout: "layout-publico", titulo: "Relatórios Distribuidora" });
+}));
+
+router.all("/distribuidora/cadastro", wrap(async (req: express.Request, res: express.Response) => {
+	res.render("publico/distribuidoracadastro", { layout: "layout-publico", titulo: "Cadastro Distribuidora" });
+}));
+
+router.all("/distribuidora/abertura", wrap(async (req: express.Request, res: express.Response) => {
+	res.render("publico/distribuidoraabertura", { layout: "layout-publico", titulo: "Abertura de Crédito Distribuidora" });
+}));
+
+
+
 router.all("/login", wrap(async (req: express.Request, res: express.Response) => {
 	let u = await Usuario.cookie(req);
 	if (!u) {
