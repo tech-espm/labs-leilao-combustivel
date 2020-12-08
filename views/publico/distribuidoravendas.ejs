@@ -1,415 +1,50 @@
-<!--HEADER / NAVBAR-->
-
-<nav id="navTop" class="navbar navbar-expand-md navbar-dark">
-
-
-	<img id="btnLogo" class="navbar-brand mr-0" href="#" src="/imagens/logo.png" width="140px" type="button">
-
-
-	<button class="navbar-toggler" type="button" style="background-color:#F09F0e" data-toggle="collapse"
-		data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
-		aria-label="Toggle navigation">
-		<i class="fa fa-bars" style="font-size:30px;color:white"></i>
-	</button>
-	<div class="collapse navbar-collapse" id="navbarCollapse">
-		<ul class="navbar-nav m-auto">
-			<li class="nav-item active">
-				<a class="nav-link" href="/homeposto">HOME</a>
-			</li>
-			<li class="nav-item active">
-				<a class="nav-link" href="/distribuidora/relatorios">RELATÓRIOS</a>
-			</li>
-			<li class="nav-item active">
-				<a class="nav-link text-nowrap" href="/distribuidora/vendas">VENDAS</a>
-			</li>
-			<li class="nav-item active">
-				<a class="nav-link" href="/distribuidora/abertura">ABERTURA DE CRÉDITO</a>
-			</li>
-			<li class="nav-item active">
-				<a class="nav-link" href="/distribuidora/cadastro">CADASTRO DE COMBUSTÍVEL</a>
-			</li>
-		</ul>
-		<form class="form-inline mt-2 mt-md-0">
-
-
-			<button class="btn">
-
-				<i class="fa fa-search" style="font-size:30px;color:white"></i>
-
-			</button>
-
-
-			<div class="dropdown ml-3">
-
-				<button class="btn btn-default" type="button" id="menu1" data-toggle="dropdown">
-					<i class="fa fa-bars" style="font-size:30px;color:#F09F0E"></i> <span class="caret"></span>
-				</button>
-				<ul id="btnCaixa" class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="menu1">
-					<li role="presentation"><a role="menuitem" id="btnContas" tabindex="-1" href="#">Filtros</a>
-					</li>
-					<li role="presentation"><a role="menuitem" id="btnMPedidos" tabindex="-1" href="#">Pedidos</a>
-					</li>
-					<li role="presentation"><a role="menuitem" id="btnAbertura" tabindex="-1" href="#">Meus Dados</a>
-					</li>
-					<li role="presentation"><a role="menuitem" id="btnConfiguracoes" tabindex="-1"
-							href="#">Configurações</a></li>
-					<hr class="bg-light">
-					<li role="presentation"><a role="menuitem" id="btnSair" tabindex="-1" href="#">Sair</a></li>
-				</ul>
-			</div>
-
-		</form>
-	</div>
-</nav>
+<%- include("../navbar-distribuidora") %>
 
 <!--CONTEÚDO DO SITE-->
 
-
 <div class="container mt-5">
 
-	<div class="row">
+	<h1 class="topText img">Vendas</h1>
 
+	<div>
+		<a href="#" class="textVendas" onclick="return selecionarRelatorio(this);">Inadimplentes</a>
+		<img src="/imagens/seta-esq.png" width="7px" class="ml-1" /><img src="/imagens/seta-dir.png" width="7px" class="mr-1" />
+		<a href="#" class="textVendas" onclick="return selecionarRelatorio(this);">Realizados</a>
+		<img src="/imagens/seta-esq.png" width="7px" class="ml-1" /><img src="/imagens/seta-dir.png" width="7px" class="mr-1" />
+		<a href="#" class="textVendas" onclick="return selecionarRelatorio(this);">Em Andamento</a>
+	</div>
+
+	<script type="text/javascript">
+		function selecionarRelatorio(opcao) {
+			$(opcao).parent().find(".textVendas").removeClass("selecionado");
+			$(opcao).addClass("selecionado");
+			return false;
+		}
+	</script>
+
+	<div class="row">
 		<div class="col-sm-7">
-
-			<div class="form-row align-items-center">
-
-				<img src="/imagens/triangulinho_esquerda_amarelo.png" width="27px" class="col-form-label mr-2">
-
-				<div>
-
-					<label class="col-form-label topText">Vendas</label>
-
-				</div>
-
-			</div>
-
-			<div class="form-row align-items-center mb-3">
-
-
-
-				<div>
-
-					<label type="button" class="col-form-label textVendas">Inadimplentes</label>
-
-				</div>
-
-				<img src="/imagens/seta-esq.png" width="7px" class="ml-2">
-
-				<img src="/imagens/seta-dir.png" width="7px" class="mr-2">
-
-				<div>
-
-					<label type="button" class="col-form-label textVendas">Realizados</label>
-
-				</div>
-
-				<img src="/imagens/seta-esq.png" width="7px" class="ml-2">
-
-				<img src="/imagens/seta-dir.png" width="7px" class="mr-2">
-
-				<div>
-
-					<label type="button" class="col-form-label textVendas">Em andamento</label>
-
-				</div>
-
-			</div>
-
-			<img width="750px" src="/imagens/vendas_img.png">
-
+			<img width="750" src="/imagens/vendas_img.png" style="max-width: 100%;" />
 		</div>
 
-
-
-
-
-		<div class="col-xl-5">
-			<img class="ml-5" src="/imagens/calendario_img.png">
+		<div class="col-sm-5">
+			<img class="ml-5" src="/imagens/calendario_img.png" style="max-width: 100%;" />
 		</div>
-
 	</div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- PARTE DE BAIXO -->
-<hr class="mt-5">
-
-<div class="container mt-5 mb-4 bg-i">
-
-	<div class="row">
-
-		<div class="col-4">
-
-			<div class="mb-4">
-
-				<h2 id="bottomTitulo" class="mb-3">
-					Contato
-				</h2>
-
-
-				<div>
-
-
-
-					<div class="form-row align-items-center">
-
-						<i class="fa fa-envelope col-form-label" style="font-size:30px;"></i>
-
-
-						<div class="col">
-
-							<label class="col-form-label" id="bottomText">contabilidade@gaeune.com.br</label>
-
-						</div>
-
-					</div>
-
-
-
-
-				</div>
-
-
-
-
-
-				<div class="form-row align-items-center">
-
-					<i class="fa fa-phone-square col-form-label" style="font-size:34px;"></i>
-
-
-					<div class="col">
-
-						<label class="col-form-label" id="bottomText">+55 (11) 3813-7699 </label>
-
-					</div>
-
-				</div>
-
-			</div>
-
-
-
-			<h2 id="bottomTitulo" class="mb-4">Endereço</h2>
-
-			<div>
-				<p id="bottomText">
-
-					Rua Dr. Virgilio de Carvalho Pinto, 656
-					<br> Pinheiros - São Paulo, SP
-					<br> Brasil
-					<br> CEP 05412-020
-
-				</p>
-
-			</div>
-
-		</div>
-
-		<div class="col-4">
-
-			<h2 id="bottomTitulo" class="mb-3">Links</h2>
-
-			<div>
-				<a href="#" id="bottomText">Home</a>
-			</div>
-
-			<div>
-				<a href="#" id="bottomText">Tendências</a>
-			</div>
-
-			<div>
-				<a href="#" id="bottomText">Novos Pedidos</a>
-			</div>
-
-			<div>
-				<a href="#" id="bottomText">Relatórios</a>
-			</div>
-
-			<div>
-				<a href="#" id="bottomText">Termos e Serviços</a>
-			</div>
-
-			<div>
-				<a href="#" id="bottomText">Políticas de Privacidade</a>
-			</div>
-		</div>
-		<div class="col-4">
-
-			<img src="/imagens/mapsimg.png" width="400px" height="300px">
-		</div>
-
-	</div>
-
-</div>
-
-<!--	FOOTER -->
-
-<footer class="p-3" style="background-color: #14234A">
-	<div class="container">
-		<span style="color: white; font-weight: 500">© 2020 EPEX</span>
-	</div>
-</footer>
 
 <%- contentFor("head") %>
 
 <style type="text/css">
-	body {
-
-		font-size: 15px;
-		font-family: "Montserrat";
-		font-weight: 700;
-		background-color: whitesmoke;
-	}
-
-
-	/*CSS DO HEADER/NAVBAR */
-
-	#navTop {
-
-		background-color: #14234A;
-
-	}
-
-	.nav-item {
-
-		margin-right: 2rem;
-	}
-
-	#btnLogo {
-
-		padding: 0rem;
-
-		margin-left: 1%;
-
-	}
-
-	.navbar-nav .nav-item .nav-link {
-		border-bottom: 1px solid transparent;
-		transition-duration: 0.4s;
-
-		display: inline-block;
-		text-decoration: none;
-
-	}
-
-	.navbar-nav .nav-item .nav-link:after {
-
-		content: "";
-		display: block;
-		width: 0;
-		border-bottom: 1px solid white;
-		margin: 0 auto;
-		transition: all 0.3s linear 0s;
-	}
-
-	.navbar-nav .nav-item .nav-link:hover {
-
-		color: #F09F0E;
-
-	}
-
-	.navbar-nav .nav-item .nav-link:hover:after {
-
-
-
-		width: 100%;
-
-
-	}
-
-	.dropdown-menu li {
-		padding: 1px;
-	}
-
-	#btnContas,
-	#btnMPedidos,
-	#btnAbertura,
-	#btnConfiguracoes,
-	#btnSair {
-		font-size: 14px;
-		margin-left: 7px;
-		color: white;
-		font-weight: 600;
-	}
-
-
-
-	#btnSair {
-		color: #F09F0E;
-		font-size: 14px;
-	}
-
-
-	#btnCaixa {
-		background-color: #14234A;
-
-	}
-
-	hr,
-	.bg-light {
-
-		margin-top: 5px;
-		margin-bottom: 6px;
-
-	}
-
-
 	/* CSS DO CONTEÚDO AGORA*/
-
-
-	.topText {
-
-		font-size: 35px;
-		color: #14234A;
-		font-weight: 700;
-
-	}
-
 	.textVendas {
-
 		font-size: 25px;
 		font-weight: 500;
 		color: #14234A;
-
-
+		vertical-align: middle;
 	}
 
-
-	#bottomTitulo {
-
-		color: #14234A;
-		font-size: 25px;
-		font-weight: 700;
-
-
-	}
-
-	#bottomText {
-
-		font-size: 13px;
-		font-weight: 500;
-
+	.selecionado {
+		background-color: #fff;
 	}
 </style>

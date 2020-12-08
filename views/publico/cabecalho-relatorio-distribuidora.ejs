@@ -1,0 +1,60 @@
+
+<style type="text/css">
+	.textRelatorio {
+		font-size: 20px;
+		font-weight: 500;
+		color: #14234A;
+		vertical-align: middle;
+	}
+
+	.selecionado {
+		background-color: #fff;
+	}
+
+	.textLegenda {
+		font-size: 16px;
+		font-weight: 500;
+	}
+</style>
+
+<div class="row mt-5 text-center">
+
+	<div class="col-sm-4 text-center">
+		<div>
+			<a href="#" class="textRelatorio selecionado" onclick="return selecionarRelatorio(this);">Anual</a>
+			<img src="/imagens/seta-esq.png" width="7px" class="ml-1" /><img src="/imagens/seta-dir.png" width="7px" class="mr-1" />
+			<a href="#" class="textRelatorio" onclick="return selecionarRelatorio(this);">Mensal</a>
+			<img src="/imagens/seta-esq.png" width="7px" class="ml-1" /><img src="/imagens/seta-dir.png" width="7px" class="mr-1" />
+			<a href="#" class="textRelatorio" onclick="return selecionarRelatorio(this);">Diário</a>
+		</div>
+		<img width="235px" src="/imagens/relatorio_img.png" style="max-width: 100%;" />
+		<div class="textLegenda">Quantidade Venda</div>
+	</div>
+
+	<div class="col-sm-4 text-center">
+		<div>
+			<a href="#" class="textRelatorio selecionado" onclick="return selecionarRelatorio(this);">Anual</a>
+			<img src="/imagens/seta-esq.png" width="7px" class="ml-1" /><img src="/imagens/seta-dir.png" width="7px" class="mr-1" />
+			<a href="#" class="textRelatorio" onclick="return selecionarRelatorio(this);">Mensal</a>
+			<img src="/imagens/seta-esq.png" width="7px" class="ml-1" /><img src="/imagens/seta-dir.png" width="7px" class="mr-1" />
+			<a href="#" class="textRelatorio" onclick="return selecionarRelatorio(this);">Diário</a>
+		</div>
+		<img width="235px" src="/imagens/relatorio_img.png" style="max-width: 100%;" />
+		<div class="textLegenda">Variação da Petrobrás</div>
+	</div>
+
+	<div class="col-sm-4">
+
+		<img src="/imagens/calendario_img.png" style="max-width: 100%;" />
+
+	</div>
+
+</div>
+
+<script type="text/javascript">
+	function selecionarRelatorio(opcao) {
+		$(opcao).parent().find(".textRelatorio").removeClass("selecionado");
+		$(opcao).addClass("selecionado");
+		return false;
+	}
+</script>
