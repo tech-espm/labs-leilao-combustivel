@@ -12,15 +12,13 @@ router.all("/criar", wrap(async (req: express.Request, res: express.Response) =>
 	let u = await Usuario.cookie(req);
 	if (!u)
 	res.redirect(appsettings.root + "/");
-	else if (u.idtipo !== Usuario.IdTipoDistribuidor)
+	else if (u.idtipo !== Usuario.IdTipoPosto)
 		res.redirect(appsettings.root + "/acesso");
 	else
 		res.render("pedido/alterar", {
-			titulo: "Criar Anúncio",
+			titulo: "Criar pedido",
 			usuario: u,
-			item: null,
-			tipos: await Transportadora.listar(),
-			comb: await Combustivel.listar()
+			item: null
 		});
 }));
 
@@ -35,7 +33,7 @@ router.all("/alterar", wrap(async (req: express.Request, res: express.Response) 
 			res.render("home/nao-encontrado", { usuario: u });
 		else
 			res.render("anuncio/alterar", {
-				titulo: "Editar Anúncio",
+				titulo: "Editar Pedido",
 				usuario: u,
 				item: item,
 				tipos: await Transportadora.listar(),

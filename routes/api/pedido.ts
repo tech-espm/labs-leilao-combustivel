@@ -27,7 +27,7 @@ router.post("/criar", wrap(async (req: express.Request, res: express.Response) =
 	let u = await Usuario.cookie(req, res, true); 
 	if (!u)
 		return;
-	if (u.idtipo !== Usuario.IdTipoDistribuidor) 
+	if (u.idtipo !== Usuario.IdTipoPosto) 
 			res.statusCode = 403;
 			res.json("Não permitido");
 	let p = req.body as Pedido; 
