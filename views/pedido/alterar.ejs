@@ -1,0 +1,529 @@
+<!--HEADER / NAVBAR-->
+
+<nav id="navTop" class="navbar navbar-expand-md navbar-dark">
+
+
+	<img id="btnLogo" class="navbar-brand mr-0" href="#" src="/imagens/logo.png" width="140px" type="button">
+
+
+	<button class="navbar-toggler" type="button" style="background-color:#F09F0e" data-toggle="collapse"
+		data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+		aria-label="Toggle navigation">
+		<i class="fa fa-bars" style="font-size:30px;color:white"></i>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarCollapse">
+		<ul class="navbar-nav m-auto">
+			<li class="nav-item active">
+				<a class="nav-link" href="/homeposto">HOME</a>
+			</li>
+			<li class="nav-item active">
+				<a class="nav-link" href="/distribuidora/relatorios">RELATÓRIOS</a>
+			</li>
+			<li class="nav-item active">
+				<a class="nav-link text-nowrap" href="/distribuidora/vendas">VENDAS</a>
+			</li>
+			<li class="nav-item active">
+				<a class="nav-link" href="/distribuidora/abertura">ABERTURA DE CRÉDITO</a>
+			</li>
+			<li class="nav-item active">
+				<a class="nav-link" href="/distribuidora/cadastro">CADASTRO DE COMBUSTÍVEL</a>
+			</li>
+		</ul>
+		<form class="form-inline mt-2 mt-md-0">
+
+
+			<button class="btn">
+
+				<i class="fa fa-search" style="font-size:30px;color:white"></i>
+
+			</button>
+
+
+			<div class="dropdown ml-3">
+
+				<button class="btn btn-default" type="button" id="menu1" data-toggle="dropdown">
+					<i class="fa fa-bars" style="font-size:30px;color:#F09F0E"></i> <span class="caret"></span>
+				</button>
+				<ul id="btnCaixa" class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="menu1">
+					<li role="presentation"><a role="menuitem" id="btnContas" tabindex="-1" href="#">Filtros</a>
+					</li>
+					<li role="presentation"><a role="menuitem" id="btnMPedidos" tabindex="-1" href="#">Pedidos</a>
+					</li>
+					<li role="presentation"><a role="menuitem" id="btnAbertura" tabindex="-1" href="#">Meus Dados</a>
+					</li>
+					<li role="presentation"><a role="menuitem" id="btnConfiguracoes" tabindex="-1"
+							href="#">Configurações</a></li>
+					<hr class="bg-light">
+					<li role="presentation"><a role="menuitem" id="btnSair" tabindex="-1" href="#">Sair</a></li>
+				</ul>
+			</div>
+
+		</form>
+	</div>
+</nav>
+
+<!--CONTEÚDO DO SITE-->
+
+
+<div class="container mt-5">
+
+	<div class="form-row align-items-center">
+
+		<img src="/imagens/triangulinho_esquerda_amarelo.png" width="27px" class="col-form-label mr-2">
+
+		<div>
+
+			<label class="col-form-label topText">Cadastrar Combustível</label>
+
+		</div>
+
+	</div>
+
+
+	<div class="container">
+
+		<hr class="mb-5 mt-4">
+
+		<div class="row">
+			<div class="col-3">
+				<div class="form-group">
+					<label class="m-2" for="exampleFormControlSelect1">Produto:</label>
+					<select class="form-control" id="exampleFormControlSelect1">
+						<option>Gasolina Comum</option>
+						<option>Gasolina Aditivada</option>
+						<option>Gasolina Premium</option>
+						<option>Álcool</option>
+						<option>Alcool Aditivado</option>
+						<option>Diesel S10</option>
+						<option>Diesel S500</option>
+						<option>- Qualquer -</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="col-3">
+				<div class="form-group">
+					<label class="m-2" for="exampleFormControlSelect3">Origem:</label>
+					<select class="form-control" id="exampleFormControlSelect3">
+						<option>Apenas Baguar</option>
+						<option>Bombeio</option>
+						<option>Importada</option>
+						<option>Formulada</option>
+						<option>- Qualquer -</option>
+					</select>
+				</div>
+			</div>
+
+
+			<div class="col-3">
+				<div class="form-group">
+					<label class="m-2" for="exampleFormControlSelect2">Prazo de Pagamento:</label>
+					<select class="form-control" id="exampleFormControlSelect2">
+						<option>0 dia</option>
+						<option>1 dia</option>
+						<option>2 dias</option>
+						<option>3 dias</option>
+						<option>4 dias</option>
+						<option>5 dias</option>
+						<option>6 dias</option>
+						<option>7 dias</option>
+						<option>- Qualquer -</option>
+
+					</select>
+				</div>
+			</div>
+		</div>
+
+
+
+		<div class="row">
+			<div class="col-3">
+				<div class="form-group">
+					<label class="m-2" for="exampleFormControlSelect4">Região:</label>
+					<select class="form-control" id="exampleFormControlSelect4">
+						<option>Região 1</option>
+						<option>Região 2</option>
+						<option>Região 3</option>
+						<option>- Qualquer -</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-3">
+				<div class="form-group">
+					<label class="m-2" for="exampleFormControlSelect5">Redes de Postos:</label>
+					<select class="form-control" id="exampleFormControlSelect5">
+						<option>-</option>
+						<option>-</option>
+						<option>- Qualquer -</option>
+					</select>
+				</div>
+			</div>
+
+		</div>
+
+		<hr class="mt-5 mb-5">
+
+		<div class="row">
+			<div class="col-3">
+				<div class="form-group">
+					<label class="m-2">Variação CIF/FOB:</label>
+					<div>
+
+						<input type="text" class="form-control form-group" id="" placeholder="Variação CIF/FOB">
+
+					</div>
+				</div>
+			</div>
+			<div class="col-3">
+				<div class="form-group">
+					<label class="m-2">Quantidade:</label>
+					<div>
+
+						<input type="text" class="form-control" id="" placeholder="Quantidade">
+
+					</div>
+					<small class="m-1">Obs.: Unidade em Litros</small>
+				</div>
+			</div>
+			<div class="col-3">
+				<div class="form-group">
+					<label class="m-2">Transportadora:</label>
+					<div>
+
+						<input type="text" class="form-control form-group" id="" placeholder="Transportadora">
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<hr class="mt-4 mb-4">
+
+		<label class="m-2">Range de Preço:</label>
+
+		<div class="row mt-0">
+
+
+
+			<div class="col-3">
+
+				<div class="form-group">
+
+					<label class="m-2" style="font-size: 13px; font-weight: 500;">Mínimo:</label>
+
+					<div>
+
+						<input type="text" class="form-control form-group" id="" placeholder="De (Mínimo)">
+
+					</div>
+
+				</div>
+			</div>
+
+
+			<div class="col-3">
+
+				<div class="form-group">
+					<label class="m-2" style="font-size: 13px; font-weight: 500;"> Máximo:</label>
+
+					<div>
+
+						<input type="text" class="form-control form-group" id="" placeholder="Até (Máximo)">
+
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+
+
+	</div>
+
+
+	<div class="mb-5 container text-center">
+		<div class="row">
+			<div class="col-sm-4 offset-sm-1">
+
+
+				<button type="button" id="btnLeilao"
+					class="btn btn-primary epex btnFinCadastro"><span>LEILÃO</span></button>
+
+
+			</div>
+			<div class="col-sm-4 offset-sm-2">
+
+
+				<button type="button" id="btnPedidos"
+					class="btn btn-primary epex btnFinCadastro"><span>MARKETPLACE</span></button>
+
+
+			</div>
+		</div>
+	</div>
+
+
+</div>
+
+
+
+
+
+<!-- PARTE DE BAIXO -->
+<hr class="mt-5">
+
+<div class="container mt-5 mb-4 bg-i">
+
+	<div class="row">
+
+		<div class="col-4">
+
+			<div class="mb-4">
+
+				<h2 id="bottomTitulo" class="mb-3">
+					Contato
+				</h2>
+
+
+				<div>
+
+
+
+					<div class="form-row align-items-center">
+
+						<i class="fa fa-envelope col-form-label" style="font-size:30px;"></i>
+
+
+						<div class="col">
+
+							<label class="col-form-label" id="bottomText">contabilidade@gaeune.com.br</label>
+
+						</div>
+
+					</div>
+
+
+
+
+				</div>
+
+
+
+
+
+				<div class="form-row align-items-center">
+
+					<i class="fa fa-phone-square col-form-label" style="font-size:34px;"></i>
+
+
+					<div class="col">
+
+						<label class="col-form-label" id="bottomText">+55 (11) 3813-7699 </label>
+
+					</div>
+
+				</div>
+
+			</div>
+
+
+
+			<h2 id="bottomTitulo" class="mb-4">Endereço</h2>
+
+			<div>
+				<p id="bottomText">
+
+					Rua Dr. Virgilio de Carvalho Pinto, 656
+					<br> Pinheiros - São Paulo, SP
+					<br> Brasil
+					<br> CEP 05412-020
+
+				</p>
+
+			</div>
+
+		</div>
+
+		<div class="col-4">
+
+			<h2 id="bottomTitulo" class="mb-3">Links</h2>
+
+			<div>
+				<a href="#" id="bottomText">Home</a>
+			</div>
+
+			<div>
+				<a href="#" id="bottomText">Tendências</a>
+			</div>
+
+			<div>
+				<a href="#" id="bottomText">Novos Pedidos</a>
+			</div>
+
+			<div>
+				<a href="#" id="bottomText">Relatórios</a>
+			</div>
+
+			<div>
+				<a href="#" id="bottomText">Termos e Serviços</a>
+			</div>
+
+			<div>
+				<a href="#" id="bottomText">Políticas de Privacidade</a>
+			</div>
+		</div>
+		<div class="col-4">
+
+			<img src="/imagens/mapsimg.png" width="400px" height="300px">
+		</div>
+
+	</div>
+
+</div>
+
+<!--	FOOTER -->
+
+<footer class="p-3" style="background-color: #14234A">
+	<div class="container">
+		<span style="color: white; font-weight: 500">© 2020 EPEX</span>
+	</div>
+</footer>
+
+<%- contentFor("head") %>
+
+<style type="text/css">
+	body {
+
+		font-size: 15px;
+		font-family: "Montserrat";
+		font-weight: 700;
+		background-color: whitesmoke;
+	}
+
+
+	/*CSS DO HEADER/NAVBAR */
+
+	#navTop {
+
+		background-color: #14234A;
+
+	}
+
+	.nav-item {
+
+		margin-right: 2rem;
+	}
+
+	#btnLogo {
+
+		padding: 0rem;
+
+		margin-left: 1%;
+
+	}
+
+	.navbar-nav .nav-item .nav-link {
+		border-bottom: 1px solid transparent;
+		transition-duration: 0.4s;
+
+		display: inline-block;
+		text-decoration: none;
+
+	}
+
+	.navbar-nav .nav-item .nav-link:after {
+
+		content: "";
+		display: block;
+		width: 0;
+		border-bottom: 1px solid white;
+		margin: 0 auto;
+		transition: all 0.3s linear 0s;
+	}
+
+	.navbar-nav .nav-item .nav-link:hover {
+
+		color: #F09F0E;
+
+	}
+
+	.navbar-nav .nav-item .nav-link:hover:after {
+
+		width: 100%;
+
+	}
+
+	.dropdown-menu li {
+		padding: 1px;
+	}
+
+	#btnContas,
+	#btnMPedidos,
+	#btnAbertura,
+	#btnConfiguracoes,
+	#btnSair {
+		font-size: 14px;
+		margin-left: 7px;
+		color: white;
+		font-weight: 600;
+	}
+
+
+
+	#btnSair {
+		color: #F09F0E;
+		font-size: 14px;
+	}
+
+
+	#btnCaixa {
+		background-color: #14234A;
+
+	}
+
+	hr,
+	.bg-light {
+
+		margin-top: 5px;
+		margin-bottom: 6px;
+
+	}
+
+
+	/* CSS DO CONTEÚDO AGORA*/
+
+
+	.topText {
+
+		font-size: 35px;
+		color: #14234A;
+		font-weight: 700;
+
+	}
+
+	.btnFinCadastro {
+
+		width: 320px;
+		margin-top: 70px;
+
+	}
+
+	/* CSS DA PARTE DE BAIXO */
+
+	#bottomTitulo {
+
+		color: #14234A;
+		font-size: 25px;
+		font-weight: 700;
+
+	}
+
+	#bottomText {
+
+		font-size: 13px;
+		font-weight: 500;
+
+	}
+</style>
