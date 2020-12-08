@@ -106,10 +106,12 @@
 			margin-bottom: 6px;
 		}
 
+		/* CSS DO CONTEUDO */
+
 		.topText {
 			padding-left: 1em;
-			font-size: 35px;
-			line-height: 35px;
+			font-size: 40px;
+			line-height: 40px;
 			color: #14234A;
 			font-weight: 700;
 		}
@@ -131,13 +133,14 @@
 
 		#bottomText {
 			font-size: 13px;
-			font-weight: 500;
+			font-weight: 600;
+			color: rgb(139, 139, 139);
 		}
 	</style>
 
 	<%- defineContent("head") %>
 
-	<link rel="stylesheet" href="<%- root %>/css/botao.css" />
+	<link rel="stylesheet" href="<%- root %> /css/botao.css"/>
 
 </head>
 <body>
@@ -151,7 +154,7 @@
 
 		<div class="row">
 
-			<div class="col-4">
+			<div class="col-sm-4">
 
 				<div class="mb-4">
 
@@ -219,7 +222,7 @@
 
 			</div>
 
-			<div class="col-4">
+			<div class="col-md-4">
 
 				<h2 id="bottomTitulo" class="mb-3">Links</h2>
 
@@ -246,8 +249,17 @@
 				<div>
 					<a href="#" id="bottomText">Políticas de Privacidade</a>
 				</div>
+
+				<div class="mt-4">
+				
+					<a href="www.facebook.com"><img width="40px" src="/imagens/face.png"></a>
+					<a href="www.instagram.com"><img width="40px" src="/imagens/insta.png"></a>
+					<a href="www.linkedin.com"><img width="40px" src="/imagens/linkedin.png"></a>
+					<a href="www.twitter.com"><img width="40px" src="/imagens/twitter.png"></a>
+				</div>
+
 			</div>
-			<div class="col-4">
+			<div class="col-md-4">
 
 				<img src="/imagens/mapsimg.png" width="400" style="max-width: 100%;">
 			</div>

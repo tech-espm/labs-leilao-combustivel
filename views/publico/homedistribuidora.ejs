@@ -1,0 +1,63 @@
+<%- include("../navbar-distribuidora") %>
+
+<!--CONTEÚDO DO SITE-->
+
+<div class="container mt-5">
+	<div class="row">
+
+		<div class="col-sm-7">
+			<div id="demo" class="carousel slide" data-ride="carousel">
+				<ul class="carousel-indicators">
+					<li data-target="#demo" data-slide-to="0" class="active"></li>
+					<li data-target="#demo" data-slide-to="1"></li>
+					<li data-target="#demo" data-slide-to="2"></li>
+				</ul>
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<img src="/imagens/postin.jpg" alt="Los Angeles">
+						<div class="carousel-caption">
+							<h3>Imagem 1</h3>
+							<p>Um exemplo de imagem 1!</p>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<img src="/imagens/carrin.jpg" alt="Chicago">
+						<div class="carousel-caption">
+							<h3>Imagem 2</h3>
+							<p>Um exemplo de imagem 2!</p>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<img src="/imagens/bombin.jpg" alt="New York">
+						<div class="carousel-caption">
+							<h3>Imagem 3</h3>
+							<p>Um exemplo de imagem 3!</p>
+						</div>
+					</div>
+				</div>
+				<a class="carousel-control-prev" href="#demo" data-slide="prev">
+					<span class="carousel-control-prev-icon"></span>
+				</a>
+				<a class="carousel-control-next" href="#demo" data-slide="next">
+					<span class="carousel-control-next-icon"></span>
+				</a>
+			</div>
+		</div>
+
+		<div class="col-sm-5">
+			<img class="ml-5" src="/imagens/calendario_img.png" style="max-width: 100%;" />
+		</div>
+
+	</div>
+</div>
+
+<%- contentFor("head") %>
+
+<style type="text/css">
+	/* CSS DO CONTEÚDO AGORA */
+
+	.carousel-inner img {
+		width: 100%;
+		height: 100%;
+	}
+</style>

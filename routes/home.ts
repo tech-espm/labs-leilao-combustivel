@@ -46,6 +46,10 @@ router.all("/pedidosmktplace", wrap(async (req: express.Request, res: express.Re
 	res.render("publico/pedidosmktplace", { layout: "layout-publico-rodape", titulo: "Pedidos MKT Place" });
 }));
 
+router.all("/homedistribuidora", wrap(async (req: express.Request, res: express.Response) => {
+	res.render("publico/homedistribuidora", { layout: "layout-publico-rodape", titulo: "HOME Distribuidora" });
+}));
+
 router.all("/distribuidora/vendas", wrap(async (req: express.Request, res: express.Response) => {
 	res.render("publico/distribuidoravendas", { layout: "layout-publico-rodape", titulo: "Vendas Distribuidora" });
 }));
