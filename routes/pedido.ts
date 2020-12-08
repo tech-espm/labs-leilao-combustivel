@@ -32,12 +32,10 @@ router.all("/alterar", wrap(async (req: express.Request, res: express.Response) 
 		if (isNaN(id_pedido) || !(item = await Pedido.obter(id_pedido)))
 			res.render("home/nao-encontrado", { usuario: u });
 		else
-			res.render("anuncio/alterar", {
+			res.render("pedido/alterar", {
 				titulo: "Editar Pedido",
 				usuario: u,
-				item: item,
-				tipos: await Transportadora.listar(),
-				comb: await Combustivel.listar()
+				item: item
 			});
 	}
 }));
