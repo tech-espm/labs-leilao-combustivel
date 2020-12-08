@@ -22,13 +22,14 @@ export = class Usuario {
 
 	public id: number;
 	public login: string;
-	public nome: string;
+	public nome: string; 
+	public nomeresp: string; 
+	public emailcont: string;
 	public idperfil: number;
 	public idtipo: number; 
 	public senha: string; 
 	public telefone: string;
 	public endereco: string;
-	public cep: string;
 	public idcidade: number;
 	public idestado: number;
 	public criacao: string; 
@@ -207,8 +208,8 @@ export = class Usuario {
 		if (u.endereco.length < 3 || u.endereco.length > 100)
 			return "Telefone inválido";
 
-		u.cep = (u.cep || "").normalize().trim().toUpperCase();
-		if (u.cep.length < 9 || u.cep.length > 15)
+		u.cnpj = (u.cnpj || "").normalize().trim().toUpperCase();
+		if (u.cnpj.length < 9 || u.cnpj.length > 15)
 			return "CEP inválido";
 
 		u.idcidade = parseInt(u.idcidade as any);
@@ -221,7 +222,7 @@ export = class Usuario {
 		let lista: Usuario[] = null;
 
 		await Sql.conectar(async (sql: Sql) => {
-			lista = await sql.query("select u.id, u.login, u.nome, p.nome perfil, t.nome tipo, u.telefone, u.cnpj, u.endereco, u.cep, c.nome cidade, e.sigla estado, date_format(u.criacao, '%d/%m/%Y') criacao from usuario u inner join perfil p on p.id = u.idperfil inner join tipo t on t.id = u.idtipo inner join cidade c on c.id = u.idcidade inner join estado e on e.id = u.idestado") as Usuario[];
+			lista = await sql.query("select u.id, u.login, u.nome, p.nome perfil, t.nome tipo, u.telefone, u.cnpj, u.endereco, c.nome cidade, e.sigla estado, date_format(u.criacao, '%d/%m/%Y') criacao from usuario u inner join perfil p on p.id = u.idperfil inner join tipo t on t.id = u.idtipo inner join cidade c on c.id = u.idcidade inner join estado e on e.id = u.idestado") as Usuario[];
 		});
 
 		return (lista || []);
@@ -231,7 +232,7 @@ export = class Usuario {
 		let usuario: Usuario = null;
 
 		await Sql.conectar(async (sql: Sql) => {
-			const lista = await sql.query("select id, login, nome, idperfil, idtipo, senha, telefone, cnpj, endereco, cep, idcidade, idestado, date_format(criacao, '%d/%m/%Y') criacao from usuario where id = ?", [id]) as Usuario[];
+			const lista = await sql.query("select id, login, nome, idperfil, idtipo, senha, telefone, cnpj, endereco, idcidade, idestado, date_format(criacao, '%d/%m/%Y') criacao from usuario where id = ?", [id]) as Usuario[];
 
 			if (lista && lista[0])
 				usuario = lista[0];
@@ -275,7 +276,7 @@ export = class Usuario {
 			return "Login inválido";
 
 		try {		//FALTA ATRIBUTO CNPJ, POSSUIR CAMINHÃO, CONVENIO, EXTRATO BANCARIO, CONTRATO SOCIAL, RAZÃO SOCIAL
-			await sql.query("insert into usuario (login, nome, idperfil, idtipo, senha, telefone, cnpj, endereco, cep, idcidade, idestado, criacao) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now())", [u.login, u.nome, u.idperfil, u.idtipo, appsettings.usuarioHashSenhaPadrao, u.telefone, u.cnpj, u.endereco, u.cep, u.idcidade, u.idestado]);
+			await sql.query("insert into usuario (login, nome, nomeresp, emailcont, idperfil, idtipo, senha, telefone, cnpj, endereco, idcidade, idestado, criacao) values (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now())", [u.login, u.nome, u.nomeresp, u.emailcont, u.idperfil, u.idtipo, appsettings.usuarioHashSenhaPadrao, u.telefone, u.cnpj, u.endereco, u.idcidade, u.idestado]);
 			u.id = await sql.scalar("select last_insert_id()") as number;
 		} catch (e) {
 			if (e.code) {
@@ -302,7 +303,7 @@ export = class Usuario {
 		if (u.id === Usuario.IdUsuarioAdmin)
 			return "Não é possível editar o usuário administrador principal";
 
-		await sql.query("update usuario set nome = ?, idperfil = ?, telefone = ?, endereco = ?, cep = ?, idcidade = ?, idestado = ? where id = ?", [u.nome, u.idperfil, u.telefone, u.endereco, u.cep, u.idcidade, u.idestado, u.id]);
+		await sql.query("update usuario set nome = ?, nomeresp = ?, emailcont = ?,  idperfil = ?, telefone = ?, endereco = ?, cnpj = ?, idcidade = ?, idestado = ? where id = ?", [u.nome, u.nomeresp, u.emailcont, u.idperfil, u.telefone, u.endereco, u.cnpj, u.idcidade, u.idestado, u.id]);
 
 		return null;
 	}

@@ -40,14 +40,15 @@ INSERT INTO estado (id, sigla, nome, idcapital) VALUES (1, 'AC','ACRE', 16), (2,
 CREATE TABLE usuario (
   id int NOT NULL AUTO_INCREMENT,
   login varchar(100) NOT NULL,
-  nome varchar(100) NOT NULL,
+  nome varchar(100) NOT NULL, 
+  nomeresp varchar(100) NOT NULL, 
+  emailcont varchar(100) NOT NULL,
   idperfil int NOT NULL,
   idtipo int NOT NULL,
   senha varchar(100) NOT NULL,
   token char(32) DEFAULT NULL,
   telefone varchar(20) NOT NULL,
   endereco varchar(100) NOT NULL,
-  cep varchar(15) NOT NULL,
   idcidade int NOT NULL,
   idestado int NOT NULL,
   criacao datetime NOT NULL,
@@ -68,7 +69,7 @@ CREATE TABLE usuario (
   CONSTRAINT usuario_idestado_FK FOREIGN KEY (idestado) REFERENCES estado (id) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
-INSERT INTO usuario (login, nome, idperfil, idtipo, senha, token, criacao, telefone, endereco, cep, idcidade, idestado, cnpj) VALUES ('ADMIN', 'ADMINISTRADOR', 1, 1, 'peTcC99vkvvLqGQL7mdhGuJZIvL2iMEqvCNvZw3475PJ:JVyo1Pg2HyDyw9aSOd3gNPT30KdEyiUYCjs7RUzSoYGN', NULL, NOW(), '', '', '', 5270, 25, '');
+INSERT INTO usuario (login, nome, nomeresp, emailcont, idperfil, idtipo, senha, token, criacao, telefone, endereco, cep, idcidade, idestado, cnpj) VALUES ('ADMIN', '', '', 'ADMINISTRADOR', 1, 1, 'peTcC99vkvvLqGQL7mdhGuJZIvL2iMEqvCNvZw3475PJ:JVyo1Pg2HyDyw9aSOd3gNPT30KdEyiUYCjs7RUzSoYGN', NULL, NOW(), '', '', 5270, 25, '');
 
 
 CREATE TABLE IF NOT EXISTS pedido (
