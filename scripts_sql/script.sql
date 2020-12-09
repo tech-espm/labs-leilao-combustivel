@@ -69,7 +69,7 @@ CREATE TABLE usuario (
   CONSTRAINT usuario_idestado_FK FOREIGN KEY (idestado) REFERENCES estado (id) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
-INSERT INTO usuario (login, nome, nomeresp, emailcont, idperfil, idtipo, senha, token, criacao, telefone, endereco, cep, idcidade, idestado, cnpj) VALUES ('ADMIN', '', '', 'ADMINISTRADOR', 1, 1, 'peTcC99vkvvLqGQL7mdhGuJZIvL2iMEqvCNvZw3475PJ:JVyo1Pg2HyDyw9aSOd3gNPT30KdEyiUYCjs7RUzSoYGN', NULL, NOW(), '', '', 5270, 25, '');
+INSERT INTO usuario (login, nome, nomeresp, emailcont, idperfil, idtipo, senha, token, criacao, telefone, endereco, idcidade, idestado, cnpj) VALUES ('ADMIN', '', '', 'ADMINISTRADOR', 1, 1, 'peTcC99vkvvLqGQL7mdhGuJZIvL2iMEqvCNvZw3475PJ:JVyo1Pg2HyDyw9aSOd3gNPT30KdEyiUYCjs7RUzSoYGN', NULL, NOW(), '', '', 5270, 25, '');
 
 
 CREATE TABLE IF NOT EXISTS pedido (
@@ -116,10 +116,18 @@ CREATE TABLE IF NOT EXISTS transportadora (
 -- -----------------------------------------------------
 -- Table `mydb`.`anuncio`
 -- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS origem(
+  id_origem INT NOT NULL AUTO_INCREMENT,
+  desc_origem VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id_origem`)); 
+
+  insert into origem(id_origem, desc_origem)values 
+  (1,"Apenas Baguar"),(2,"Bombeio"), (3,"Importada"), (4,"Formulada"); 
 
 CREATE TABLE IF NOT EXISTS anuncio (
   id_anu INT NOT NULL AUTO_INCREMENT,
-  prazo_anu VARCHAR(45) NOT NULL,
+  prazo_anu VARCHAR(45) NOT NULL, 
+  id_origem INT NOT NULL,
   qtd_anu INT NOT NULL,
   id_usuario INT NOT NULL,
   data_anu DATETIME NULL,
@@ -128,7 +136,8 @@ CREATE TABLE IF NOT EXISTS anuncio (
   id_comb INT NOT NULL,
   PRIMARY KEY (`id_anu`),
   KEY(id_usuario),
-  CONSTRAINT FK_tranportadora FOREIGN KEY (id_transp) REFERENCES transportadora(id_transp) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT FK_tranportadora FOREIGN KEY (id_transp) REFERENCES transportadora(id_transp) ON DELETE NO ACTION ON UPDATE NO ACTION, 
+  CONSTRAINT FK_origem FOREIGN KEY (id_origem) REFERENCES origem(id_origem) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT fk_anuncio_combustivel1 FOREIGN KEY (id_comb) REFERENCES combustivel (id_comb) ON DELETE NO ACTION ON UPDATE NO ACTION,
   FOREIGN KEY (id_usuario) REFERENCES usuario(id)
 );
