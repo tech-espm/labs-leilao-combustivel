@@ -2,7 +2,8 @@ import express = require("express");
 import wrap = require("express-async-error-wrapper");
 import Pedido = require("../models/pedido"); 
 import Combustivel = require("../models/combustivel") 
-import Transportadora = require("../models/transportadora")
+import Transportadora = require("../models/transportadora") 
+import Origem = require("../models/origem") 
 import Usuario = require("../models/usuario");
 import appsettings = require("../appsettings");
 
@@ -18,7 +19,10 @@ router.all("/criar", wrap(async (req: express.Request, res: express.Response) =>
 		res.render("pedido/alterar", {
 			titulo: "Criar pedido",
 			usuario: u,
-			item: null
+			item: null, 
+			tipos: await Transportadora.listar(),
+			comb: await Combustivel.listar(), 
+			ori: await Origem.listar()
 		});
 }));
 
