@@ -6,6 +6,24 @@
 			<div class="panel-body no-bottom">
 				<input type="hidden" id="id_anu" name="id_anu" value="<%=(item ? item.id_anu : 0) %>" />
 				<div class="form-group">
+					<label for="id_comb">Produto</label>
+					<select id="id_comb" name="id_comb" class="form-control" size="1">
+						<option value="">SELECIONE...</option>
+						<% for (let i = 0; i < comb.length; i++) { %>
+						<option value="<%= comb[i].id_comb %>" <%-((item && item.id_comb === comb[i].id_comb) ? 'selected="selected"' : '') %>><%= comb[i].desc_comb %></option>
+						<% } %>
+					</select>
+				</div>  
+				<div class="form-group">
+					<label for="id_origem">Origem</label>
+					<select id="id_origem" name="id_origem" class="form-control" size="1">
+						<option value="">SELECIONE...</option>
+						<% for (let i = 0; i < ori.length; i++) { %>
+						<option value="<%= ori[i].id_origem %>" <%-((item && item.id_origem === ori[i].id_origem) ? 'selected="selected"' : '') %>><%= ori[i].desc_origem %></option>
+						<% } %>
+					</select>
+				</div> 
+				<div class="form-group">
 					<label for="prazo_anu">Prazo</label>
 					<input id="prazo_anu" name="prazo_anu" maxlength="45" class="form-control" type="text" spellcheck="false" value="<%=(item ? item.prazo_anu : '') %>" />
                 </div> 
@@ -15,11 +33,7 @@
                 </div> 
                 
                 <div class="form-group">
-					<label for="valor_anu">Valor</label>
-					<input id="valor_anu" name="valor_anu" maxlength="10" class="form-control" type="text" spellcheck="false" value="<%=(item ? item.valor_anu.toString().replace('.', ',') : '') %>" />
-                </div> 
-                <div class="form-group">
-					<label for="id_transp">Transportadora</label>
+					<label for="id_transp">Variação CIF/FOB</label>
 					<select id="id_transp" name="id_transp" class="form-control" size="1">
 						<option value="">SELECIONE...</option>
 						<% for (let i = 0; i < tipos.length; i++) { %>
@@ -27,15 +41,11 @@
 						<% } %>
 					</select>
 				</div> 
+
 				<div class="form-group">
-					<label for="id_comb">Combustível</label>
-					<select id="id_comb" name="id_comb" class="form-control" size="1">
-						<option value="">SELECIONE...</option>
-						<% for (let i = 0; i < comb.length; i++) { %>
-						<option value="<%= comb[i].id_comb %>" <%-((item && item.id_comb === comb[i].id_comb) ? 'selected="selected"' : '') %>><%= comb[i].desc_comb %></option>
-						<% } %>
-					</select>
-				</div> 
+					<label for="valor_anu">Valor</label>
+					<input id="valor_anu" name="valor_anu" maxlength="10" class="form-control" type="text" spellcheck="false" value="<%=(item ? item.valor_anu.toString().replace('.', ',') : '') %>" />
+                </div> 
 			</div>
 			<div class="panel-footer">
 				<input value="<%=(item ? 'Salvar Alterações' : 'Criar Anúncio') %>" class="btn btn-primary btn-lg btn-block" type="submit" />
@@ -69,6 +79,9 @@
 				required: true
 			},
 			id_comb: {
+				required: true
+			}, 
+			id_origem: {
 				required: true
 			}
 		},
