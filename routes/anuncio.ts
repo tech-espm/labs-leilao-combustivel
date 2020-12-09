@@ -2,6 +2,7 @@ import express = require("express");
 import wrap = require("express-async-error-wrapper");
 import Anuncio = require("../models/anuncio"); 
 import Combustivel = require("../models/combustivel") 
+import Origem = require("../models/origem") 
 import Transportadora = require("../models/transportadora")
 import Usuario = require("../models/usuario");
 import appsettings = require("../appsettings");
@@ -20,7 +21,9 @@ router.all("/criar", wrap(async (req: express.Request, res: express.Response) =>
 			usuario: u,
 			item: null,
 			tipos: await Transportadora.listar(),
-			comb: await Combustivel.listar()
+			comb: await Combustivel.listar(), 
+			ori: await Origem.listar()
+
 		});
 }));
 
@@ -39,7 +42,8 @@ router.all("/alterar", wrap(async (req: express.Request, res: express.Response) 
 				usuario: u,
 				item: item,
 				tipos: await Transportadora.listar(),
-				comb: await Combustivel.listar()
+				comb: await Combustivel.listar(), 
+				ori: await Origem.listar()
 			});
 	}
 }));
