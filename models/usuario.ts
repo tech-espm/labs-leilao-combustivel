@@ -190,7 +190,16 @@ export = class Usuario {
 
 		u.nome = (u.nome || "").normalize().trim().toUpperCase();
 		if (u.nome.length < 3 || u.nome.length > 100)
-			return "Nome inválido";
+			return "Razão social inválido"; 
+
+		u.nomeresp = (u.nomeresp || "").normalize().trim().toUpperCase();
+		if (u.nomeresp.length < 3 || u.nomeresp.length > 100)
+			return "Nome Résponsavel inválido"; 
+		
+		u.emailcont = (u.emailcont || "").normalize().trim().toUpperCase();
+		if (u.emailcont.length < 3 || u.emailcont.length > 100 || !emailValido(u.emailcont))
+			return "Email inválido";
+		
 
 		u.idperfil = parseInt(u.idperfil as any);
 		if (isNaN(u.idperfil) || u.idperfil < Usuario.IdPerfilAdmin || u.idperfil > Usuario.IdPerfilComum)
@@ -232,7 +241,7 @@ export = class Usuario {
 		let usuario: Usuario = null;
 
 		await Sql.conectar(async (sql: Sql) => {
-			const lista = await sql.query("select id, login, nome, idperfil, idtipo, senha, telefone, cnpj, endereco, idcidade, idestado, date_format(criacao, '%d/%m/%Y') criacao from usuario where id = ?", [id]) as Usuario[];
+			const lista = await sql.query("select id, login, nome, idperfil, idtipo, senha, telefone, cnpj, endereco, idcidade, idestado, nomeresp, emailcont, date_format(criacao, '%d/%m/%Y') criacao from usuario where id = ?", [id]) as Usuario[];
 
 			if (lista && lista[0])
 				usuario = lista[0];

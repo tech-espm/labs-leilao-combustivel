@@ -4,7 +4,8 @@ export = class Anuncio {
 
 
 	public id_anu: number;
-	public prazo_anu: string;
+	public prazo_anu: string; 
+	public id_origem: number;
     public qtd_anu: number;
     public id_usuario: number;
 	public data_anu: string;
@@ -44,7 +45,11 @@ export = class Anuncio {
 
 		a.id_comb = parseInt(a.id_comb as any);
 		if (isNaN(a.id_comb))
-			return "Combustível inválido";
+			return "Combustível inválido"; 
+
+		a.id_origem = parseInt(a.id_origem as any);
+		if (isNaN(a.id_origem))
+			return "Origem inválida";
 
 		return null;
 	}
@@ -54,7 +59,7 @@ export = class Anuncio {
 		let lista: Anuncio[] = null;
 
 		await Sql.conectar(async (sql: Sql) => {
-			lista = (await sql.query("select a.id_anu, a.prazo_anu, a.qtd_anu, a.id_usuario, date_format(a.data_anu, '%d/%m/%Y') data_anu, a.valor_anu, a.id_transp, t.nome_transp, a.id_comb, c.desc_comb from anuncio a inner join transportadora t on t.id_transp = a.id_transp inner join combustivel c on c.id_comb = a.id_comb where a.id_usuario = ? order by a.id_anu desc", [id_usuario])) as Anuncio[];
+			lista = (await sql.query("select a.id_anu, a.prazo_anu, a.qtd_anu, a.id_usuario, date_format(a.data_anu, '%d/%m/%Y') data_anu, a.valor_anu, a.id_transp, t.nome_transp, a.id_comb, c.desc_comb, a.id_origem, o.desc_origem from anuncio a inner join transportadora t on t.id_transp = a.id_transp inner join combustivel c on c.id_comb = a.id_comb inner join origem o on o.id_origem = a.id_origem where a.id_usuario = ? order by a.id_anu desc", [id_usuario])) as Anuncio[];
 		});
 
 		return (lista || []);
@@ -64,7 +69,7 @@ export = class Anuncio {
 		let lista: Anuncio[] = null;
 
 		await Sql.conectar(async (sql: Sql) => {
-			lista = await sql.query("select a.id_anu, a.prazo_anu, a.qtd_anu, a.id_usuario, date_format(a.data_anu, '%d/%m/%Y') data_anu, a.valor_anu, a.id_transp, t.nome_transp, a.id_comb, c.desc_comb from anuncio a inner join transportadora t on t.id_transp = a.id_transp inner join combustivel c on c.id_comb = a.id_comb where a.id_anu = ? and a.id_usuario = ?", [id_anu, id_usuario]) as Anuncio[];
+			lista = await sql.query("select a.id_anu, a.prazo_anu, a.qtd_anu, a.id_usuario, date_format(a.data_anu, '%d/%m/%Y') data_anu, a.valor_anu, a.id_transp, t.nome_transp, a.id_comb, c.desc_comb, a.id_origem, o.desc_origem from anuncio a inner join transportadora t on t.id_transp = a.id_transp inner join combustivel c on c.id_comb = a.id_comb inner join origem o on o.id_origem = a.id_origem where a.id_anu = ? and a.id_usuario = ?", [id_anu, id_usuario]) as Anuncio[];
 		});
 
 		return ((lista && lista[0]) || null);
@@ -76,7 +81,7 @@ export = class Anuncio {
 			return erro;
 
 		await Sql.conectar(async (sql: Sql) => {
-			await sql.query("insert into anuncio (prazo_anu, qtd_anu, id_usuario, data_anu, valor_anu, id_transp, id_comb) values (?, ?, ?,now(),?,?,?)", [a.prazo_anu, a.qtd_anu, a.id_usuario, a.valor_anu, a.id_transp, a.id_comb]);
+			await sql.query("insert into anuncio (prazo_anu, qtd_anu, id_usuario, data_anu, valor_anu, id_transp, id_comb, id_origem) values (?, ?, ?,now(),?,?,?,?)", [a.prazo_anu, a.qtd_anu, a.id_usuario, a.valor_anu, a.id_transp, a.id_comb, a.id_origem]);
 		});
 		
 		return erro;
@@ -88,7 +93,7 @@ export = class Anuncio {
 			return erro;
 
 		await Sql.conectar(async (sql: Sql) => {
-			await sql.query("update anuncio set prazo_anu = ?, qtd_anu = ?, valor_anu = ?, id_transp = ?, id_comb = ? where id_anu = ? and id_usuario = ?", [a.prazo_anu, a.qtd_anu, a.valor_anu, a.id_transp, a.id_comb, a.id_anu, a.id_usuario]);
+			await sql.query("update anuncio set prazo_anu = ?, qtd_anu = ?, valor_anu = ?, id_transp = ?, id_comb = ?, id_origem where id_anu = ? and id_usuario = ?", [a.prazo_anu, a.qtd_anu, a.valor_anu, a.id_transp, a.id_comb, a.id_origem, a.id_anu, a.id_usuario]);
 			if (!sql.linhasAfetadas)
 				erro = "Anúncio não encontrado";
 		});

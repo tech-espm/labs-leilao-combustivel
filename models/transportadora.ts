@@ -40,7 +40,7 @@ export = class Transportadora {
 
 		await Sql.conectar(async (sql: Sql) => {
 			try {
-				await sql.query("insert into transportadora (nome_transportadora) values (?)", [a.nome_transp]);
+				await sql.query("insert into transportadora (nome_transp) values (?)", [a.nome_transp]);
 			} catch (e) {
 			if (e.code && e.code === "ER_DUP_ENTRY")
 				res = `O assunto ${a.nome_transp} já existe`;
