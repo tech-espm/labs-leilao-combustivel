@@ -4,13 +4,13 @@
 
 <div id="card">
 	<div class="card-header" id="cardhead">
-		<h1 class="text-center">
+		<h1 class="text-center textCima">
 			Escolha o tipo de cadastro que você deseja realizar:
 		</h1>
 	</div>
 
-	<div class="text-center" id="cardbutton">
-		<a id="btnPosto" href="..." class="btn btn-primary btn-lg btn-block epex mb-5"><span>CADASTRO DE
+	<div id="cardbutton">
+		<a id="btnPosto" href="/homeposto" class="btn btn-primary btn-lg btn-block epex mb-5"><span>CADASTRO DE
 				POSTOS</span></a>
 		<a id="btnDistribuidora" href="..." class="btn btn-primary btn-lg btn-block epex mb-5"><span>CADASTRO DE
 				DISTRIBUIDORAS</span></a>
@@ -39,47 +39,26 @@
 
 		background-color: whitesmoke;
 		padding: 2%;
-		margin-left: 0%;
-		margin-right: 0%;
 		box-shadow: 1px 2px 20px black;
 
 	}
 
-	.text-center {
+	.textCima {
 
 		font-size: 32px;
-
-	}
-
-	#btnPosto {
-		margin-bottom: 2%;
-		margin-top: 1%
-	}
-
-	#btnDistribuidora {
-		margin-bottom: 2.6%;
-		margin-top: 0.6%
-	}
-
-	#formgroup {
-
-		margin-top: 1.7%;
+		font-weight: 700;
 
 	}
 
 	#cardhead {
 		box-shadow: 0px 0.3px 1px 0.2px;
-		margin: 0px auto 3%;
-		max-width: 1000px;
+		margin: 0px auto 4%;
+		max-width: 100%;
 	}
 
 	#cardbutton {
-		margin: 0px auto;
-		max-width: 600px;
-	}
-
-	.form-control::placeholder {
-		font-size: 0.75em;
-		color: #aaaaaa;
+		margin: auto;
+		min-width: 300px;
+		max-width: 45%;
 	}
 </style>
