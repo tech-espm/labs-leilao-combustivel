@@ -18,8 +18,17 @@ router.all("/tipocadastro", wrap(async (req: express.Request, res: express.Respo
 	res.render("publico/tipocadastro", { layout: "layout-publico", titulo: "Escolha o tipo" });
 }));
 
-router.all("/cadastro", wrap(async (req: express.Request, res: express.Response) => {
-	res.render("publico/cadastro", { layout: "layout-publico", titulo: "Cadastro" });
+router.all("/cadastro/:tipo", wrap(async (req: express.Request, res: express.Response) => {
+	const tipo = req.params["tipo"] as string;
+	if (tipo !== "posto" && tipo !== "distribuidor") {
+		res.status(400).json("Tipo inválido");
+		return;
+	}
+	res.render("publico/cadastro", { layout: "layout-publico", titulo: "Cadastro", idperfil: Usuario.IdPerfilAdmin, idtipo: (tipo === "posto" ? Usuario.IdTipoPosto : Usuario.IdTipoDistribuidor), estados: await Usuario.listarEstados() });
+}));
+
+router.all("/listarCidades/:idestado", wrap(async (req: express.Request, res: express.Response) => {
+	res.json(await Usuario.listarCidades(parseInt(req.params["idestado"])));
 }));
 
 router.all("/novospedidos", wrap(async (req: express.Request, res: express.Response) => {

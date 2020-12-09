@@ -53,6 +53,8 @@ CREATE TABLE usuario (
   idestado int NOT NULL,
   criacao datetime NOT NULL,
   cnpj varchar(18) NOT NULL,
+  frotapropria tinyint NOT NULL,
+  convenio varchar(150),
   num_anuncios int,
   num_vendas int,
   num_pedidos int,

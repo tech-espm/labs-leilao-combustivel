@@ -8,8 +8,12 @@ import GeradorHash = require("../utils/geradorHash");
 import appsettings = require("../appsettings");
 import intToHex = require("../utils/intToHex");
 import emailValido = require("../utils/emailValido");
+import Upload = require("../infra/upload");
+import FS = require("../infra/fs");
 
 export = class Usuario {
+
+	public static readonly CaminhoRelativoArquivos = "dados/usuario";
 
 	public static readonly IdUsuarioAdmin = 1;
 
@@ -22,23 +26,25 @@ export = class Usuario {
 
 	public id: number;
 	public login: string;
-	public nome: string; 
-	public nomeresp: string; 
+	public nome: string;
+	public nomeresp: string;
 	public emailcont: string;
 	public idperfil: number;
-	public idtipo: number; 
-	public senha: string; 
+	public idtipo: number;
+	public senha: string;
 	public telefone: string;
 	public endereco: string;
 	public idcidade: number;
 	public idestado: number;
-	public criacao: string; 
-	public cnpj: string; 
-	public num_anuncios: number; 
-	public num_vendas: number; 
-	public num_pedidos: number; 
-	public num_compras: number; 
-	public combustiveis: Combustivel[]; 
+	public criacao: string;
+	public cnpj: string;
+	public frotapropria: number;
+	public convenio: string;
+	public num_anuncios: number;
+	public num_vendas: number;
+	public num_pedidos: number;
+	public num_compras: number;
+	public combustiveis: Combustivel[];
 	// Utilizados apenas através do cookie
 	public superadmin: boolean;
 
@@ -107,7 +113,7 @@ export = class Usuario {
 		let u: Usuario = null;
 
 		await Sql.conectar(async (sql: Sql) => {
-			login = login.normalize().trim().toUpperCase();
+			login = login.normalize().trim().toLowerCase();
 
 			let rows = await sql.query("select id, nome, idperfil, idtipo, senha from usuario where login = ?", [login]);
 			let row;
@@ -145,7 +151,7 @@ export = class Usuario {
 	}
 
 	public async alterarPerfil(res: express.Response, nome: string, senhaAtual: string, novaSenha: string): Promise<string> {
-		nome = (nome || "").normalize().trim().toUpperCase();
+		nome = (nome || "").normalize().trim();
 		if (nome.length < 3 || nome.length > 100)
 			return "Nome inválido";
 
@@ -184,22 +190,17 @@ export = class Usuario {
 	protected static validarUsuario(u: Usuario): string {
 		u.id = parseInt(u.id as any);
 
-		u.login = (u.login || "").normalize().trim().toUpperCase();
-		if (u.login.length < 3 || u.login.length > 100 || !emailValido(u.login))
-			return "Login inválido";
-
-		u.nome = (u.nome || "").normalize().trim().toUpperCase();
+		u.nome = (u.nome || "").normalize().trim();
 		if (u.nome.length < 3 || u.nome.length > 100)
-			return "Razão social inválido"; 
+			return "Razão social inválida";
 
-		u.nomeresp = (u.nomeresp || "").normalize().trim().toUpperCase();
+		u.nomeresp = (u.nomeresp || "").normalize().trim();
 		if (u.nomeresp.length < 3 || u.nomeresp.length > 100)
 			return "Nome Résponsavel inválido"; 
 		
-		u.emailcont = (u.emailcont || "").normalize().trim().toUpperCase();
+		u.emailcont = (u.emailcont || "").normalize().trim().toLowerCase();
 		if (u.emailcont.length < 3 || u.emailcont.length > 100 || !emailValido(u.emailcont))
 			return "Email inválido";
-		
 
 		u.idperfil = parseInt(u.idperfil as any);
 		if (isNaN(u.idperfil) || u.idperfil < Usuario.IdPerfilAdmin || u.idperfil > Usuario.IdPerfilComum)
@@ -209,22 +210,59 @@ export = class Usuario {
 		if (isNaN(u.idtipo) || u.idtipo < Usuario.IdTipoGeral || u.idperfil > Usuario.IdTipoDistribuidor)
 			return "Tipo inválido";
 
-		u.telefone = (u.telefone || "").normalize().trim().toUpperCase();
+		u.telefone = (u.telefone || "").normalize().trim();
 		if (u.telefone.length < 3 || u.telefone.length > 20)
 			return "Telefone inválido";
 
-		u.endereco = (u.endereco || "").normalize().trim().toUpperCase();
+		u.endereco = (u.endereco || "").normalize().trim();
 		if (u.endereco.length < 3 || u.endereco.length > 100)
 			return "Telefone inválido";
 
-		u.cnpj = (u.cnpj || "").normalize().trim().toUpperCase();
-		if (u.cnpj.length < 9 || u.cnpj.length > 15)
-			return "CEP inválido";
+		u.cnpj = (u.cnpj || "").normalize().trim();
+		if (u.cnpj.length !== 18)
+			return "CNPJ inválido";
+
+		u.frotapropria = parseInt(u.frotapropria as any);
+		if (isNaN(u.frotapropria) || u.frotapropria < 0 || u.frotapropria > 1)
+			return "Frota própria inválida";
+
+		u.convenio = (u.convenio || "").normalize().trim();
+		if (u.convenio.length > 150)
+			return "Convênio inválido";
 
 		u.idcidade = parseInt(u.idcidade as any);
 		u.idestado = parseInt(u.idestado as any);
 
+		const combustiveis = (u.combustiveis as any[]) as number[];
+		if (!combustiveis || !combustiveis.length)
+			return "Combustíveis inválidos";
+		for (let i = 0; i < combustiveis.length; i++) {
+			combustiveis[i] = parseInt(combustiveis[i] as any);
+			if (isNaN(combustiveis[i]))
+				return "Combustíveis inválidos";
+		}
+
 		return null;
+	}
+
+	public static async listarEstados(): Promise<any[]> {
+		let lista: any[] = null;
+
+		await Sql.conectar(async (sql: Sql) => {
+			lista = await sql.query("select id, sigla from estado order by id");
+		});
+
+		return (lista || []);
+	}
+
+	public static async listarCidades(idestado: number): Promise<any[]> {
+		let lista: any[] = null;
+
+		await Sql.conectar(async (sql: Sql) => {
+			lista = await sql.query("select id, nome from cidade where idestado = ? order by id", [idestado]);
+		});
+
+		return (lista || []);
 	}
 
 	public static async listarGeral(): Promise<Usuario[]> {
@@ -253,13 +291,13 @@ export = class Usuario {
 		return usuario;
 	}
 
-	public static async criarGeral(u: Usuario): Promise<string> {
+	public static async criarGeral(u: Usuario, contratosocial: any, extratobancario: any): Promise<string> {
 		let res: string;
 		if ((res = Usuario.validarUsuario(u)))
 			return res;
 
 		await Sql.conectar(async (sql: Sql) => {
-			res = await Usuario.criarUsuario(sql, u);
+			res = await Usuario.criarUsuario(sql, u, contratosocial, extratobancario);
 		});
 
 		return res;
@@ -277,16 +315,32 @@ export = class Usuario {
 		return res;
 	}
 
-	protected static async criarUsuario(sql: Sql, u: Usuario): Promise<string> {
+	protected static async criarUsuario(sql: Sql, u: Usuario, contratosocial: any, extratobancario: any): Promise<string> {
 		let res: string = null;
 
-		u.login = (u.login || "").normalize().trim().toUpperCase();
+		u.login = (u.login || "").normalize().trim().toLowerCase();
 		if (u.login.length < 3 || u.login.length > 100)
 			return "Login inválido";
 
-		try {		//FALTA ATRIBUTO CNPJ, POSSUIR CAMINHÃO, CONVENIO, EXTRATO BANCARIO, CONTRATO SOCIAL, RAZÃO SOCIAL
-			await sql.query("insert into usuario (login, nome, nomeresp, emailcont, idperfil, idtipo, senha, telefone, cnpj, endereco, idcidade, idestado, criacao) values (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now())", [u.login, u.nome, u.nomeresp, u.emailcont, u.idperfil, u.idtipo, appsettings.usuarioHashSenhaPadrao, u.telefone, u.cnpj, u.endereco, u.idcidade, u.idestado]);
+		u.senha = (u.senha || "").normalize();
+		if (u.senha.length < 6 || u.senha.length > 16)
+			return "Senha inválida";
+
+		try {
+			await sql.beginTransaction();
+
+			await sql.query("insert into usuario (login, nome, nomeresp, emailcont, idperfil, idtipo, senha, telefone, endereco, idcidade, idestado, criacao, cnpj, frotapropria, convenio, num_anuncios, num_vendas, num_pedidos, num_compras) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now(), ?, ?, ?, 0, 0, 0, 0)", [u.login, u.nome, u.nomeresp, u.emailcont, u.idperfil, u.idtipo, await GeradorHash.criarHash(u.senha), u.telefone, u.endereco, u.idcidade, u.idestado, u.cnpj, u.frotapropria, u.convenio]);
 			u.id = await sql.scalar("select last_insert_id()") as number;
+
+			const combustiveis = (u.combustiveis as any[]) as number[];
+			for (let i = 0; i < combustiveis.length; i++) {
+				await sql.query("insert into rescomb(id_usuario, id_comb) values (?, ?)", [u.id, combustiveis[i]]);
+			}
+
+			await Upload.gravarArquivo(contratosocial, Usuario.CaminhoRelativoArquivos, "c" + u.id + ".pdf");
+			await Upload.gravarArquivo(extratobancario, Usuario.CaminhoRelativoArquivos, "e" + u.id + ".pdf");
+
+			await sql.commit();
 		} catch (e) {
 			if (e.code) {
 				switch (e.code) {
@@ -324,8 +378,17 @@ export = class Usuario {
 		let res: string = null;
 
 		await Sql.conectar(async (sql: Sql) => {
+			await sql.beginTransaction();
+
 			await sql.query("delete from usuario where id = ?", [id]);
-			res = sql.linhasAfetadas.toString();
+			if (sql.linhasAfetadas) {
+				await FS.excluirArquivo(Usuario.CaminhoRelativoArquivos + "/c" + id + ".pdf");
+				await FS.excluirArquivo(Usuario.CaminhoRelativoArquivos + "/e" + id + ".pdf");
+			} else {
+				res = "Usuário não encontrado";
+			}
+
+			await sql.commit();
 		});
 
 		return res;
