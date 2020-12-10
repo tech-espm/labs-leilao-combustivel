@@ -24,7 +24,7 @@
 					</select>
 				</div> 
 				<div class="form-group">
-					<label for="prazo_anu">Prazo</label>
+					<label for="prazo_anu">Prazo de Pagamento</label>
 					<input id="prazo_anu" name="prazo_anu" maxlength="45" class="form-control" type="text" spellcheck="false" value="<%=(item ? item.prazo_anu : '') %>" />
                 </div> 
                 <div class="form-group">
@@ -43,8 +43,18 @@
 				</div> 
 
 				<div class="form-group">
-					<label for="valor_anu">Valor</label>
-					<input id="valor_anu" name="valor_anu" maxlength="10" class="form-control" type="text" spellcheck="false" value="<%=(item ? item.valor_anu.toString().replace('.', ',') : '') %>" />
+					<label for="desctransp">Transportadora</label>
+					<input id="desctransp" name="desctransp" maxlength="45" class="form-control" type="text" spellcheck="false" value="<%=(item ? item.desctransp : '') %>" />
+                </div> 
+				
+				<div class="form-group">
+					<label for="maxvalor_anu">Valor Máximo</label>
+					<input id="maxvalor_anu" name="maxvalor_anu" maxlength="10" class="form-control" type="text" spellcheck="false" value="<%=(item ? item.maxvalor_anu.toString().replace('.', ',') : '') %>" />
+				</div>  ]
+				
+				<div class="form-group">
+					<label for="minvalor_anu">Valor Mínimo</label>
+					<input id="minvalor_anu" name="minvalor_anu" maxlength="10" class="form-control" type="text" spellcheck="false" value="<%=(item ? item.minvalor_anu.toString().replace('.', ',') : '') %>" />
                 </div> 
 			</div>
 			<div class="panel-footer">
@@ -60,7 +70,13 @@
 	"use strict";
 
 	$("#form").validate({
-		rules: {
+		rules: { 
+			id_comb: {
+				required: true
+			}, 
+			id_origem: {
+				required: true
+			}, 
 			prazo_anu: {
 				required: true,
 				maxlength: 45,
@@ -71,18 +87,20 @@
 				min: 1,
 				max: 9999
 			},
-			valor_anu: {
-				required: true,
-				maxlength: 10
-			},
 			id_transp: {
 				required: true
-			},
-			id_comb: {
-				required: true
 			}, 
-			id_origem: {
-				required: true
+			desctransp: {
+				required: true,
+				maxlength: 45,
+			},
+			maxvalor_anu: {
+				required: true,
+				maxlength: 10
+			}, 
+			minvalor_anu: {
+				required: true,
+				maxlength: 10
 			}
 		},
 

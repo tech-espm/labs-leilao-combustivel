@@ -9,7 +9,9 @@ export = class Anuncio {
     public qtd_anu: number;
     public id_usuario: number;
 	public data_anu: string;
-    public valor_anu: number;
+	public maxvalor_anu: number;  
+	public minvalor_anu: number; 
+	public desctransp: string;
     public id_transp: number;
     public id_comb: number;
 
@@ -31,17 +33,29 @@ export = class Anuncio {
 		if (isNaN(a.id_usuario))
 			return "Usuário inválido";
 
-		if ((typeof a.valor_anu) === "string") {
-			a.valor_anu = parseFloat((a.valor_anu as any).normalize().replace(/\./g, "").replace(",", "."));
+		if ((typeof a.maxvalor_anu) === "string") {
+			a.maxvalor_anu = parseFloat((a.maxvalor_anu as any).normalize().replace(/\./g, "").replace(",", "."));
 		} else {
-			a.valor_anu = parseFloat(a.valor_anu as any);
+			a.maxvalor_anu = parseFloat(a.maxvalor_anu as any);
 		}
-		if (isNaN(a.valor_anu) || a.valor_anu < 0)
+		if (isNaN(a.maxvalor_anu) || a.maxvalor_anu < 0)
+			return "Valor inválido"; 
+
+		if ((typeof a.minvalor_anu) === "string") {
+			a.minvalor_anu = parseFloat((a.minvalor_anu as any).normalize().replace(/\./g, "").replace(",", "."));
+		} else {				
+			a.minvalor_anu = parseFloat(a.minvalor_anu as any);
+			}
+		if (isNaN(a.minvalor_anu) || a.minvalor_anu < 0)
 			return "Valor inválido";
 
 		a.id_transp = parseInt(a.id_transp as any);
 		if (isNaN(a.id_transp))
-			return "Transportadora inválido";
+			return "Variação de transportadora inválida"; 
+		
+		a.desctransp = (a.desctransp || "").normalize().trim();
+		if (!a.desctransp || a.desctransp.length > 45)
+			return "Transportadora inválida";
 
 		a.id_comb = parseInt(a.id_comb as any);
 		if (isNaN(a.id_comb))
@@ -59,7 +73,7 @@ export = class Anuncio {
 		let lista: Anuncio[] = null;
 
 		await Sql.conectar(async (sql: Sql) => {
-			lista = (await sql.query("select a.id_anu, a.prazo_anu, a.qtd_anu, a.id_usuario, date_format(a.data_anu, '%d/%m/%Y') data_anu, a.valor_anu, a.id_transp, t.nome_transp, a.id_comb, c.desc_comb, a.id_origem, o.desc_origem from anuncio a inner join transportadora t on t.id_transp = a.id_transp inner join combustivel c on c.id_comb = a.id_comb inner join origem o on o.id_origem = a.id_origem where a.id_usuario = ? order by a.id_anu desc", [id_usuario])) as Anuncio[];
+			lista = (await sql.query("select a.id_anu, a.prazo_anu, a.qtd_anu, a.id_usuario, date_format(a.data_anu, '%d/%m/%Y') data_anu, a.maxvalor_anu,a.minvalor_anu, a.id_transp, t.nome_transp, a.id_comb, c.desc_comb, a.id_origem, o.desc_origem from anuncio a inner join transportadora t on t.id_transp = a.id_transp inner join combustivel c on c.id_comb = a.id_comb inner join origem o on o.id_origem = a.id_origem where a.id_usuario = ? order by a.id_anu desc", [id_usuario])) as Anuncio[];
 		});
 
 		return (lista || []);
@@ -69,7 +83,7 @@ export = class Anuncio {
 		let lista: Anuncio[] = null;
 
 		await Sql.conectar(async (sql: Sql) => {
-			lista = await sql.query("select a.id_anu, a.prazo_anu, a.qtd_anu, a.id_usuario, date_format(a.data_anu, '%d/%m/%Y') data_anu, a.valor_anu, a.id_transp, t.nome_transp, a.id_comb, c.desc_comb, a.id_origem, o.desc_origem from anuncio a inner join transportadora t on t.id_transp = a.id_transp inner join combustivel c on c.id_comb = a.id_comb inner join origem o on o.id_origem = a.id_origem where a.id_anu = ? and a.id_usuario = ?", [id_anu, id_usuario]) as Anuncio[];
+			lista = await sql.query("select a.id_anu, a.prazo_anu, a.qtd_anu, a.id_usuario, date_format(a.data_anu, '%d/%m/%Y') data_anu, a.maxvalor_anu,a.minvalor_anu, a.id_transp, t.nome_transp, a.id_comb, c.desc_comb, a.id_origem, o.desc_origem from anuncio a inner join transportadora t on t.id_transp = a.id_transp inner join combustivel c on c.id_comb = a.id_comb inner join origem o on o.id_origem = a.id_origem where a.id_anu = ? and a.id_usuario = ?", [id_anu, id_usuario]) as Anuncio[];
 		});
 
 		return ((lista && lista[0]) || null);
@@ -81,7 +95,7 @@ export = class Anuncio {
 			return erro;
 
 		await Sql.conectar(async (sql: Sql) => {
-			await sql.query("insert into anuncio (prazo_anu, qtd_anu, id_usuario, data_anu, valor_anu, id_transp, id_comb, id_origem) values (?, ?, ?,now(),?,?,?,?)", [a.prazo_anu, a.qtd_anu, a.id_usuario, a.valor_anu, a.id_transp, a.id_comb, a.id_origem]);
+			await sql.query("insert into anuncio (prazo_anu, qtd_anu, id_usuario, data_anu, maxvalor_anu, a.minvalor_anu, id_transp, desctransp, id_comb, id_origem) values (?, ?, ?,now(),?,?,?,?,?,?)", [a.prazo_anu, a.qtd_anu, a.id_usuario, a.maxvalor_anu, a.minvalor_anu, a.id_transp, a.desctransp, a.id_comb, a.id_origem]);
 		});
 		
 		return erro;
@@ -93,7 +107,7 @@ export = class Anuncio {
 			return erro;
 
 		await Sql.conectar(async (sql: Sql) => {
-			await sql.query("update anuncio set prazo_anu = ?, qtd_anu = ?, valor_anu = ?, id_transp = ?, id_comb = ?, id_origem where id_anu = ? and id_usuario = ?", [a.prazo_anu, a.qtd_anu, a.valor_anu, a.id_transp, a.id_comb, a.id_origem, a.id_anu, a.id_usuario]);
+			await sql.query("update anuncio set prazo_anu = ?, qtd_anu = ?, maxvalor_anu = ?, minvalor_anu = ?, id_transp = ?, desctransp = ?, id_comb = ?, id_origem where id_anu = ? and id_usuario = ?", [a.prazo_anu, a.qtd_anu, a.maxvalor_anu, a.minvalor_anu, a.id_transp, a.desctransp, a.id_comb, a.id_origem, a.id_anu, a.id_usuario]);
 			if (!sql.linhasAfetadas)
 				erro = "Anúncio não encontrado";
 		});

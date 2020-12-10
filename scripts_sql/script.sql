@@ -71,7 +71,14 @@ CREATE TABLE usuario (
   CONSTRAINT usuario_idestado_FK FOREIGN KEY (idestado) REFERENCES estado (id) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
-INSERT INTO usuario (login, nome, nomeresp, emailcont, idperfil, idtipo, senha, token, criacao, telefone, endereco, idcidade, idestado, cnpj) VALUES ('ADMIN', '', '', 'ADMINISTRADOR', 1, 1, 'peTcC99vkvvLqGQL7mdhGuJZIvL2iMEqvCNvZw3475PJ:JVyo1Pg2HyDyw9aSOd3gNPT30KdEyiUYCjs7RUzSoYGN', NULL, NOW(), '', '', 5270, 25, '');
+INSERT INTO usuario (login, nome, nomeresp, emailcont, idperfil, idtipo, senha, token, criacao, telefone, endereco, idcidade, idestado, cnpj, frotapropria) 
+VALUES ('ADMIN', 'ADMINISTRADOR', '', '', 1, 1, 'peTcC99vkvvLqGQL7mdhGuJZIvL2iMEqvCNvZw3475PJ:JVyo1Pg2HyDyw9aSOd3gNPT30KdEyiUYCjs7RUzSoYGN', NULL, NOW(), '', '', 5270, 25, '', 0);
+
+INSERT INTO usuario (login, nome, nomeresp, emailcont, idperfil, idtipo, senha, token, criacao, telefone, endereco, idcidade, idestado, cnpj, frotapropria) 
+VALUES ('Posto', 'Posto', 'Lucas', 'posto@gmail.com', 1, 2, 'peTcC99vkvvLqGQL7mdhGuJZIvL2iMEqvCNvZw3475PJ:JVyo1Pg2HyDyw9aSOd3gNPT30KdEyiUYCjs7RUzSoYGN', NULL, NOW(), '99999999999', 'Rua Posto', 5270, 25, '00000000000000', 0);
+
+INSERT INTO usuario (login, nome, nomeresp, emailcont, idperfil, idtipo, senha, token, criacao, telefone, endereco, idcidade, idestado, cnpj, frotapropria) 
+VALUES ('Distribuidor', 'Distribuidor', 'Marcos', 'distribuidor@gmail.com', 1, 3, 'peTcC99vkvvLqGQL7mdhGuJZIvL2iMEqvCNvZw3475PJ:JVyo1Pg2HyDyw9aSOd3gNPT30KdEyiUYCjs7RUzSoYGN', NULL, NOW(), '99999999999', 'Rua Distribuidor', 5270, 25, '00000000000000', 0);
 
 
 CREATE TABLE IF NOT EXISTS pedido (
@@ -133,7 +140,9 @@ CREATE TABLE IF NOT EXISTS anuncio (
   qtd_anu INT NOT NULL,
   id_usuario INT NOT NULL,
   data_anu DATETIME NULL,
-  valor_anu DOUBLE NOT NULL,
+  maxvalor_anu DOUBLE NOT NULL, 
+  minvalor_anu DOUBLE NOT NULL, 
+  desctransp VARCHAR(45),
   id_transp INT NOT NULL,
   id_comb INT NOT NULL,
   PRIMARY KEY (`id_anu`),
