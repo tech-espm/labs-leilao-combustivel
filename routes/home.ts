@@ -23,6 +23,10 @@ router.all("/tipocadastro", wrap(async (req: express.Request, res: express.Respo
 	res.render("publico/tipocadastro", { layout: "layout-publico", titulo: "Escolha o tipo" });
 }));
 
+router.all("/token", wrap(async (req: express.Request, res: express.Response) => {
+	res.render("publico/token", { layout: "layout-publico", titulo: "Token (Protótipo)" });
+}));
+
 router.all("/cadastro/:tipo", wrap(async (req: express.Request, res: express.Response) => {
 	const tipo = req.params["tipo"] as string;
 	if (tipo !== "posto" && tipo !== "distribuidor") {
