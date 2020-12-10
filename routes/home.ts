@@ -10,7 +10,12 @@ router.all("/", wrap(async (req: express.Request, res: express.Response) => {
 	if (!u) {
 		res.redirect(appsettings.root + "/login");
 	} else {
-		res.render("home/dashboard", { titulo: "Dashboard", usuario: u });
+		if (u.idtipo === Usuario.IdTipoDistribuidor)
+			res.render("publico/homedistribuidora", { layout: "layout-publico-rodape", titulo: "Dashboard" });
+		else if (u.idtipo === Usuario.IdTipoPosto)
+			res.render("publico/homeposto", { layout: "layout-publico-rodape", titulo: "Dashboard" });
+		else
+			res.render("home/dashboard", { titulo: "Dashboard", usuario: u });
 	}
 }));
 
@@ -35,10 +40,6 @@ router.all("/novospedidos", wrap(async (req: express.Request, res: express.Respo
 	res.render("publico/novospedidos", { layout: "layout-publico-rodape", titulo: "Novos Pedidos" });
 }));
 
-router.all("/homeposto", wrap(async (req: express.Request, res: express.Response) => {
-	res.render("publico/homeposto", { layout: "layout-publico-rodape", titulo: "HOME Posto" });
-}));
-
 router.all("/comprafim", wrap(async (req: express.Request, res: express.Response) => {
 	res.render("publico/comprafim", { layout: "layout-publico-rodape", titulo: "Compra Finalizada!" });
 }));
@@ -53,10 +54,6 @@ router.all("/relatorios", wrap(async (req: express.Request, res: express.Respons
 
 router.all("/pedidosmktplace", wrap(async (req: express.Request, res: express.Response) => {
 	res.render("publico/pedidosmktplace", { layout: "layout-publico-rodape", titulo: "Pedidos MKT Place" });
-}));
-
-router.all("/homedistribuidora", wrap(async (req: express.Request, res: express.Response) => {
-	res.render("publico/homedistribuidora", { layout: "layout-publico-rodape", titulo: "HOME Distribuidora" });
 }));
 
 router.all("/distribuidora/vendas", wrap(async (req: express.Request, res: express.Response) => {
@@ -85,11 +82,11 @@ router.all("/login", wrap(async (req: express.Request, res: express.Response) =>
 		if (req.body.login || req.body.senha) {
 			[mensagem, u] = await Usuario.efetuarLogin(req.body.login as string, req.body.senha as string, res);
 			if (mensagem)
-				res.render("home/login", { layout: "layout-externo", mensagem: mensagem });
+				res.render("publico/login", { layout: "layout-publico", mensagem: mensagem });
 			else
 				res.redirect(appsettings.root + "/");
 		} else {
-			res.render("home/login", { layout: "layout-externo", mensagem: null });
+			res.render("publico/login", { layout: "layout-publico", mensagem: null });
 		}
 	} else {
 		res.redirect(appsettings.root + "/");

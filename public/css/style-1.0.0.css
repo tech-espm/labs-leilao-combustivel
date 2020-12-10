@@ -1,0 +1,26 @@
+.navbar-default {
+    background-color: #13224b;
+}
+
+@media (min-width: 768px) {
+	.sidebar-fake-bg {
+		background: #13224b;
+	}
+}
+
+.sidebar {
+    background: #13224b;
+}
+
+.sidebar .nav-second-level li {
+    background: #0d1835;
+}
+
+#side-menu > li > a > i {
+    color: #f19f00;
+}
+
+#side-menu > li > a:focus, #side-menu > li > a:hover, #side-menu > li.active > a, #side-menu > li > a.active {
+    border-left-color: #f19f00;
+}
+

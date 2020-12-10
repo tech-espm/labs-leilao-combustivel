@@ -95,7 +95,7 @@ export = class Anuncio {
 			return erro;
 
 		await Sql.conectar(async (sql: Sql) => {
-			await sql.query("insert into anuncio (prazo_anu, qtd_anu, id_usuario, data_anu, maxvalor_anu, a.minvalor_anu, id_transp, desctransp, id_comb, id_origem) values (?, ?, ?,now(),?,?,?,?,?,?)", [a.prazo_anu, a.qtd_anu, a.id_usuario, a.maxvalor_anu, a.minvalor_anu, a.id_transp, a.desctransp, a.id_comb, a.id_origem]);
+			await sql.query("insert into anuncio (prazo_anu, qtd_anu, id_usuario, data_anu, maxvalor_anu, minvalor_anu, id_transp, desctransp, id_comb, id_origem) values (?, ?, ?,now(),?,?,?,?,?,?)", [a.prazo_anu, a.qtd_anu, a.id_usuario, a.maxvalor_anu, a.minvalor_anu, a.id_transp, a.desctransp, a.id_comb, a.id_origem]);
 		});
 		
 		return erro;

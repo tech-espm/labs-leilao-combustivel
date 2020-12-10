@@ -31,7 +31,7 @@ router.get("/obter", wrap(async (req: express.Request, res: express.Response) =>
 }));
 
 router.post("/criar", multer().fields([ { name: "contratosocial", maxCount: 1 }, { name: "extratobancario", maxCount: 1 } ]), wrap(async (req: express.Request, res: express.Response) => {
-	let u = await Usuario.cookie(req, res, true);
+	let u = await Usuario.cookie(req);
 	let novo = req.body as Usuario;
 	if (!novo) {
 		res.status(400).json("Dados inválidos");

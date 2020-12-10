@@ -19,22 +19,25 @@ router.get("/obter", wrap(async (req: express.Request, res: express.Response) =>
 	let u = await Usuario.cookie(req, res);
 	if (!u)
 		return;
-	let id = parseInt(req.query["id"] as string);
-	res.json(isNaN(id) ? null : await Anuncio.obter(id, u.id));
+	let id_anu = parseInt(req.query["id_anu"] as string);
+	res.json(isNaN(id_anu) ? null : await Anuncio.obter(id_anu, u.id));
 }));
 
 router.post("/criar", wrap(async (req: express.Request, res: express.Response) => {
 	let u = await Usuario.cookie(req, res, true); 
 	if (!u)
 		return;
-	if (u.idtipo !== Usuario.IdTipoDistribuidor) 
-			res.statusCode = 403;
-			res.json("Não permitido");
-	let p = req.body as Anuncio; 
-	
 
+	if (u.idtipo !== Usuario.IdTipoDistribuidor) {
+		res.statusCode = 403;
+		res.json("Não permitido");
+		return;
+	}
+
+	let p = req.body as Anuncio; 
 	if (p)
 		p.id_usuario = u.id;
+
 	jsonRes(res, 400, await Anuncio.criar(p));
 }));
 
@@ -52,8 +55,8 @@ router.get("/excluir", wrap(async (req: express.Request, res: express.Response) 
 	let u = await Usuario.cookie(req, res, true);
 	if (!u)
 		return;
-	let id = parseInt(req.query["id"] as string);
-	jsonRes(res, 400, isNaN(id) ? "Dados inválidos" : await Anuncio.excluir(id, u.id));
+	let id_anu = parseInt(req.query["id_anu"] as string);
+	jsonRes(res, 400, isNaN(id_anu) ? "Dados inválidos" : await Anuncio.excluir(id_anu, u.id));
 }));
 
 export = router;

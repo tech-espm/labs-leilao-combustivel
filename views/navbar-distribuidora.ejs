@@ -9,7 +9,7 @@
 <nav id="navTop" class="navbar navbar-expand-md navbar-dark">
 
 
-	<img id="btnLogo" class="navbar-brand mr-0" href="#" src="/imagens/logo.png" width="140px" type="button">
+	<a href="<%- root %>/"><img id="btnLogo" class="navbar-brand mr-0"  src="/imagens/logo.png" width="140px" type="button" /></a>
 
 
 	<button class="navbar-toggler" type="button" style="background-color:#F09F0e" data-toggle="collapse"
@@ -20,19 +20,16 @@
 	<div class="collapse navbar-collapse" id="navbarCollapse">
 		<ul class="navbar-nav m-auto">
 			<li class="nav-item active">
-				<a class="nav-link" href="/homedistribuidora">HOME</a>
+				<a class="nav-link" href="<%- root %>/distribuidora/relatorios">RELATÓRIOS</a>
 			</li>
 			<li class="nav-item active">
-				<a class="nav-link" href="/distribuidora/relatorios">RELATÓRIOS</a>
+				<a class="nav-link text-nowrap" href="<%- root %>/distribuidora/vendas">VENDAS</a>
 			</li>
 			<li class="nav-item active">
-				<a class="nav-link text-nowrap" href="/distribuidora/vendas">VENDAS</a>
+				<a class="nav-link" href="<%- root %>/distribuidora/abertura">ABERTURA DE CRÉDITO</a>
 			</li>
 			<li class="nav-item active">
-				<a class="nav-link" href="/distribuidora/abertura">ABERTURA DE CRÉDITO</a>
-			</li>
-			<li class="nav-item active">
-				<a class="nav-link" href="/distribuidora/cadastro">CADASTRO DE COMBUSTÍVEL</a>
+				<a class="nav-link" href="<%- root %>/anuncio/listar">ANÚNCIOS</a>
 			</li>
 		</ul>
 		<form class="form-inline mt-2 mt-md-0">
@@ -51,16 +48,12 @@
 					<i class="fa fa-bars" style="font-size:30px;color:#F09F0E"></i> <span class="caret"></span>
 				</button>
 				<ul id="btnCaixa" class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="menu1">
-					<li role="presentation"><a role="menuitem" id="btnContas" tabindex="-1" href="#">Filtros</a>
-					</li>
-					<li role="presentation"><a role="menuitem" id="btnMPedidos" tabindex="-1" href="#">Pedidos</a>
-					</li>
-					<li role="presentation"><a role="menuitem" id="btnAbertura" tabindex="-1" href="#">Meus Dados</a>
-					</li>
-					<li role="presentation"><a role="menuitem" id="btnConfiguracoes" tabindex="-1"
-							href="#">Configurações</a></li>
+					<li role="presentation"><a role="menuitem" id="btnContas" tabindex="-1" href="#">Filtros</a></li>
+					<li role="presentation"><a role="menuitem" id="btnMPedidos" tabindex="-1" href="#">Pedidos</a></li>
+					<li role="presentation"><a role="menuitem" id="btnAbertura" tabindex="-1" href="#">Meus Dados</a></li>
+					<li role="presentation"><a role="menuitem" id="btnConfiguracoes" tabindex="-1" href="#">Configurações</a></li>
 					<hr class="bg-light">
-					<li role="presentation"><a role="menuitem" id="btnSair" tabindex="-1" href="#">Sair</a></li>
+					<li role="presentation"><a role="menuitem" id="btnSair" tabindex="-1" href="<%- root %>/logout">Sair</a></li>
 				</ul>
 			</div>
 

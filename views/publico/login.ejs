@@ -1,0 +1,116 @@
+<form id="telaLogin" method="post" action="<%- root %>/login">
+	<div class="card-header" id="cardhead">
+		<h1 class="text-center">
+			<img src="<%- root %>/imagens/logo.png" alt="Logo" id="imgLogo">
+		</h1>
+	</div>
+
+	<div class="card-body" id="card">
+		<div class="form-group mb-4">
+			<div class="form-row align-items-center">
+				<img src="<%- root %>/imagens/seta-esq.png" width="20" class="col-form-label" />
+
+				<div class="col">
+					<label for="login" class="col-form-label">Usuário</label>
+				</div>
+			</div>
+
+			<div>
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<div class="input-group-text">@</div>
+					</div>
+					<input type="text" class="form-control text-lowercase" id="login" name="login" placeholder="Informe o USUÁRIO para Login" />
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="form-row align-items-center">
+				<img src="<%- root %>/imagens/seta-esq.png" width="20" class="col-form-label" />
+
+				<div class="col">
+					<label for="senha" class="col-form-label">Senha</label>
+				</div>
+			</div>
+
+			<div>
+				<input type="password" class="form-control" id="senha" name="senha" placeholder="Informe a SENHA para Login" />
+			</div>
+		</div>
+
+		<% if (mensagem) { %>
+		<div class="alert alert-danger"><%=mensagem %></div>
+		<% } %>
+
+		<div class="cardbutton">
+			<button type="submit" class="btn btn-block btn-primary epex btnFin"><span>LOGIN</span></button>
+		</div>
+	</div>
+
+	<div class="text-center">
+		<label>Ainda não tem conta?
+			<a href="<%- root %>/tipoCadastro" id="cadAqui">Cadastre-se aqui!</a>
+		</label>
+	</div>
+</form>
+
+<%- contentFor("head") %>
+<style type="text/css">
+	body {
+		font-size: 17px;
+		font-family: "Montserrat";
+		color: rgb(20, 35, 74);
+		font-weight: 700;
+		background-color: whitesmoke;
+	}
+
+	input:focus {
+		font-weight: 700;
+	}
+
+	.form-control::placeholder {
+		font-family: "Montserrat";
+		font-size: 15px;
+		font-weight: 400;
+	}
+
+	#btnVoltar {
+		background-color: whitesmoke;
+		margin-top: 1%;
+		margin-left: 1%;
+	}
+
+	#imgLogo {
+		max-width: 100%;
+	}
+
+	#telaLogin {
+		max-width: 400px;
+		margin: 10px auto;
+	}
+
+	#card {
+		background-color: whitesmoke;
+	}
+
+	#btnLogo {
+		display: block;
+		margin: 20px auto;
+		width: 170px;
+	}
+
+	#cardhead {
+		background-color: whitesmoke;
+	}
+
+	.cardbutton {
+		margin: auto;
+	}
+
+	label.error {
+		font-weight: normal;
+		color: #f00;
+		display: block;
+	}
+</style>

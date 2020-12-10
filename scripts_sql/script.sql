@@ -34,7 +34,7 @@ CREATE TABLE estado (
 INSERT INTO estado (id, sigla, nome, idcapital) VALUES (1, 'AC','ACRE', 16), (2, 'AL','ALAGOAS', 69), (3, 'AP','AMAPÁ', 131), (4, 'AM','AMAZONAS', 178), (5, 'BA','BAHIA', 538), (6, 'CE','CEARÁ', 678), (7, 'DF','DISTRITO FEDERAL', 804), (8, 'ES','ESPIRITO SANTO', 882), (9, 'GO','GOIÁS', 977), (10,'MA','MARANHÃO', 1314), (11,'MS','MATO GROSSO DO SUL', 1365), (12,'MT','MATO GROSSO', 1461), (13,'MG','MINAS GERAIS', 1630), (14,'PA','PARÁ', 2436), (15,'PB','PARAÍBA', 2655), (16,'PR','PARANÁ', 2878), (17,'PE','PERNAMBUCO', 3315), (18,'PI','PIAUÍ', 3582), (19,'RJ','RIO DE JANEIRO', 3658), (20,'RN','RIO GRANDE DO NORTE', 3770), (21,'RS','RIO GRANDE DO SUL', 4174), (22,'RO','RONDÔNIA', 4382), (23,'RR','RORAIMA', 4400), (24,'SC','SANTA CATARINA', 4500), (25,'SP','SÃO PAULO', 5270), (26,'SE','SERGIPE', 5353), (27,'TO','TOCANTINS', 5514);
 
 
---COLOCAR SCRIPT DA CIDADE AQUI
+-- COLOCAR SCRIPT DA CIDADE AQUI
 
 -- DROP TABLE IF EXISTS usuario;
 CREATE TABLE usuario (
@@ -72,13 +72,13 @@ CREATE TABLE usuario (
 );
 
 INSERT INTO usuario (login, nome, nomeresp, emailcont, idperfil, idtipo, senha, token, criacao, telefone, endereco, idcidade, idestado, cnpj, frotapropria) 
-VALUES ('ADMIN', 'ADMINISTRADOR', '', '', 1, 1, 'peTcC99vkvvLqGQL7mdhGuJZIvL2iMEqvCNvZw3475PJ:JVyo1Pg2HyDyw9aSOd3gNPT30KdEyiUYCjs7RUzSoYGN', NULL, NOW(), '', '', 5270, 25, '', 0);
+VALUES ('admin', 'Administrador', '', '', 1, 1, 'peTcC99vkvvLqGQL7mdhGuJZIvL2iMEqvCNvZw3475PJ:JVyo1Pg2HyDyw9aSOd3gNPT30KdEyiUYCjs7RUzSoYGN', NULL, NOW(), '', '', 5270, 25, '', 0);
 
 INSERT INTO usuario (login, nome, nomeresp, emailcont, idperfil, idtipo, senha, token, criacao, telefone, endereco, idcidade, idestado, cnpj, frotapropria) 
-VALUES ('Posto', 'Posto', 'Lucas', 'posto@gmail.com', 1, 2, 'peTcC99vkvvLqGQL7mdhGuJZIvL2iMEqvCNvZw3475PJ:JVyo1Pg2HyDyw9aSOd3gNPT30KdEyiUYCjs7RUzSoYGN', NULL, NOW(), '99999999999', 'Rua Posto', 5270, 25, '00000000000000', 0);
+VALUES ('posto', 'Posto', 'Lucas', 'posto@gmail.com', 1, 2, 'peTcC99vkvvLqGQL7mdhGuJZIvL2iMEqvCNvZw3475PJ:JVyo1Pg2HyDyw9aSOd3gNPT30KdEyiUYCjs7RUzSoYGN', NULL, NOW(), '99999999999', 'Rua Posto', 5270, 25, '00000000000000', 0);
 
 INSERT INTO usuario (login, nome, nomeresp, emailcont, idperfil, idtipo, senha, token, criacao, telefone, endereco, idcidade, idestado, cnpj, frotapropria) 
-VALUES ('Distribuidor', 'Distribuidor', 'Marcos', 'distribuidor@gmail.com', 1, 3, 'peTcC99vkvvLqGQL7mdhGuJZIvL2iMEqvCNvZw3475PJ:JVyo1Pg2HyDyw9aSOd3gNPT30KdEyiUYCjs7RUzSoYGN', NULL, NOW(), '99999999999', 'Rua Distribuidor', 5270, 25, '00000000000000', 0);
+VALUES ('distribuidor', 'Distribuidor', 'Marcos', 'distribuidor@gmail.com', 1, 3, 'peTcC99vkvvLqGQL7mdhGuJZIvL2iMEqvCNvZw3475PJ:JVyo1Pg2HyDyw9aSOd3gNPT30KdEyiUYCjs7RUzSoYGN', NULL, NOW(), '99999999999', 'Rua Distribuidor', 5270, 25, '00000000000000', 0);
 
 
 CREATE TABLE IF NOT EXISTS pedido (

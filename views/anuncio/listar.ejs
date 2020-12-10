@@ -18,31 +18,11 @@
 			</div>
 			<div class="modal-body">
 				<p>
-					Tem certeza que deseja excluir o usuário <span id="lblNome"></span>? Esta operação <b class="col-h">NÃO</b> pode ser desfeita!
+					Tem certeza que deseja excluir o anúncio <span id="lblNome"></span>? Esta operação <b class="col-h">NÃO</b> pode ser desfeita!
 				</p>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-danger" onclick="excluir()"><i class="fa fa-check"></i>Excluir</button>
-				<button type="button" class="btn btn-outline btn-default" data-dismiss="modal"><i class="fa fa-times"></i>Cancelar</button>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="modal fade" tabindex="-1" role="dialog" id="modalRedefinirSenha">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Oops...</h4>
-			</div>
-			<div class="modal-body">
-				<p>
-					Tem certeza que deseja redefinir a senha do usuário <span id="lblNomeRedefinirSenha"></span> para "1234"? Esta operação <b class="col-h">NÃO</b> pode ser desfeita!
-				</p>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" onclick="redefinirSenha()"><i class="fa fa-check"></i>Redefinir Senha</button>
 				<button type="button" class="btn btn-outline btn-default" data-dismiss="modal"><i class="fa fa-times"></i>Cancelar</button>
 			</div>
 		</div>
@@ -58,16 +38,15 @@
 		order: [[1, "asc"]],
 		deferRender: true,
 		columns: [
-			{ title: "", "class": "col-min", searchable: false, orderable: false, data: "id_anu", render: function (v, type, row) { return "<a target=\"_blank\" title=\"Editar\" href=\"<%- root %>/anucio/alterar?id=" + row.id_anu + "\" class=\"btn btn-outline btn-primary\"><i class=\"fa fa-nomargin fa-edit\"></i></a> <button title=\"Redefinir Senha\" type=\"button\" class=\"btn btn-outline btn-primary\"><i class=\"fa fa-nomargin fa-lock\"></i></button> <button title=\"Excluir\" type=\"button\" data-excluir=\"1\" class=\"btn btn-outline btn-danger\"><i class=\"fa fa-nomargin fa-times\"></i></button>"; } },
+			{ title: "", "class": "col-min", searchable: false, orderable: false, data: "id_anu", render: function (v, type, row) { return "<a target=\"_blank\" title=\"Editar\" href=\"<%- root %>/anucio/alterar?id=" + row.id_anu + "\" class=\"btn btn-outline btn-primary\"><i class=\"fa fa-nomargin fa-edit\"></i></a> <button title=\"Excluir\" type=\"button\" data-excluir=\"1\" class=\"btn btn-outline btn-danger\"><i class=\"fa fa-nomargin fa-times\"></i></button>"; } },
 			{ title: "Prazo", render: encode, data: "prazo_anu" },
 			{ title: "Quantidade", data: "qtd_anu" },
-			{ title: "Valor", data: "valor_anu" },
+			{ title: "Valor (Mín)", "type": "number", data: "minvalor_anu" },
+			{ title: "Valor (Máx)", "type": "number", data: "maxvalor_anu" },
 			{ title: "Combustivel", render: encode, data: "desc_comb" },
 			{ title: "Transportadora", render: encode, data: "nome_transp" }, 
 			{ title: "Origem", render: encode, data: "desc_origem" },
 			{ title: "Criação", "class": "col-min text-right", "type": "customdateint", data: "data_anu" }
-
-			
 		],
 		data: <%- lista %>,
 		export: { title: "Anúncios" }
@@ -79,19 +58,12 @@
 		if (JsonWebApi.active)
 			return;
 
-		var usuario = tabela.row(trClicada = this.parentNode.parentNode).data();
+		var anuncio = tabela.row(trClicada = this.parentNode.parentNode).data();
 
 		if (this.getAttribute("data-excluir")) {
-			$("#lblNome").text(usuario.login);
+			$("#lblNome").text(anuncio.desc_comb);
 
 			$("#modalExcluir").modal({
-				backdrop: "static",
-				keyboard: true
-			});
-		} else {
-			$("#lblNomeRedefinirSenha").text(usuario.login);
-
-			$("#modalRedefinirSenha").modal({
 				backdrop: "static",
 				keyboard: true
 			});
@@ -104,38 +76,19 @@
 
 		$("#modalExcluir").modal("hide");
 
-		var usuario = tabela.row(trClicada).data();
+		var anuncio = tabela.row(trClicada).data();
 
 		Notification.wait();
 
-		JsonWebApi.get("<%- root %>/api/usuario/excluir", function (response) {
+		JsonWebApi.get("<%- root %>/api/anuncio/excluir", function (response) {
 			if (response.success) {
-				Notification.success("Usuário excluído com sucesso! " + emoji.happy);
+				Notification.success("Anúncio excluído com sucesso! " + emoji.happy);
 				tabela.row(trClicada).remove().draw();
 			} else {
 				Notification.error(response.value, true);
 			}
 			trClicada = null;
-		}, "id", usuario.id);
-	}
-
-	function redefinirSenha() {
-		if (JsonWebApi.active || !trClicada)
-			return;
-
-		$("#modalRedefinirSenha").modal("hide");
-
-		var usuario = tabela.row(trClicada).data();
-
-		Notification.wait();
-
-		JsonWebApi.get("<%- root %>/api/usuario/redefinirSenha", function (response) {
-			if (response.success)
-				Notification.success("Senha redefinida com sucesso! " + emoji.happy);
-			else
-				Notification.error(response.value, true);
-			trClicada = null;
-		}, "id", usuario.id);
+		}, "id_anu", anuncio.id_anu);
 	}
 
 	//]]>
