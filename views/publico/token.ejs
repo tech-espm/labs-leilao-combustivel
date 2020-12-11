@@ -1,0 +1,48 @@
+<div class="form-group imgLogo">
+	<img src="<%- root %>/imagens/logo.png" width="170" alt="Logo">
+</div>
+
+<div id="card" class="text-center">
+	<h1 class="mb-4">Verificação em duas etapas!</h1>
+	<h4 class="mb-5">Para sua maior segurança, insira o código token enviado ao celular abaixo, para seguir com o login
+	</h4>
+	<h5 class="mb-3">Celular: <label>XXXXX-XX89</label></h5>
+	<input>
+
+	<div class="row justify-content-center mt-5">
+		<div id="btnPosto" href="" class="btn btn-primary btn-md btn-block epex col-4"><span>ENVIAR</span></div>
+	</div>
+</div>
+
+<%- contentFor("head") %>
+
+<style type="text/css">
+	body {
+		font-family: 'Montserrat', sans-serif;
+		background-color: whitesmoke;
+		color: rgb(20, 35, 74);
+		;
+	}
+
+	h1 {
+		font-weight: 700;
+	}
+
+	label {
+		color: rgb(226, 147, 0);
+	}
+
+	.imgLogo {
+		text-align: center;
+		margin-top: 30px;
+		margin-bottom: 30px;
+	}
+
+	#card {
+		background-color: rgb(230, 230, 230);
+		width: 65%;
+		margin: 0 auto;
+		padding: 50px;
+	}
+
+</style>
