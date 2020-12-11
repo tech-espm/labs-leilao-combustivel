@@ -84,7 +84,8 @@ VALUES ('distribuidor', 'Distribuidor', 'Marcos', 'distribuidor@gmail.com', 1, 3
 CREATE TABLE IF NOT EXISTS pedido (
   id_pedido INT NOT NULL AUTO_INCREMENT,
   id_anu INT NOT NULL,
-  id_usuario INT NOT NULL,
+  id_usuario INT NOT NULL, 
+  qntd_pedido INT NOT NULL,
   data_pedido DATE NOT NULL,
   valortotal_pedido DOUBLE NOT NULL,
   PRIMARY KEY (`id_pedido`),

@@ -17,6 +17,11 @@
 				</div>  
 
 				<div class="form-group">
+					<label for="qntd_pedido">Quantidade</label>
+					<input id="qntd_pedido" name="qntd_pedido" class="form-control" type="number" min="1" max="9999" value="<%=(item ? item.qntd_pedido : '') %>" />
+                </div> 
+
+				<div class="form-group">
 					<label for="valortotal_pedido">Valor total</label>
 					<input id="valortotal_pedido" name="valortotal_pedido" class="form-control" type="number" min="1" max="9999" value="<%=(item ? item.valortotal_pedido : '') %>" />
                 </div> 
@@ -40,6 +45,12 @@
 				required: true,
 				maxlength: 10
 			},
+
+			qntd_pedido:{
+				required: true, 
+				maxlength: 10
+			},
+
 			id_anu: {
 				required: true
 			}
