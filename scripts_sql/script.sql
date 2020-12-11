@@ -74,13 +74,6 @@ CREATE TABLE usuario (
 INSERT INTO usuario (login, nome, nomeresp, emailcont, idperfil, idtipo, senha, token, criacao, telefone, endereco, idcidade, idestado, cnpj, frotapropria) 
 VALUES ('admin', 'Administrador', '', '', 1, 1, 'peTcC99vkvvLqGQL7mdhGuJZIvL2iMEqvCNvZw3475PJ:JVyo1Pg2HyDyw9aSOd3gNPT30KdEyiUYCjs7RUzSoYGN', NULL, NOW(), '', '', 5270, 25, '', 0);
 
-INSERT INTO usuario (login, nome, nomeresp, emailcont, idperfil, idtipo, senha, token, criacao, telefone, endereco, idcidade, idestado, cnpj, frotapropria) 
-VALUES ('posto', 'Posto', 'Lucas', 'posto@gmail.com', 1, 2, 'peTcC99vkvvLqGQL7mdhGuJZIvL2iMEqvCNvZw3475PJ:JVyo1Pg2HyDyw9aSOd3gNPT30KdEyiUYCjs7RUzSoYGN', NULL, NOW(), '99999999999', 'Rua Posto', 5270, 25, '00000000000000', 0);
-
-INSERT INTO usuario (login, nome, nomeresp, emailcont, idperfil, idtipo, senha, token, criacao, telefone, endereco, idcidade, idestado, cnpj, frotapropria) 
-VALUES ('distribuidor', 'Distribuidor', 'Marcos', 'distribuidor@gmail.com', 1, 3, 'peTcC99vkvvLqGQL7mdhGuJZIvL2iMEqvCNvZw3475PJ:JVyo1Pg2HyDyw9aSOd3gNPT30KdEyiUYCjs7RUzSoYGN', NULL, NOW(), '99999999999', 'Rua Distribuidor', 5270, 25, '00000000000000', 0);
-
-
 CREATE TABLE IF NOT EXISTS pedido (
   id_pedido INT NOT NULL AUTO_INCREMENT,
   id_anu INT NOT NULL,
