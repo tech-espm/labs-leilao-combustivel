@@ -77,6 +77,16 @@ export = class Anuncio {
 		});
 
 		return (lista || []);
+	} 
+
+	public static async listarGeral(): Promise<Anuncio[]> {
+		let lista: Anuncio[] = null;
+
+		await Sql.conectar(async (sql: Sql) => {
+			lista = (await sql.query("select a.id_anu, a.prazo_anu, a.qtd_anu, a.id_usuario, date_format(a.data_anu, '%d/%m/%Y') data_anu, a.maxvalor_anu,a.minvalor_anu, a.id_transp, t.nome_transp, a.id_comb, c.desc_comb, a.id_origem, o.desc_origem from anuncio a inner join transportadora t on t.id_transp = a.id_transp inner join combustivel c on c.id_comb = a.id_comb inner join origem o on o.id_origem = a.id_origem order by a.id_anu desc")) as Anuncio[];
+		});
+
+		return (lista || []);
 	}
 
 	public static async obter(id_anu: number, id_usuario: number): Promise<Anuncio> {

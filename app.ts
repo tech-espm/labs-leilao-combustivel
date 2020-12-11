@@ -108,7 +108,8 @@ app.use("/pedido", require("./routes/pedido"));
 // API
 app.use("/api/assunto", require("./routes/api/assunto"));
 app.use("/api/usuario", require("./routes/api/usuario")); 
-app.use("/api/anuncio", require("./routes/api/anuncio"));
+app.use("/api/anuncio", require("./routes/api/anuncio")); 
+app.use("/api/pedido", require("./routes/api/pedido"));
 
 // Depois de registrados todos os caminhos das rotas e seus
 // tratadores, registramos os tratadores que serão chamados

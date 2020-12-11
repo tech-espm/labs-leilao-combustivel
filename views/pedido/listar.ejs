@@ -58,21 +58,18 @@
 		order: [[1, "asc"]],
 		deferRender: true,
 		columns: [
-			{ title: "", "class": "col-min", searchable: false, orderable: false, data: "id_anu", render: function (v, type, row) { return "<a target=\"_blank\" title=\"Editar\" href=\"<%- root %>/anucio/alterar?id=" + row.id_anu + "\" class=\"btn btn-outline btn-primary\"><i class=\"fa fa-nomargin fa-edit\"></i></a> <button title=\"Redefinir Senha\" type=\"button\" class=\"btn btn-outline btn-primary\"><i class=\"fa fa-nomargin fa-lock\"></i></button> <button title=\"Excluir\" type=\"button\" data-excluir=\"1\" class=\"btn btn-outline btn-danger\"><i class=\"fa fa-nomargin fa-times\"></i></button>"; } },
-			{ title: "Prazo", render: encode, data: "prazo_anu" },
-			{ title: "Quantidade", data: "qtd_anu" },
-			{ title: "id Usuario", data: "id_usuario" }, 
-			{ title: "Valor", data: "valor_anu" },
-			{ title: "id Comustivel", data: "id_comb" },
-			{ title: "Combustivel", render: encode, data: "desc_comb" },
-			{ title: "id Transportadora", data: "id_transp" },
-			{ title: "Transportadora", render: encode, data: "nome_transp" },
-			{ title: "Criação", "class": "col-min text-right", "type": "customdateint", data: "data_anu" }
+			{ title: "", "class": "col-min", searchable: false, orderable: false, data: "id_pedido", render: function (v, type, row) { return "<a target=\"_blank\" title=\"Editar\" href=\"<%- root %>/pedido/alterar?id=" + row.id_pedido + "\" class=\"btn btn-outline btn-primary\"><i class=\"fa fa-nomargin fa-edit\"></i></a> <button title=\"Redefinir Senha\" type=\"button\" class=\"btn btn-outline btn-primary\"><i class=\"fa fa-nomargin fa-lock\"></i></button> <button title=\"Excluir\" type=\"button\" data-excluir=\"1\" class=\"btn btn-outline btn-danger\"><i class=\"fa fa-nomargin fa-times\"></i></button>"; } },
+			{ title: "id Anúncio", data: "id_anu" }, 
+			{ title: "Distribuidor", render: encode, data: "nome" }, 
+			{ title: "Tipo de Combustível", render: encode, data: "desc_comb" }, 
+			{ title: "Origem", render: encode, data: "desc_origem" },
+			{ title: "Valor", data: "valortotal_pedido" },
+			{ title: "Criação", "class": "col-min text-right", "type": "customdateint", data: "data_pedido" }
 
 			
 		],
 		data: <%- lista %>,
-		export: { title: "Anúncios" }
+		export: { title: "Pedidos" }
 	});
 
 	var trClicada;

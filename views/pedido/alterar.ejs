@@ -5,50 +5,25 @@
 			<div class="panel-heading">Informações do Assunto</div>
 			<div class="panel-body no-bottom">
 				<input type="hidden" id="id_pedido" name="id_pedido" value="<%=(item ? item.id_pedido : 0) %>" />
+				
 				<div class="form-group">
-					<label for="id_comb">Combustivel</label>
-					<select id="id_comb" name="id_comb" class="form-control" size="1">
+					<label for="id_anu">Anúncio Escolhido</label>
+					<select id="id_anu" name="id_anu" class="form-control" size="1">
 						<option value="">SELECIONE...</option>
-						<% for (let i = 0; i < comb.length; i++) { %>
-						<option value="<%= comb[i].id_comb %>" <%-((item && item.id_comb === comb[i].id_comb) ? 'selected="selected"' : '') %>><%= comb[i].desc_comb %></option>
+						<% for (let i = 0; i < anu.length; i++) { %>
+						<option value="<%= anu[i].id_anu %>" <%-((item && item.id_anu === anu[i].id_anu) ? 'selected="selected"' : '') %>><%= anu[i].id_anu %></option>
 						<% } %>
 					</select>
 				</div>  
-				<div class="form-group">
-					<label for="id_origem">Origem</label>
-					<select id="id_origem" name="id_origem" class="form-control" size="1">
-						<option value="">SELECIONE...</option>
-						<% for (let i = 0; i < ori.length; i++) { %>
-						<option value="<%= ori[i].id_origem %>" <%-((item && item.id_origem === ori[i].id_origem) ? 'selected="selected"' : '') %>><%= ori[i].desc_origem %></option>
-						<% } %>
-					</select>
-				</div> 
-				<div class="form-group">
-					<label for="prazo_anu">Prazo de pagamento</label>
-					<input id="prazo_anu" name="prazo_anu" maxlength="45" class="form-control" type="text" spellcheck="false" value="<%=(item ? item.prazo_anu : '') %>" />
-                </div> 
-                <div class="form-group">
-					<label for="qtd_anu">Quantidade</label>
-					<input id="qtd_anu" name="qtd_anu" class="form-control" type="number" min="1" max="9999" value="<%=(item ? item.qtd_anu : '') %>" />
-                </div> 
-                
-                <div class="form-group">
-					<label for="id_transp">Transporte</label>
-					<select id="id_transp" name="id_transp" class="form-control" size="1">
-						<option value="">SELECIONE...</option>
-						<% for (let i = 0; i < tipos.length; i++) { %>
-						<option value="<%= tipos[i].id_transp %>" <%-((item && item.id_transp === tipos[i].id_transp) ? 'selected="selected"' : '') %>><%= tipos[i].nome_transp %></option>
-						<% } %>
-					</select>
-				</div> 
 
 				<div class="form-group">
-					<label for="valor_anu">Valor</label>
-					<input id="valor_anu" name="valor_anu" maxlength="10" class="form-control" type="text" spellcheck="false" value="<%=(item ? item.valor_anu.toString().replace('.', ',') : '') %>" />
+					<label for="valortotal_pedido">Valor total</label>
+					<input id="valortotal_pedido" name="valortotal_pedido" class="form-control" type="number" min="1" max="9999" value="<%=(item ? item.valortotal_pedido : '') %>" />
                 </div> 
+
 			</div>
 			<div class="panel-footer">
-				<input value="<%=(item ? 'Salvar Alterações' : 'Criar Anúncio') %>" class="btn btn-primary btn-lg btn-block" type="submit" />
+				<input value="<%=(item ? 'Salvar Alterações' : 'Criar Pedido') %>" class="btn btn-primary btn-lg btn-block" type="submit" />
 			</div>
 		</form>
 	</div>
@@ -61,27 +36,11 @@
 
 	$("#form").validate({
 		rules: {
-			prazo_anu: {
-				required: true,
-				maxlength: 45,
-			},
-			qtd_anu: {
-				required: true,
-				number: true,
-				min: 1,
-				max: 9999
-			},
-			valor_anu: {
+			valortotal_pedido: {
 				required: true,
 				maxlength: 10
 			},
-			id_transp: {
-				required: true
-			},
-			id_comb: {
-				required: true
-			}, 
-			id_origem: {
+			id_anu: {
 				required: true
 			}
 		},
@@ -94,19 +53,19 @@
 
 			//<% if (item) { %>
 
-			JsonWebApi.postFormData("<%- root %>/api/anuncio/alterar", form, function (response) {
+			JsonWebApi.postFormData("<%- root %>/api/pedido/alterar", form, function (response) {
 				if (response.success)
-					Notification.success("Anúncio alterado com sucesso! " + emoji.happy);
+					Notification.success("Pedido alterado com sucesso! " + emoji.happy);
 				else
 					Notification.error(response.value, true);
 			});
 
 			//<% } else { %>
 
-			JsonWebApi.postFormData("<%- root %>/api/anuncio/criar", form, function (response) {
+			JsonWebApi.postFormData("<%- root %>/api/pedido/criar", form, function (response) {
 				if (response.success) {
 					resetForm("#form");
-					Notification.success("Anúncio criado com sucesso! " + emoji.happy);
+					Notification.success("Pedido criado com sucesso! " + emoji.happy);
 				} else {
 					Notification.error(response.value, true);
 				}

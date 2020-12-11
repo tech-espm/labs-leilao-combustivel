@@ -4,6 +4,7 @@ import Pedido = require("../models/pedido");
 import Combustivel = require("../models/combustivel") 
 import Transportadora = require("../models/transportadora") 
 import Origem = require("../models/origem") 
+import Anuncio = require("../models/anuncio")
 import Usuario = require("../models/usuario");
 import appsettings = require("../appsettings");
 
@@ -22,7 +23,8 @@ router.all("/criar", wrap(async (req: express.Request, res: express.Response) =>
 			item: null, 
 			tipos: await Transportadora.listar(),
 			comb: await Combustivel.listar(), 
-			ori: await Origem.listar()
+			ori: await Origem.listar(), 
+			anu: await Anuncio.listarGeral()
 		});
 }));
 
@@ -49,8 +51,8 @@ router.get("/listar", wrap(async (req: express.Request, res: express.Response) =
 	if (!u)
 		res.redirect(appsettings.root + "/acesso");
 	else
-		res.render("anuncio/listar", {
-			titulo: "Gerenciar Anúncios",
+		res.render("pedido/listar", {
+			titulo: "Gerenciar Pedidos",
 			usuario: u,
 			lista: JSON.stringify(await Pedido.listar(u.id))
 		});
